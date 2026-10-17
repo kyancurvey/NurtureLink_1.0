@@ -1,0 +1,22 @@
+/* Design tokens. All colors, spacing and type come from here.
+   Brand colors were sampled from the logo (open item: confirm with the designer).
+   Alert colors (red, amber, green) will be added separately and must never
+   reuse brand coral. */
+:root {
+  --color-brand-purple: #5b3986;
+  --color-brand-purple-soft: #8c6bb1;
+  --color-brand-coral: #f68b8a;
+
+  --color-bg: #ffffff;
+  --color-bg-tint: #f6f2fa;
+  --color-text: #2b1d3d;
+
+  --space-2: 0.5rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+
+  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-size-tagline: 1.125rem;
+  --font-size-name: 2rem;
+}
