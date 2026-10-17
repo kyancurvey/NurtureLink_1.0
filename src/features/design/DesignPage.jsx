@@ -7,14 +7,14 @@ import {
 import { AppShell, SplitView } from '../../components/layout/index.js'
 
 // Visual check page at /#/design. Developer tool: remove or hide before release.
-// Text is shown through i18n keys (placeholders until step 1.3). CSS variable
-// names in the swatches are technical identifiers, not UI copy.
+// All text comes from the locale files (common:design.*). CSS variable names in
+// the swatches are technical identifiers, not UI copy.
 const TABS = [
-  { to: '/design', end: true, labelKey: 'nav.home', icon: <HomeIcon /> },
-  { to: '/design/monitor', labelKey: 'nav.monitor', icon: <ActivityIcon /> },
-  { to: '/design/alerts', labelKey: 'nav.alerts', icon: <BellIcon /> },
-  { to: '/design/care', labelKey: 'nav.care', icon: <HeartIcon /> },
-  { to: '/design/profile', labelKey: 'nav.profile', icon: <UserIcon /> },
+  { to: '/design', end: true, labelKey: 'patient:tabs.home', icon: <HomeIcon /> },
+  { to: '/design/monitor', labelKey: 'patient:tabs.monitor', icon: <ActivityIcon /> },
+  { to: '/design/alerts', labelKey: 'patient:tabs.alerts', icon: <BellIcon /> },
+  { to: '/design/care', labelKey: 'patient:tabs.care', icon: <HeartIcon /> },
+  { to: '/design/profile', labelKey: 'patient:tabs.profile', icon: <UserIcon /> },
 ]
 
 const SWATCHES = [
@@ -121,7 +121,7 @@ export default function DesignPage() {
                       aria-pressed={selected === n}
                       onClick={() => setSelected(n)}
                     >
-                      <span>{t('design.split.item')} {n}</span>
+                      <span>{t('design.split.item', { n })}</span>
                       <StatusBadge status={['success', 'warning', 'danger', 'success'][n - 1]} />
                     </button>
                   </li>
@@ -129,7 +129,7 @@ export default function DesignPage() {
               </ul>
             }
             detail={
-              <Card title={`${t('design.split.detail')} ${selected}`}>
+              <Card title={t('design.split.detail', { n: selected })}>
                 <p>{t('design.split.body')}</p>
               </Card>
             }
