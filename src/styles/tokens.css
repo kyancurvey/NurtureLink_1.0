@@ -71,6 +71,8 @@
   --touch-min: 2.75rem; /* 44px */
   --tabbar-height: 4rem;
   --sidebar-width: 17rem;
+  --header-height: 3.5rem; /* top bar with the language switch */
+  --header-offset: calc(var(--header-height) + env(safe-area-inset-top, 0px));
 
   /* Type: rounded system stack, no web fonts. ui-rounded gives the rounded
      look on Apple devices; other platforms fall back to their system font. */

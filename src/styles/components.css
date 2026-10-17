@@ -217,6 +217,7 @@ input {
 .nl-toggle__state {
   min-width: 2.25rem;
   text-align: left;
+  white-space: nowrap; /* keep "Naka-on" on one line */
 }
 .nl-toggle__track {
   display: inline-flex;
@@ -355,9 +356,61 @@ input {
   gap: var(--space-2);
 }
 
+/* ---------- App header (language switch on every screen) ---------- */
+.nl-appheader {
+  position: sticky;
+  top: 0;
+  z-index: 20; /* above the tab bar (10); dialogs use the top layer */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: var(--header-offset);
+  padding: env(safe-area-inset-top, 0px) var(--space-4) 0;
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ---------- Language toggle (EN | FIL) ---------- */
+.nl-lang {
+  display: inline-flex;
+  overflow: hidden;
+  border: 2px solid var(--color-brand-purple);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+}
+.nl-lang__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-width: var(--touch-min);
+  min-height: var(--touch-min);
+  padding: 0 var(--space-3);
+  border: 0;
+  background: transparent;
+  color: var(--color-brand-purple);
+  font: inherit;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  cursor: pointer;
+}
+.nl-lang__btn + .nl-lang__btn {
+  border-left: 2px solid var(--color-brand-purple);
+}
+.nl-lang__btn:hover {
+  background: var(--color-bg-tint-strong);
+}
+.nl-lang__btn:focus-visible {
+  outline-offset: -5px; /* draw inside: the pill clips anything outside it */
+}
+.nl-lang__btn[aria-pressed='true'] {
+  background: var(--gradient-action);
+  color: var(--color-text-on-action);
+}
+
 /* ---------- App shell: phone first ---------- */
 .nl-shell {
-  min-height: 100dvh;
+  min-height: calc(100dvh - var(--header-offset));
 }
 .nl-shell__main {
   max-width: 64rem;
@@ -397,7 +450,7 @@ input {
   justify-content: center;
   gap: 2px;
   min-height: var(--tabbar-height);
-  padding: var(--space-1);
+  padding: var(--space-1) 2px; /* 2px sides: room for longer Filipino labels */
   font-size: 0.8125rem;
   font-weight: 600;
   text-decoration: none;
@@ -469,11 +522,11 @@ input {
   }
   .nl-sidebar {
     position: sticky;
-    top: 0;
+    top: var(--header-offset);
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
-    height: 100dvh;
+    height: calc(100dvh - var(--header-offset));
     padding: var(--space-5) var(--space-4);
     background: var(--color-surface);
     border-right: 1px solid var(--color-border);
