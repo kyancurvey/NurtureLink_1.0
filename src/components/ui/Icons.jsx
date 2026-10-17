@@ -84,3 +84,26 @@ export const UserIcon = (p) => (
     <path d="M4.5 20.5c1-4 4-5.5 7.5-5.5s6.5 1.5 7.5 5.5" />
   </Svg>
 )
+export const UsersIcon = (p) => (
+  <Svg size={24} {...p}>
+    <circle cx="9" cy="8" r="3.5" />
+    <path d="M2.5 20c.8-3.6 3.3-5 6.5-5s5.7 1.4 6.5 5M16 4.7a3.5 3.5 0 010 6.6M18 15.3c1.9.7 3.1 2.2 3.5 4.7" />
+  </Svg>
+)
+export const MessageIcon = (p) => (
+  <Svg size={24} {...p}>
+    <path d="M4 5h16v11H9.5L5 20v-4H4V5z" />
+  </Svg>
+)
+export const FileTextIcon = (p) => (
+  <Svg size={24} {...p}>
+    <path d="M6 3h8l4 4v14H6V3zM14 3v4h4M9 12h6M9 16h6" />
+  </Svg>
+)
+export const SettingsIcon = (p) => (
+  <Svg size={24} {...p}>
+    <path d="M4 7h10M18 7h2M4 17h2M10 17h10" />
+    <circle cx="16" cy="7" r="2.2" />
+    <circle cx="8" cy="17" r="2.2" />
+  </Svg>
+)
