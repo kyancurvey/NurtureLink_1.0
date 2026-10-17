@@ -20,7 +20,6 @@ export default defineConfig({
         theme_color: '#5B3986', // deep purple sampled from the logo
         background_color: '#FFFFFF',
         display: 'standalone',
-        orientation: 'portrait',
         start_url: BASE,
         scope: BASE,
         id: BASE,
