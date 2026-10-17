@@ -84,9 +84,73 @@
         "detail": "Detalye {{n}}",
         "body": "Dito ilalagay ang nilalaman ng detalye."
       }
+    },
+    "emptyState": {
+      "title": "Wala pa rito",
+      "body": "Ginagawa pa ang bahaging ito ng NurtureLink. Bumalik muli sa lalong madaling panahon."
     }
   },
-  "auth": {},
+  "auth": {
+    "working": "Sandali lang…",
+    "logout": "Mag-log out",
+    "backToLogin": "Bumalik sa log in",
+    "field": {
+      "email": "Email address",
+      "password": "Password",
+      "newPassword": "Bagong password",
+      "passwordHint": "Hindi bababa sa 8 karakter.",
+      "dob": "Petsa ng kapanganakan",
+      "dobHint": "Ginagamit namin ito para malaman kung kailangan ding sumang-ayon ng magulang o tagapag-alaga.",
+      "code": "Code ng imbitasyon"
+    },
+    "login": {
+      "title": "Maligayang pagbabalik",
+      "subtitle": "Mag-log in sa iyong NurtureLink account.",
+      "submit": "Mag-log in",
+      "forgot": "Nakalimutan ang password?",
+      "createAccount": "Gumawa ng account ng pasyente",
+      "haveInvite": "May code ng imbitasyon bilang provider?"
+    },
+    "signup": {
+      "title": "Gawin ang iyong account",
+      "subtitle": "Para sa mga buntis na pasyente. Ang mga healthcare provider ay kailangan ng code ng imbitasyon.",
+      "submit": "Gumawa ng account",
+      "haveAccount": "May account na? Mag-log in",
+      "minorNote": "Wala ka pang 18 taong gulang, kaya hihilingin ding sumang-ayon ang magulang o tagapag-alaga mo. Maaari ka pa ring gumawa ng account.",
+      "checkEmail": {
+        "title": "Tingnan ang iyong email",
+        "body": "Kung magagamit ang {{email}} para sa bagong account, nagpadala kami ng link dito. Buksan ang link para kumpirmahin ang account, pagkatapos ay mag-log in.",
+        "sameBrowser": "Pakibuksan ang link sa browser na ito. Maaaring abutin ng ilang minuto bago dumating. Tingnan din ang spam folder."
+      }
+    },
+    "forgot": {
+      "title": "I-reset ang iyong password",
+      "subtitle": "Ilagay ang iyong email address at magpapadala kami ng link para pumili ng bagong password.",
+      "submit": "Ipadala ang link",
+      "sent": {
+        "title": "Tingnan ang iyong email",
+        "body": "Kung may account para sa {{email}}, papunta na ang link sa pag-reset."
+      }
+    },
+    "reset": {
+      "title": "Pumili ng bagong password",
+      "subtitle": "Gumana ang iyong link. Ilagay sa ibaba ang bagong password.",
+      "submit": "I-save ang bagong password",
+      "invalid": "Hindi na valid ang link na ito sa pag-reset. Maaaring nag-expire na ito, nagamit na, o binuksan sa ibang browser. Humingi ng bagong link.",
+      "requestNew": "Magpadala ng bagong link"
+    },
+    "invite": {
+      "title": "Imbitasyon para sa provider",
+      "subtitle": "Ilagay ang code na ibinigay sa iyo para gawing provider account ang account na ito.",
+      "submit": "Gamitin ang code",
+      "needAccount": "Para magamit ang code ng imbitasyon, gumawa muna ng account o mag-log in. Pagkatapos, ilagay ang iyong code.",
+      "notNow": "Hindi muna"
+    },
+    "admin": {
+      "title": "Account ng may-ari ng proyekto",
+      "body": "Ito ang admin account. Ginagawa ang mga gawain ng admin sa Supabase SQL Editor, hindi sa app na ito. Gumamit ng account ng pasyente o provider para subukan ang app."
+    }
+  },
   "terms": {},
   "patient": {
     "tabs": {
@@ -97,7 +161,49 @@
       "profile": "Ako"
     }
   },
-  "provider": {},
+  "provider": {
+    "tabs": {
+      "overview": "Buod",
+      "patients": "Pasyente",
+      "alerts": "Abiso",
+      "consults": "Konsulta",
+      "validation": "Beripikasyon",
+      "reports": "Ulat",
+      "settings": "Setting"
+    }
+  },
   "alerts": {},
-  "errors": {}
+  "errors": {
+    "email_required": "Pakilagay ang iyong email address.",
+    "email_invalid": "Mukhang hindi ito email address. Pakisuri.",
+    "password_required": "Pakilagay ang iyong password.",
+    "password_short": "Gumamit ng hindi bababa sa 8 karakter.",
+    "dob_required": "Pakilagay ang iyong petsa ng kapanganakan.",
+    "dob_invalid": "Pakilagay ang tamang petsa ng kapanganakan.",
+    "code_required": "Pakilagay ang iyong code ng imbitasyon.",
+    "invalid_credentials": "Mali ang email o password. Pakisubukan muli.",
+    "email_not_confirmed": "Kumpirmahin muna ang iyong email. Tingnan ang inbox para sa mensahe namin.",
+    "account_exists": "Hindi namin magawa ang account na iyon. Kung mayroon ka nang account, subukang mag-log in o i-reset ang password.",
+    "weak_password": "Masyadong madaling hulaan ang password. Gumamit ng mas mahaba at mas iba-iba.",
+    "same_password": "Pumili ng password na iba sa dati mong password.",
+    "rate_limit": "Masyadong maraming pagsubok. Maghintay ng ilang minuto bago subukan muli.",
+    "email_rate_limit": "Kaunti lang ang email na maipapadala kada oras. Maghintay muna bago subukan muli.",
+    "offline": "Hindi makakonekta sa server. Pakisuri ang iyong internet at subukan muli.",
+    "not_signed_in": "Natapos na ang iyong session. Mag-log in muli.",
+    "no_profile": "Hindi namin makita ang iyong profile. Mag-log out at gumawa muli ng account, o sabihin sa may-ari ng proyekto.",
+    "not_eligible": "May tungkulin nang provider o admin ang account na ito, kaya hindi na kailangan ng code.",
+    "invalid_invite": "Hindi gumana ang code. Maaaring mali ito, nagamit na, nag-expire na, o para sa ibang email. Pakisuri, o humingi ng bagong code.",
+    "invalid_language": "Hindi available ang wikang iyon.",
+    "role_change_not_allowed": "Hindi mapapalitan ang tungkulin ng account mula sa app.",
+    "permission_denied": "Hindi pinapayagan ang account na ito na gawin iyon. Kung sa tingin mo ay dapat, problema ito sa setup at hindi ikaw ang nagkamali. Pakisabi sa may-ari ng proyekto.",
+    "technical_detail": "Teknikal na detalye: {{detail}}",
+    "not_configured": "Hindi pa nakakonekta ang app sa database nito. Pakisabi sa may-ari ng proyekto.",
+    "unknown": "May nangyaring problema. Pakisubukan muli. Kung patuloy itong mangyari, sabihin sa may-ari ng proyekto.",
+    "link_expired": "Nag-expire na o nagamit na ang link sa email. Mag-log in, o humiling ng bagong link.",
+    "link_invalid": "Hindi gumana ang link sa email. Mag-log in, o humiling ng bagong link.",
+    "profile_title": "Hindi namin ma-load ang iyong account",
+    "retry": "Subukan muli",
+    "language_not_saved": "Hindi nai-save sa iyong account ang napili mong wika. Gumagana pa rin ito sa device na ito.",
+    "email_not_authorized": "Hindi pa makapagpadala ng email ang aming serbisyo sa address na ito. Pakisabi sa may-ari ng proyekto."
+  }
 }

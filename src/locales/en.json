@@ -84,9 +84,73 @@
         "detail": "Detail {{n}}",
         "body": "Detail content goes here."
       }
+    },
+    "emptyState": {
+      "title": "Nothing here yet",
+      "body": "This part of NurtureLink is still being built. Please check back soon."
     }
   },
-  "auth": {},
+  "auth": {
+    "working": "Please wait…",
+    "logout": "Log out",
+    "backToLogin": "Back to log in",
+    "field": {
+      "email": "Email address",
+      "password": "Password",
+      "newPassword": "New password",
+      "passwordHint": "At least 8 characters.",
+      "dob": "Date of birth",
+      "dobHint": "We use this to check whether a parent or guardian also needs to agree.",
+      "code": "Invite code"
+    },
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Log in to your NurtureLink account.",
+      "submit": "Log in",
+      "forgot": "Forgot your password?",
+      "createAccount": "Create a patient account",
+      "haveInvite": "Have a provider invite code?"
+    },
+    "signup": {
+      "title": "Create your account",
+      "subtitle": "For pregnant patients. Healthcare providers need an invite code instead.",
+      "submit": "Create account",
+      "haveAccount": "Already have an account? Log in",
+      "minorNote": "You are under 18, so a parent or guardian will also be asked to agree. You can still create your account.",
+      "checkEmail": {
+        "title": "Check your email",
+        "body": "If {{email}} can be used for a new account, we have sent it a link. Open the link to confirm your account, then log in.",
+        "sameBrowser": "Please open the link in this same browser. It may take a few minutes to arrive. Check your spam folder too."
+      }
+    },
+    "forgot": {
+      "title": "Reset your password",
+      "subtitle": "Enter your email address and we will send you a link to choose a new password.",
+      "submit": "Send reset link",
+      "sent": {
+        "title": "Check your email",
+        "body": "If there is an account for {{email}}, a reset link is on its way."
+      }
+    },
+    "reset": {
+      "title": "Choose a new password",
+      "subtitle": "Your link worked. Enter a new password below.",
+      "submit": "Save new password",
+      "invalid": "This reset link is not valid any more. It may have expired, been used already, or been opened in a different browser. Please ask for a new one.",
+      "requestNew": "Send me a new link"
+    },
+    "invite": {
+      "title": "Provider invite",
+      "subtitle": "Enter the code you were given to turn this account into a provider account.",
+      "submit": "Use this code",
+      "needAccount": "To use an invite code, first create an account or log in. Then enter your code.",
+      "notNow": "Not now"
+    },
+    "admin": {
+      "title": "Project owner account",
+      "body": "This is the admin account. Admin tasks are done in the Supabase SQL Editor, not in this app. Use a patient or provider account to try the app."
+    }
+  },
   "terms": {},
   "patient": {
     "tabs": {
@@ -97,7 +161,49 @@
       "profile": "Profile"
     }
   },
-  "provider": {},
+  "provider": {
+    "tabs": {
+      "overview": "Overview",
+      "patients": "Patients",
+      "alerts": "Alerts",
+      "consults": "Consults",
+      "validation": "Validation",
+      "reports": "Reports",
+      "settings": "Settings"
+    }
+  },
   "alerts": {},
-  "errors": {}
+  "errors": {
+    "email_required": "Please enter your email address.",
+    "email_invalid": "That does not look like an email address. Please check it.",
+    "password_required": "Please enter your password.",
+    "password_short": "Please use at least 8 characters.",
+    "dob_required": "Please enter your date of birth.",
+    "dob_invalid": "Please enter a real date of birth.",
+    "code_required": "Please enter your invite code.",
+    "invalid_credentials": "That email or password is not right. Please try again.",
+    "email_not_confirmed": "Please confirm your email first. Check your inbox for our message.",
+    "account_exists": "We could not create that account. If you already have one, try logging in or resetting your password.",
+    "weak_password": "That password is too easy to guess. Please try a longer one with more variety.",
+    "same_password": "Please choose a password that is different from your old one.",
+    "rate_limit": "Too many tries just now. Please wait a few minutes and try again.",
+    "email_rate_limit": "Only a few emails can be sent each hour. Please wait a while and try again.",
+    "offline": "We cannot reach the server. Please check your internet connection and try again.",
+    "not_signed_in": "Your session has ended. Please log in again.",
+    "no_profile": "We could not find your profile. Please log out and create your account again, or tell the project owner.",
+    "not_eligible": "This account already has a provider or admin role, so a code is not needed.",
+    "invalid_invite": "That code did not work. It may be wrong, already used, expired, or meant for a different email. Please check it, or ask for a new one.",
+    "invalid_language": "That language is not available.",
+    "role_change_not_allowed": "Account roles cannot be changed from the app.",
+    "permission_denied": "This account is not allowed to do that. If you think it should be, this is a setup problem, not something you did wrong. Please tell the project owner.",
+    "technical_detail": "Technical detail: {{detail}}",
+    "not_configured": "The app is not connected to its database yet. Please tell the project owner.",
+    "unknown": "Something went wrong. Please try again. If it keeps happening, tell the project owner.",
+    "link_expired": "The link in the email has expired or was already used. Please log in, or ask for a new link.",
+    "link_invalid": "The link in the email did not work. Please log in, or ask for a new link.",
+    "profile_title": "We could not load your account",
+    "retry": "Try again",
+    "language_not_saved": "Your language choice could not be saved to your account. It still works on this device.",
+    "email_not_authorized": "Our email service cannot send to this address yet. Please tell the project owner."
+  }
 }
