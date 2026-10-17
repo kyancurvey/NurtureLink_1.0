@@ -1,0 +1,115 @@
+/* Sign-in screens, empty states, the disclaimer line and the notice bar.
+   Colors, spacing and type come from tokens.css only. */
+
+/* Header: language switch and Log out side by side. */
+.nl-appheader {
+  gap: var(--space-3);
+}
+
+/* ---------- Sign-in frame ---------- */
+.nl-auth {
+  min-height: calc(100dvh - var(--header-offset));
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: var(--space-6) var(--space-4) calc(var(--space-8) + env(safe-area-inset-bottom));
+  background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg-tint) 100%);
+}
+.nl-auth__panel {
+  width: 100%;
+  max-width: 28rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.nl-auth__logo {
+  align-self: center;
+  width: 72px;
+  height: auto;
+}
+.nl-auth__title {
+  margin: 0;
+  text-align: center;
+  font-size: var(--font-size-xl);
+  color: var(--color-brand-purple);
+}
+.nl-auth__subtitle {
+  margin: 0;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+.nl-auth__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+.nl-auth__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.nl-auth__note {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+.nl-auth__links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.nl-auth__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--touch-min);
+  padding: 0 var(--space-2);
+  font-weight: 700;
+  color: var(--color-brand-purple);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.nl-auth__link:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Required line on every screen that will show readings. */
+.nl-disclaimer {
+  margin: var(--space-2) 0 0;
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* Error or notice shown under the header. */
+.nl-notice {
+  padding: var(--space-3) var(--space-4) 0;
+}
+
+/* ---------- Empty state (a tab that is not built yet) ---------- */
+.nl-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-6) auto;
+  padding: var(--space-8) var(--space-5);
+  max-width: 32rem;
+  text-align: center;
+  color: var(--color-brand-purple);
+  background: var(--color-bg-tint);
+  border-radius: var(--radius-lg);
+}
+.nl-empty__title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+}
+.nl-empty__body {
+  margin: 0;
+  color: var(--color-text-muted);
+}
