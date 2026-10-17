@@ -1,6 +1,7 @@
-// Brand name and tagline are brand identity, not translated copy. They move
-// behind i18n keys (en + fil) when the i18n scaffold is added.
+import { useT } from '../lib/useT.js'
+
 export default function Splash() {
+  const t = useT()
   return (
     <main className="splash">
       <img
@@ -10,8 +11,8 @@ export default function Splash() {
         width="240"
         height="240"
       />
-      <h1 className="splash__name">NurtureLink</h1>
-      <p className="splash__tagline">Nurture Lives, Linking Hearts</p>
+      <h1 className="splash__name">{t('brand.name')}</h1>
+      <p className="splash__tagline">{t('brand.tagline')}</p>
     </main>
   )
 }
