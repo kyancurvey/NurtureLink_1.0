@@ -1,22 +1,88 @@
 /* Design tokens. All colors, spacing and type come from here.
    Brand colors were sampled from the logo (open item: confirm with the designer).
-   Alert colors (red, amber, green) will be added separately and must never
-   reuse brand coral. */
+   Status colors (success / warning / danger) are deliberately separate from
+   brand coral and must never reuse it. Status is always shown with an icon
+   AND text, never color alone.
+
+   Contrast (WCAG AA: 4.5:1 normal text, 3:1 large text and UI boundaries):
+   text on bg 14.1 | brand-purple on bg-tint 8.0 | text-muted on bg-tint 6.7
+   white on action gradient (lightest stop) 5.8 | white on danger 6.5
+   success 6.7 | warning 7.8 | danger-soft 6.9 (text on its own soft bg)
+   White on coral is 2.3 and FAILS, so coral never carries white text. */
 :root {
-  --color-brand-purple: #5b3986;
-  --color-brand-purple-soft: #8c6bb1;
+  /* Brand (sampled from logo) */
   --color-brand-coral: #f68b8a;
+  --color-brand-violet: #a77ab5;
+  --color-brand-purple: #5b3986; /* deep purple: text, nav, theme color */
+  --color-brand-purple-soft: #8c6bb1;
 
+  /* Brand gradients. Decorative only: coral stop is too light for white text. */
+  --gradient-brand: linear-gradient(135deg, #f68b8a 0%, #a77ab5 50%, #5b3986 100%);
+  /* Primary button gradient: both stops pass AA with white text. */
+  --gradient-action: linear-gradient(135deg, #7a52a8 0%, #5b3986 100%);
+  --gradient-action-hover: linear-gradient(135deg, #6a4496 0%, #4a2d70 100%);
+
+  /* Surfaces and text */
   --color-bg: #ffffff;
-  --color-bg-tint: #f6f2fa;
+  --color-bg-tint: #f6f2fa; /* pale lavender page background */
+  --color-bg-tint-strong: #ece4f5; /* active nav item, hover */
+  --color-surface: #ffffff;
   --color-text: #2b1d3d;
+  --color-text-muted: #5c5070;
+  --color-text-on-action: #ffffff;
+  --color-border: #d9cfe6; /* decorative dividers only */
+  --color-border-input: #8a7d9c; /* form control edges, 3:1 or better */
+  --color-disabled-bg: #e7e1ee;
+  --color-disabled-text: #6b6178;
+  --color-focus: #0b5cd5;
+  --color-overlay: rgba(43, 29, 61, 0.55);
 
+  /* Status. Separate from brand coral. Each has a solid (border/icon),
+     a soft background, and a text color that passes AA on that background. */
+  --color-success: #1f8a42;
+  --color-success-bg: #e4f4e8;
+  --color-success-text: #14602d;
+  --color-warning: #b36b00;
+  --color-warning-bg: #fff1cc;
+  --color-warning-text: #6b4200;
+  --color-danger: #b3261e;
+  --color-danger-bg: #fde7e7;
+  --color-danger-text: #9b1c1c;
+
+  /* Spacing */
+  --space-1: 0.25rem;
   --space-2: 0.5rem;
+  --space-3: 0.75rem;
   --space-4: 1rem;
+  --space-5: 1.25rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
+  --space-10: 2.5rem;
 
-  --font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  /* Shape */
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --radius-pill: 999px;
+  --shadow-card: 0 1px 2px rgba(43, 29, 61, 0.08), 0 4px 14px rgba(43, 29, 61, 0.07);
+  --shadow-raised: 0 8px 28px rgba(43, 29, 61, 0.25);
+
+  /* Touch targets and layout */
+  --touch-min: 2.75rem; /* 44px */
+  --tabbar-height: 4rem;
+  --sidebar-width: 17rem;
+
+  /* Type: rounded system stack, no web fonts. ui-rounded gives the rounded
+     look on Apple devices; other platforms fall back to their system font. */
+  --font-sans: ui-rounded, 'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Quicksand, Nunito,
+    'Varela Round', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  --font-size-sm: 1rem;
+  --font-size-base: 1.125rem; /* large base for readability: 18px */
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 1.875rem;
   --font-size-tagline: 1.125rem;
   --font-size-name: 2rem;
+  --line-height: 1.5;
 }
