@@ -1,0 +1,73 @@
+/* Layout helpers for the /#/design page only. */
+.design-grid {
+  display: grid;
+  gap: var(--space-5);
+}
+@media (min-width: 900px) {
+  .design-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+  .design-grid > :first-child,
+  .design-grid > :last-child {
+    grid-column: 1 / -1;
+  }
+}
+.design-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+.design-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.design-swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+  gap: var(--space-3);
+}
+.design-swatch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: 0.8125rem;
+  overflow-wrap: anywhere;
+}
+.design-swatch__chip {
+  height: 3rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+.design-toast {
+  margin-top: var(--space-3);
+}
+.design-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.design-list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  width: 100%;
+  min-height: 3.5rem;
+  padding: var(--space-2) var(--space-4);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text);
+  text-align: left;
+  cursor: pointer;
+}
+.design-list__item[aria-pressed='true'] {
+  border-color: var(--color-brand-purple);
+  background: var(--color-bg-tint-strong);
+}
