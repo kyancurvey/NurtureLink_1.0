@@ -1,0 +1,103 @@
+{
+  "common": {
+    "brand": {
+      "name": "NurtureLink",
+      "tagline": "Alagaan ang Buhay, Ugnayin ang mga Puso"
+    },
+    "language": {
+      "label": "Wika",
+      "name": {
+        "en": "English",
+        "fil": "Filipino"
+      },
+      "short": {
+        "en": "EN",
+        "fil": "FIL"
+      }
+    },
+    "disclaimer": "Ang NurtureLink ay para sa pagsubaybay at screening lamang, hindi para sa diyagnosis.",
+    "ui": {
+      "back": "Bumalik",
+      "close": "Isara",
+      "dismiss": "Alisin",
+      "on": "Naka-on",
+      "off": "Naka-off"
+    },
+    "nav": {
+      "main": "Pangunahing menu"
+    },
+    "status": {
+      "success": "Maayos",
+      "warning": "Kailangang bantayan",
+      "danger": "Agarang atensyon"
+    },
+    "design": {
+      "title": "Sistema ng disenyo",
+      "subtitle": "Tingnan dito ang hitsura ng mga bahagi ng app. Para sa mga developer lamang.",
+      "header": {
+        "action": "Aksyon sa header"
+      },
+      "section": {
+        "colors": "Mga kulay",
+        "buttons": "Mga button",
+        "status": "Mga badge ng katayuan",
+        "form": "Mga field ng form",
+        "overlays": "Mga dialog at mensahe",
+        "split": "Split view (listahan at detalye)"
+      },
+      "button": {
+        "primary": "Pangunahin",
+        "secondary": "Pangalawa",
+        "danger": "Mapanganib",
+        "disabled": "Naka-disable",
+        "full": "Buong lapad"
+      },
+      "field": {
+        "label": "Halimbawang field",
+        "hint": "Isang maikling gabay ang lalabas dito.",
+        "placeholder": "Mag-type dito",
+        "error": "Kailangang punan ang field na ito."
+      },
+      "checkbox": {
+        "label": "Sumasang-ayon ako sa halimbawang ito"
+      },
+      "toggle": {
+        "label": "Halimbawang setting"
+      },
+      "modal": {
+        "open": "Buksan ang dialog",
+        "title": "Halimbawang dialog",
+        "body": "Ganito ang hitsura ng dialog ng kumpirmasyon.",
+        "cancel": "Kanselahin",
+        "confirm": "Kumpirmahin"
+      },
+      "toast": {
+        "info": "Impormasyon",
+        "success": "Matagumpay",
+        "warning": "Babala",
+        "danger": "Panganib",
+        "message": "Ito ay halimbawang mensahe."
+      },
+      "split": {
+        "empty": "Pumili ng isa upang makita ang detalye.",
+        "item": "Halimbawa {{n}}",
+        "detail": "Detalye {{n}}",
+        "body": "Dito ilalagay ang nilalaman ng detalye."
+      }
+    }
+  },
+  "auth": {},
+  "terms": {},
+  "patient": {
+    "tabs": {
+      "home": "Tahanan",
+      "monitor": "Monitor",
+      "alerts": "Abiso",
+      "care": "Konsulta",
+      "profile": "Ako"
+    }
+  },
+  "provider": {},
+  "alerts": {},
+  "errors": {}
+}

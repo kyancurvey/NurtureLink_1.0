@@ -1,0 +1,103 @@
+{
+  "common": {
+    "brand": {
+      "name": "NurtureLink",
+      "tagline": "Nurture Lives, Linking Hearts"
+    },
+    "language": {
+      "label": "Language",
+      "name": {
+        "en": "English",
+        "fil": "Filipino"
+      },
+      "short": {
+        "en": "EN",
+        "fil": "FIL"
+      }
+    },
+    "disclaimer": "NurtureLink is for monitoring and screening, not diagnosis.",
+    "ui": {
+      "back": "Back",
+      "close": "Close",
+      "dismiss": "Dismiss",
+      "on": "On",
+      "off": "Off"
+    },
+    "nav": {
+      "main": "Main navigation"
+    },
+    "status": {
+      "success": "Normal",
+      "warning": "Needs attention",
+      "danger": "Urgent"
+    },
+    "design": {
+      "title": "Design system",
+      "subtitle": "A visual check of the shared components. For developers only.",
+      "header": {
+        "action": "Header action"
+      },
+      "section": {
+        "colors": "Colors",
+        "buttons": "Buttons",
+        "status": "Status badges",
+        "form": "Form fields",
+        "overlays": "Dialogs and messages",
+        "split": "Split view (list and detail)"
+      },
+      "button": {
+        "primary": "Primary",
+        "secondary": "Secondary",
+        "danger": "Danger",
+        "disabled": "Disabled",
+        "full": "Full width"
+      },
+      "field": {
+        "label": "Sample field",
+        "hint": "A short hint appears here.",
+        "placeholder": "Type here",
+        "error": "This field is required."
+      },
+      "checkbox": {
+        "label": "I agree to this sample item"
+      },
+      "toggle": {
+        "label": "Sample setting"
+      },
+      "modal": {
+        "open": "Open dialog",
+        "title": "Sample dialog",
+        "body": "This is how a confirmation dialog looks.",
+        "cancel": "Cancel",
+        "confirm": "Confirm"
+      },
+      "toast": {
+        "info": "Info",
+        "success": "Success",
+        "warning": "Warning",
+        "danger": "Danger",
+        "message": "This is a sample message."
+      },
+      "split": {
+        "empty": "Select one to see its detail.",
+        "item": "Sample {{n}}",
+        "detail": "Detail {{n}}",
+        "body": "Detail content goes here."
+      }
+    }
+  },
+  "auth": {},
+  "terms": {},
+  "patient": {
+    "tabs": {
+      "home": "Home",
+      "monitor": "Monitor",
+      "alerts": "Alerts",
+      "care": "Care",
+      "profile": "Profile"
+    }
+  },
+  "provider": {},
+  "alerts": {},
+  "errors": {}
+}
