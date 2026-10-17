@@ -5,16 +5,19 @@
 //   1. both files contain exactly the expected namespaces,
 //   2. every key in one file exists in the other,
 //   3. every value is a non-empty string,
-//   4. {{placeholders}} are the same in both languages.
+//   4. {{placeholders}} are the same in both languages,
+//   5. every key used in the code (t('...') and labelKey: '...') exists.
 // It does not check that the Filipino is good. That is what
 // docs/FILIPINO_REVIEW.md and your midwife or medical officer are for.
-import { readFileSync } from 'node:fs'
+import { readFileSync, readdirSync, statSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
 const NAMESPACES = ['common', 'auth', 'terms', 'patient', 'provider', 'alerts', 'errors']
 const LANGS = ['en', 'fil']
 const dir = join(dirname(fileURLToPath(import.meta.url)), '..', 'src', 'locales')
+
+const srcDir = join(dirname(fileURLToPath(import.meta.url)), '..', 'src')
 
 const errors = []
 const files = {}
@@ -80,6 +83,35 @@ if (errors.length === 0) {
   for (const key of Object.keys(flat.en)) {
     if (key in flat.fil && placeholders(flat.en[key]) !== placeholders(flat.fil[key])) {
       errors.push(`Placeholders differ for ${key}: en "${placeholders(flat.en[key])}" vs fil "${placeholders(flat.fil[key])}"`)
+    }
+  }
+
+  // 5. Keys used in the code must exist. Static keys are checked exactly.
+  //    A key built with ${...} is checked only by its fixed prefix.
+  const walk = (d) =>
+    readdirSync(d).flatMap((f) => {
+      const p = join(d, f)
+      return statSync(p).isDirectory() ? walk(p) : [p]
+    })
+  const codeFiles = walk(srcDir).filter((f) => /\.jsx?$/.test(f))
+  const patterns = [/\bt\(\s*(['"`])([^'"`]+)\1/g, /labelKey:\s*(['"`])([^'"`]+)\1/g]
+  for (const file of codeFiles) {
+    const text = readFileSync(file, 'utf8')
+    const rel = file.slice(srcDir.length - 3).replace(/\\/g, '/')
+    for (const re of patterns) {
+      for (const m of text.matchAll(re)) {
+        const raw = m[2]
+        const [ns, path] = raw.includes(':') ? raw.split(':') : ['common', raw]
+        const full = `${ns}:${path}`
+        if (raw.includes('${')) {
+          const prefix = `${ns}:${path.split('${')[0]}`
+          if (!Object.keys(flat.en).some((k) => k.startsWith(prefix))) {
+            errors.push(`Used in ${rel} but no key starts with: ${prefix}`)
+          }
+        } else if (!(full in flat.en)) {
+          errors.push(`Used in ${rel} but missing from en.json and fil.json: ${full}`)
+        }
+      }
     }
   }
 }
