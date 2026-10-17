@@ -53,16 +53,29 @@ i18n.on('languageChanged', (lng) => {
   document.documentElement.lang = lng
 })
 
-// The one place a language is chosen. Saves it, then switches. Phase 2 will
-// also save it to the user's profile here.
-export function setLanguage(code) {
-  if (!LANGUAGES.includes(code)) return Promise.resolve()
+// Signed-in users also save their language to their profile. AuthProvider
+// registers the function that does that (kept out of this file so i18n has no
+// dependency on Supabase). The function never throws.
+let languageSaver = null
+export function registerLanguageSaver(fn) {
+  languageSaver = fn
+  return () => {
+    if (languageSaver === fn) languageSaver = null
+  }
+}
+
+// The one place a language is chosen. Saves it on this device, switches, and
+// (when signed in) saves it to the profile. Pass { saveToProfile: false } when
+// the language came FROM the profile, so it is not written straight back.
+export async function setLanguage(code, { saveToProfile = true } = {}) {
+  if (!LANGUAGES.includes(code)) return
   try {
     localStorage.setItem(STORAGE_KEY, code)
   } catch {
     // Not saved this time; the switch below still works for this visit.
   }
-  return i18n.changeLanguage(code)
+  await i18n.changeLanguage(code)
+  if (saveToProfile && languageSaver) await languageSaver(code)
 }
 
 export default i18n

@@ -24,4 +24,21 @@ if (missing.length > 0) {
 const usable = missing.length === 0 && !key.startsWith('sb_secret_')
 
 // null when not configured, so the app still loads instead of crashing.
-export const supabase = usable ? createClient(url, key) : null
+//
+// Auth settings (supabase-js stores and refreshes the session itself; this app
+// never stores or reads tokens):
+//  - flowType 'pkce': email links come back as "?code=..." (a query string),
+//    not as tokens in the "#" part, so they cannot clash with HashRouter.
+//  - storageKey: kyancurvey.github.io is one browser origin shared by all of
+//    the owner's repos, so this app uses its own storage name.
+export const supabase = usable
+  ? createClient(url, key, {
+      auth: {
+        flowType: 'pkce',
+        storageKey: 'nurturelink.auth',
+        persistSession: true,
+        autoRefreshToken: true,
+        detectSessionInUrl: true,
+      },
+    })
+  : null
