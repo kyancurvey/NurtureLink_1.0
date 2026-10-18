@@ -8,6 +8,7 @@ import ForgotPasswordPage from './features/auth/ForgotPasswordPage.jsx'
 import ResetPasswordPage from './features/auth/ResetPasswordPage.jsx'
 import InvitePage from './features/auth/InvitePage.jsx'
 import AdminNoticePage from './features/auth/AdminNoticePage.jsx'
+import ConsentGate from './features/consent/ConsentGate.jsx'
 import PatientApp from './features/patient/PatientApp.jsx'
 import ProviderApp from './features/provider/ProviderApp.jsx'
 import DesignPage from './features/design/DesignPage.jsx'
@@ -20,7 +21,9 @@ import DesignPage from './features/design/DesignPage.jsx'
 //
 // The route guards (RequireRole, PublicOnly) only choose which screen to show.
 // They are for usability, not security: RLS plus grants in the database are the
-// real protection (see guards.jsx).
+// real protection (see guards.jsx). ConsentGate (step 2.4) is the same kind of
+// screen-only check: until the required documents are accepted, the app behind
+// it is not shown.
 export default function App() {
   return (
     <HashRouter>
@@ -35,8 +38,8 @@ export default function App() {
             <Route path="/forgot-password" element={<PublicOnly><ForgotPasswordPage /></PublicOnly>} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
             <Route path="/invite" element={<InvitePage />} />
-            <Route path="/patient/*" element={<RequireRole role="patient"><PatientApp /></RequireRole>} />
-            <Route path="/provider/*" element={<RequireRole role="provider"><ProviderApp /></RequireRole>} />
+            <Route path="/patient/*" element={<RequireRole role="patient"><ConsentGate><PatientApp /></ConsentGate></RequireRole>} />
+            <Route path="/provider/*" element={<RequireRole role="provider"><ConsentGate><ProviderApp /></ConsentGate></RequireRole>} />
             <Route path="/admin" element={<RequireRole role="admin"><AdminNoticePage /></RequireRole>} />
             <Route path="/design/*" element={<DesignPage />} />
             <Route path="*" element={<Navigate to="/" replace />} />
