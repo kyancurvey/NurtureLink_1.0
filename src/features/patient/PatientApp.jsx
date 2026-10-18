@@ -1,7 +1,9 @@
-import { Link, Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { AppShell, TabPlaceholder } from '../../components/layout/index.js'
 import { ActivityIcon, BellIcon, HeartIcon, HomeIcon, UserIcon } from '../../components/ui/index.js'
 import { useT } from '../../lib/useT.js'
+import PrivacyPage from './PrivacyPage.jsx'
+import ProfilePage from './ProfilePage.jsx'
 
 // The patient app: five tabs (bottom bar on phones, sidebar on laptops).
 // Every tab is a placeholder for now; Phase 3 fills them in.
@@ -22,16 +24,8 @@ export default function PatientApp() {
         <Route path="monitor" element={<TabPlaceholder title={t('patient:tabs.monitor')} />} />
         <Route path="alerts" element={<TabPlaceholder title={t('patient:tabs.alerts')} />} />
         <Route path="care" element={<TabPlaceholder title={t('patient:tabs.care')} />} />
-        <Route
-          path="profile"
-          element={
-            <TabPlaceholder title={t('patient:tabs.profile')}>
-              <Link className="nl-auth__link" to="/invite">
-                {t('auth:login.haveInvite')}
-              </Link>
-            </TabPlaceholder>
-          }
-        />
+        <Route path="profile" element={<ProfilePage />} />
+        <Route path="profile/privacy" element={<PrivacyPage />} />
         <Route path="*" element={<Navigate to="/patient" replace />} />
       </Routes>
     </AppShell>
