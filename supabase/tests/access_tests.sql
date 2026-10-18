@@ -162,9 +162,11 @@ begin
     insert into public.validation_pairs (session_id, patient_id, recorded_by, doppler_fhr_bpm) values
       (gen_random_uuid(), a, p1, 140), (gen_random_uuid(), b, p2, 140);
     insert into public.consent_documents (id, doc_type, version, language, title, body, is_published) values
-      (doc_pub,   'terms_of_use',   1, 'en', 'DRAFT test', 'DRAFT, pending ethics/legal review', true),
-      (doc_pub2,  'privacy_notice', 1, 'en', 'DRAFT test', 'DRAFT, pending ethics/legal review', true),
-      (doc_draft, 'terms_of_use',   2, 'en', 'DRAFT test', 'DRAFT, pending ethics/legal review', false);
+      -- Versions 901 and 902 on purpose: the real seed (006) uses version 1, and the
+      -- unique key (doc_type, version, language) would clash with it.
+      (doc_pub,   'terms_of_use',   901, 'en', 'DRAFT test', 'DRAFT, pending ethics/legal review', true),
+      (doc_pub2,  'privacy_notice', 901, 'en', 'DRAFT test', 'DRAFT, pending ethics/legal review', true),
+      (doc_draft, 'terms_of_use',   902, 'en', 'DRAFT test', 'DRAFT, pending ethics/legal review', false);
     insert into public.consent_records (user_id, document_id) values (a, doc_pub), (b, doc_pub);
     insert into public.deletion_requests (patient_id) values (b);
     insert into public.audit_log (actor_id, patient_id, action) values (p1, a, 'seed_row');
