@@ -4,7 +4,7 @@ Copy-paste snippets for the project owner. **Run them only in the Supabase SQL E
 
 Replace every placeholder in `ALL_CAPS_WITH_UNDERSCORES` or in `<angle brackets>` before running. Do not paste real emails, codes or results into chats, screenshots or the repo.
 
-Depends on migrations 000 to 003 having been run.
+Depends on migrations 000 to 003 having been run (snippets 7 to 10 also need 006).
 
 ---
 
@@ -179,3 +179,116 @@ Read the audit trail of threshold changes:
 ```sql
 select created_at, actor_id, details from public.audit_log where action = 'alert_threshold_updated' order by created_at desc;
 ```
+
+---
+
+## 7. Publish the consent documents (version 1)
+
+Migration 006 inserts the 14 DRAFT documents **unpublished**. The app shows only published rows, so until you publish, every patient and provider is stopped at a screen saying the documents are not ready. Publish English and Filipino together (they share a version number).
+
+Look first (expect 14 rows, `is_published = false`):
+
+```sql
+select doc_type, version, language, is_published, published_at
+from public.consent_documents order by doc_type, version, language;
+```
+
+Publish all version-1 documents (for testing, or after the reviewer approves the text):
+
+```sql
+update public.consent_documents
+set is_published = true, published_at = now()
+where version = 1 and not is_published
+returning doc_type, version, language;
+```
+
+Publish one document type only (both languages), for example `privacy_notice`:
+
+```sql
+update public.consent_documents
+set is_published = true, published_at = now()
+where doc_type = 'privacy_notice' and version = 1 and not is_published
+returning doc_type, version, language;
+```
+
+**Never edit the text of a published row and never set it back to unpublished once someone has accepted it.** The accepted text is the evidence of what people agreed to, and an unpublished version hides the person's own record of it (their Privacy page would show "text not available"). Use snippet 8 instead. Drafts that are still unpublished can be edited freely (edit 006 and re-run it, or use `update ... where not is_published`).
+
+Not legal advice: do not publish for real users until a Philippine lawyer or the Data Protection Officer has approved the text and every `[placeholder]` is filled in.
+
+---
+
+## 8. Publish a NEW version of a document (everyone is asked again)
+
+Insert the new text as version N+1 in both languages, check it, then publish. As soon as it is published, every user whose accepted version is older sees the consent screen again, showing only the changed document (marked "Updated version"). Replace the type, the version and both texts.
+
+```sql
+insert into public.consent_documents (doc_type, version, language, title, body, is_published)
+values
+  ('privacy_notice', 2, 'en',  'Privacy Notice (Data Privacy Act, RA 10173)', $nl$NEW ENGLISH TEXT$nl$, false),
+  ('privacy_notice', 2, 'fil', 'Paunawa sa Privacy (Data Privacy Act, RA 10173)', $nl$BAGONG TEKSTO SA FILIPINO$nl$, false)
+returning doc_type, version, language, is_published;
+```
+
+Publish it (both languages in one statement):
+
+```sql
+update public.consent_documents
+set is_published = true, published_at = now()
+where doc_type = 'privacy_notice' and version = 2
+returning doc_type, version, language, is_published;
+```
+
+---
+
+## 9. List deletion requests
+
+Patients file these in the app (Profile > Privacy). The oldest pending ones come first.
+
+```sql
+select dr.id, dr.status, dr.requested_at, dr.completed_at, dr.note,
+       dr.patient_id, u.email
+from public.deletion_requests dr
+left join auth.users u on u.id = dr.patient_id
+order by (dr.status = 'pending') desc, dr.requested_at;
+```
+
+---
+
+## 10. Handle a deletion request
+
+The target response time is a placeholder (`[X DAYS]`) until the reviewer sets it. Do not paste real emails or results into chats or the repo.
+
+**A. Complete it** (deletes the account and everything linked to it). Replace `REQUEST_UUID`. **Order matters: mark the request completed FIRST.** Once the account is deleted the request's `patient_id` becomes empty and you could no longer find it.
+
+```sql
+-- 1. Mark it completed and note which account it was (expect 1 row)
+update public.deletion_requests
+set status = 'completed', completed_at = now()
+where id = 'REQUEST_UUID' and status = 'pending'
+returning id, status, patient_id;
+
+-- 2. Delete the account. This removes the profile, pregnancy details, devices,
+--    readings, alerts, appointments, notes, validation pairs and consent
+--    records linked to it. The deletion request itself stays as proof.
+delete from auth.users
+where id = (select patient_id from public.deletion_requests where id = 'REQUEST_UUID');
+```
+
+Check afterwards (expect `patient_id` empty and status `completed`):
+
+```sql
+select id, status, patient_id, completed_at from public.deletion_requests where id = 'REQUEST_UUID';
+```
+
+Rows in `audit_log` that name this person keep their entry but the person's id is cleared. Whether any records must be kept by law (and for how long) is a question for the reviewing lawyer.
+
+**B. Decline it** (the table has no reason column; keep the reason in your own notes, and tell the person):
+
+```sql
+update public.deletion_requests
+set status = 'declined', completed_at = now()
+where id = 'REQUEST_UUID' and status = 'pending'
+returning id, status;
+```
+
+After a decline the patient can file a new request.

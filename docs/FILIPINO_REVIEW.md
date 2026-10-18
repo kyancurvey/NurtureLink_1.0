@@ -1,7 +1,7 @@
 # Filipino wording review
 
 **Status: DRAFT, pending review by the midwife or medical officer.**
-Last generated: 2026-10-17, from `src/locales/en.json` and `src/locales/fil.json` (137 strings).
+Last generated: 2026-10-18, from `src/locales/en.json` and `src/locales/fil.json` (218 strings; the 81 added in step 2.4 are in section 5).
 
 NurtureLink is a monitoring and screening prototype, not a diagnostic device. The Filipino text was written in plain, calm wording. It has **not** been checked by a clinician yet.
 
@@ -198,6 +198,94 @@ Calm wording on purpose. Please read each as a worried person would.
 | 32 | `common:emptyState.body` | This part of NurtureLink is still being built. Please check back soon. | Ginagawa pa ang bahaging ito ng NurtureLink. Bumalik muli sa lalong madaling panahon. | - |  | |
 | 33 | `errors:email_not_authorized` | Our email service cannot send to this address yet. Please tell the project owner. | Hindi pa makapagpadala ng email ang aming serbisyo sa address na ito. Pakisabi sa may-ari ng proyekto. | - | Shown when Supabase's built-in email refuses an address (project owner must set up custom email). | |
 
+## 5. Terms and consent screens (step 2.4)
+
+Wording of the consent screen, the Profile > Privacy page and the data-deletion request. **Consent and withdrawal wording also needs the ethics/legal reviewer**, not only the Filipino reviewer. The 14 consent DOCUMENTS themselves (terms, privacy notice, informed consent, medical disclaimer, guardian assent, study data, provider confidentiality) are stored in the database by `supabase/migrations/006_consent_documents_seed.sql`, not in the locale files; their Filipino text is also a DRAFT and should be reviewed together with the English by the same people.
+
+| # | Key | English | Filipino | Flag | Notes for the reviewer | Reviewer: OK or better wording |
+|---|---|---|---|---|---|---|
+| 1 | `terms:saving` | Saving… | Sine-save… | - |  | |
+| 2 | `terms:item.required` | Required | Kinakailangan | - |  | |
+| 3 | `terms:item.optional` | Optional | Opsyonal | - |  | |
+| 4 | `terms:item.updated` | Updated version | Bagong bersyon | - |  | |
+| 5 | `terms:item.version` | Version {{version}} | Bersyon {{version}} | - |  | |
+| 6 | `terms:item.fallback` | This item is not available in {{wanted}} yet. It is shown in {{shown}}. | Wala pa ang aytem na ito sa wikang {{wanted}}. Ipinapakita ito sa wikang {{shown}}. | - |  | |
+| 7 | `terms:item.read` | Read the full text | Basahin ang buong teksto | - |  | |
+| 8 | `terms:item.hide` | Hide the text | Itago ang teksto | - |  | |
+| 9 | `terms:item.agree` | I agree: {{title}} | Sumasang-ayon ako: {{title}} | - |  | |
+| 10 | `terms:gate.title` | Before you start | Bago ka magsimula | - |  | |
+| 11 | `terms:gate.intro` | Please read each item and tick its box to agree. You need to agree to every required item to use NurtureLink. | Basahin ang bawat aytem at tsekan ang kahon nito kung sumasang-ayon ka. Kailangan mong sumang-ayon sa bawat kinakailangang aytem para magamit ang NurtureLink. | CONSENT WORDING |  | |
+| 12 | `terms:gate.languageHint` | The text follows the language you pick with the EN | FIL button at the top. | Sumusunod ang teksto sa wikang pipiliin mo gamit ang EN | FIL na button sa itaas. | - |  | |
+| 13 | `terms:gate.updated` | Some documents have changed. Please read and accept the new versions. | May mga dokumentong nagbago. Basahin at tanggapin ang mga bagong bersyon. | - |  | |
+| 14 | `terms:gate.languageChanged` | You changed the language, so the boxes were cleared. Please tick them again so that what we save matches the text you read. | Binago mo ang wika kaya nabura ang mga tsek. Tsekan muli ang mga ito para tumugma ang itatabi namin sa tekstong binasa mo. | - |  | |
+| 15 | `terms:gate.requiredHeading` | Required | Kinakailangan | - |  | |
+| 16 | `terms:gate.optionalHeading` | Optional | Opsyonal | - |  | |
+| 17 | `terms:gate.optionalHint` | This item is optional. You can use NurtureLink without it. | Opsyonal ang aytem na ito. Magagamit mo ang NurtureLink kahit wala ito. | - |  | |
+| 18 | `terms:gate.remaining` | Boxes still to tick: {{n}} | Mga kahon na kailangan pang tsekan: {{n}} | - |  | |
+| 19 | `terms:gate.continue` | Continue | Magpatuloy | - |  | |
+| 20 | `terms:exit.title` | Not ready to agree? | Hindi pa handang sumang-ayon? | - |  | |
+| 21 | `terms:exit.body` | You can log out at any time using the button at the top. You can also ask us to delete your data. | Maaari kang mag-log out anumang oras gamit ang button sa itaas. Maaari mo ring hilingin na burahin namin ang iyong datos. | - |  | |
+| 22 | `terms:loadError.title` | We could not load the documents | Hindi namin ma-load ang mga dokumento | - |  | |
+| 23 | `terms:unavailable.title` | The documents are not ready yet | Hindi pa handa ang mga dokumento | - |  | |
+| 24 | `terms:unavailable.body` | NurtureLink cannot ask for your agreement yet because the documents have not been published. Please tell the project owner, then try again. | Hindi pa maaaring hingin ng NurtureLink ang iyong pagsang-ayon dahil hindi pa nailalathala ang mga dokumento. Sabihin sa may-ari ng proyekto, pagkatapos ay subukan muli. | - |  | |
+| 25 | `terms:delete.title` | Request data deletion | Humiling na burahin ang datos | - |  | |
+| 26 | `terms:delete.body` | You can ask us to delete your account and the data linked to it. The project team reviews each request, and you can follow its status here. | Maaari mong hilingin na burahin namin ang iyong account at ang datos na kaugnay nito. Susuriin ng project team ang bawat kahilingan at makikita mo rito ang status nito. | - |  | |
+| 27 | `terms:delete.button` | Request data deletion | Humiling na burahin ang datos | - |  | |
+| 28 | `terms:delete.sent` | Your request was sent. | Naipadala ang iyong kahilingan. | - |  | |
+| 29 | `terms:delete.status.pending` | Your request is waiting for review. | Naghihintay ng pagsusuri ang iyong kahilingan. | - |  | |
+| 30 | `terms:delete.status.completed` | Your request was completed. | Natapos na ang iyong kahilingan. | - |  | |
+| 31 | `terms:delete.status.declined` | Your request was declined. | Tinanggihan ang iyong kahilingan. | - |  | |
+| 32 | `terms:delete.requestedOn` | Requested on {{date}}. | Hiniling noong {{date}}. | - |  | |
+| 33 | `terms:delete.pendingNote` | You already have a request waiting. You do not need to send another. | May naghihintay ka nang kahilingan. Hindi mo na kailangang magpadala ng isa pa. | - |  | |
+| 34 | `terms:delete.modal.title` | Ask us to delete your data? | Hihilingin mo bang burahin ang iyong datos? | - |  | |
+| 35 | `terms:delete.modal.warning` | If your data is deleted, you lose your account, your readings and your history in NurtureLink. This cannot be undone. Some records may have to be kept if the law requires it. | Kapag nabura ang iyong datos, mawawala ang iyong account, mga reading at kasaysayan sa NurtureLink. Hindi na ito maibabalik. Maaaring may mga record na kailangang itago kung hinihingi ng batas. | CONSENT WORDING (priority) |  | |
+| 36 | `terms:delete.modal.noteLabel` | Anything you want us to know (optional) | May gusto ka bang sabihin sa amin? (opsyonal) | - |  | |
+| 37 | `terms:delete.modal.noteHint` | Please do not write health details here. Up to 1000 characters. | Huwag magsulat dito ng mga detalye tungkol sa kalusugan. Hanggang 1000 karakter. | - |  | |
+| 38 | `terms:delete.modal.cancel` | Cancel | Kanselahin | - |  | |
+| 39 | `terms:delete.modal.confirm` | Send request | Ipadala ang kahilingan | - |  | |
+| 40 | `patient:profile.privacyLink` | Privacy and consent | Privacy at pahintulot | - |  | |
+| 41 | `patient:profile.privacyHint` | What you agreed to, a copy to download, withdrawing, and data deletion | Ang sinang-ayunan mo, kopyang ida-download, pag-atras, at pagbura ng datos | - |  | |
+| 42 | `patient:privacy.title` | Privacy and consent | Privacy at pahintulot | - |  | |
+| 43 | `patient:privacy.subtitle` | See what you agreed to, download a copy, withdraw a consent, or ask us to delete your data. | Tingnan ang sinang-ayunan mo, mag-download ng kopya, bawiin ang pahintulot, o hilingin na burahin ang iyong datos. | - |  | |
+| 44 | `patient:privacy.backToProfile` | Back to Profile | Bumalik sa Profile | - |  | |
+| 45 | `patient:privacy.loading` | Loading… | Naglo-load… | - |  | |
+| 46 | `patient:privacy.accepted.title` | What you agreed to | Ang sinang-ayunan mo | - |  | |
+| 47 | `patient:privacy.accepted.empty` | You have not agreed to any documents yet. | Wala ka pang sinasang-ayunang dokumento. | - |  | |
+| 48 | `patient:privacy.record.meta` | Version {{version}} · {{language}} · Agreed on {{date}} | Bersyon {{version}} · {{language}} · Sinang-ayunan noong {{date}} | - |  | |
+| 49 | `patient:privacy.record.active` | Active | Aktibo | - |  | |
+| 50 | `patient:privacy.record.withdrawnOn` | Withdrawn on {{date}} | Binawi noong {{date}} | - |  | |
+| 51 | `patient:privacy.record.textUnavailable` | The text of this version is not available any more. | Wala na ang teksto ng bersyong ito. | - |  | |
+| 52 | `patient:privacy.withdraw.button` | Withdraw | Bawiin | - |  | |
+| 53 | `patient:privacy.withdraw.title` | Withdraw your consent? | Babawiin mo ba ang iyong pahintulot? | - |  | |
+| 54 | `patient:privacy.withdraw.warningRequired` | If you withdraw this, NurtureLink stops working for you. Monitoring, alerts and sharing your readings with your provider stop. You will go straight to the consent screen, and you can use the app again only after you agree again. | Kapag binawi mo ito, titigil ang paggana ng NurtureLink para sa iyo. Titigil ang pagsubaybay, ang mga abiso, at ang pagbabahagi ng iyong mga reading sa iyong provider. Dadalhin ka agad sa screen ng pahintulot, at magagamit mo lamang muli ang app pagkatapos mong sumang-ayon ulit. | HEALTH / CONSENT WORDING (priority) |  | |
+| 55 | `patient:privacy.withdraw.warningStudy` | We will stop using your anonymized data for the study from now on. Data that was already combined into results may not be possible to take out. The rest of NurtureLink keeps working. | Ititigil na namin ang paggamit ng iyong anonymized na datos para sa pag-aaral mula ngayon. Maaaring hindi na maalis ang datos na naisama na sa mga resulta. Patuloy na gagana ang iba pang bahagi ng NurtureLink. | CONSENT WORDING (priority) |  | |
+| 56 | `patient:privacy.withdraw.cancel` | Keep it | Panatilihin | - |  | |
+| 57 | `patient:privacy.withdraw.confirm` | Yes, withdraw | Oo, bawiin | - |  | |
+| 58 | `patient:privacy.withdraw.done` | Your consent was withdrawn. | Nabawi ang iyong pahintulot. | - |  | |
+| 59 | `patient:privacy.withdraw.nothingChanged` | This consent was already withdrawn. | Nabawi na ang pahintulot na ito. | - |  | |
+| 60 | `patient:privacy.study.title` | Study data (optional) | Datos para sa pag-aaral (opsyonal) | - |  | |
+| 61 | `patient:privacy.study.off` | You have not agreed to this. It is optional. | Hindi ka pa pumapayag dito. Opsyonal ito. | - |  | |
+| 62 | `patient:privacy.study.button` | Read and agree | Basahin at sumang-ayon | - |  | |
+| 63 | `patient:privacy.study.cancel` | Cancel | Kanselahin | - |  | |
+| 64 | `patient:privacy.study.confirm` | I agree | Sumasang-ayon ako | - |  | |
+| 65 | `patient:privacy.study.done` | Thank you. Your agreement was saved. | Salamat. Nai-save ang iyong pagsang-ayon. | - |  | |
+| 66 | `patient:privacy.history.title` | Withdrawn consents | Mga binawing pahintulot | - |  | |
+| 67 | `patient:privacy.download.title` | Download a copy | Mag-download ng kopya | - |  | |
+| 68 | `patient:privacy.download.body` | Save a text file with your consent history: what you agreed to, which version, in which language, and when. | Mag-save ng text file ng iyong kasaysayan ng pahintulot: ang sinang-ayunan mo, anong bersyon, sa anong wika, at kailan. | - |  | |
+| 69 | `patient:privacy.download.button` | Download my consents | I-download ang aking mga pahintulot | - |  | |
+| 70 | `patient:privacy.file.title` | NurtureLink: my consent record | NurtureLink: ang aking talaan ng pahintulot | - |  | |
+| 71 | `patient:privacy.file.created` | Created: {{date}} | Ginawa: {{date}} | - |  | |
+| 72 | `patient:privacy.file.draftNote` | Some of these documents are DRAFT texts that are still waiting for ethics and legal review. | Ang ilan sa mga dokumentong ito ay DRAFT na teksto na naghihintay pa ng pagsusuri ng ethics at legal. | - |  | |
+| 73 | `patient:privacy.file.none` | You have not agreed to any documents yet. | Wala ka pang sinasang-ayunang dokumento. | - |  | |
+| 74 | `patient:privacy.file.unknownDocument` | Document (text no longer available) | Dokumento (wala na ang teksto) | - |  | |
+| 75 | `patient:privacy.file.type` | Type | Uri | - |  | |
+| 76 | `patient:privacy.file.version` | Version | Bersyon | - |  | |
+| 77 | `patient:privacy.file.language` | Language | Wika | - |  | |
+| 78 | `patient:privacy.file.accepted` | Agreed | Sinang-ayunan | - |  | |
+| 79 | `patient:privacy.file.withdrawn` | Withdrawn | Binawi | - |  | |
+| 80 | `patient:privacy.file.status` | Status | Status | - |  | |
+| 81 | `patient:privacy.file.active` | Active | Aktibo | - |  | |
+
 ## Not yet written (later steps)
 
-Terms and consent, Privacy Notice, guardian assent text, alerts text, patient and provider screen content. Each will be added here as it is written. Consent and legal text also needs ethics/legal review (see `PLAN.md`, open items).
+Alerts text and patient and provider screen content. Each will be added here as it is written. Consent and legal text also needs ethics/legal review (see `PLAN.md`, open items).
