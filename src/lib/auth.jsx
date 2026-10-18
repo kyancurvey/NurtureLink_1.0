@@ -2,6 +2,7 @@ import { createContext, useCallback, useContext, useEffect, useMemo, useRef, use
 import { supabase } from './supabase.js'
 import i18n, { LANGUAGES, registerLanguageSaver, setLanguage } from './i18n.js'
 import { getLinkError } from './authLink.js'
+import { AUDIT, writeAudit } from './audit.js'
 
 // AuthProvider: the one place that knows who is signed in.
 //
@@ -14,6 +15,26 @@ import { getLinkError } from './authLink.js'
 // Components read it with useAuth().
 
 const AuthContext = createContext(null)
+
+// A provider's login is written to the audit log once per browser tab session,
+// not on every page reload or token refresh. sessionStorage can be blocked, so
+// every access is wrapped; without it the entry is simply written once per page load.
+const LOGIN_AUDIT_KEY = 'nurturelink.audit.login'
+function loginAlreadyLogged(userId) {
+  try {
+    return sessionStorage.getItem(LOGIN_AUDIT_KEY) === userId
+  } catch {
+    return false
+  }
+}
+function markLoginLogged(userId) {
+  try {
+    if (userId) sessionStorage.setItem(LOGIN_AUDIT_KEY, userId)
+    else sessionStorage.removeItem(LOGIN_AUDIT_KEY)
+  } catch {
+    // Not remembered; the worst case is one extra audit row.
+  }
+}
 
 export function useAuth() {
   const ctx = useContext(AuthContext)
@@ -43,6 +64,7 @@ export function AuthProvider({ children }) {
   const [linkError, setLinkError] = useState(getLinkError) // expired or invalid email link
   const [notice, setNotice] = useState(null) // an error to show (for example language not saved)
   const syncedFor = useRef(null) // user whose language was already applied
+  const auditedFor = useRef(null) // provider whose login was already written to the audit log
 
   const userId = session?.user?.id ?? null
 
@@ -57,7 +79,10 @@ export function AuthProvider({ children }) {
       setSession(next)
       setReady(true)
       if (event === 'PASSWORD_RECOVERY') setRecovery(true)
-      if (event === 'SIGNED_OUT') setRecovery(false)
+      if (event === 'SIGNED_OUT') {
+        setRecovery(false)
+        markLoginLogged(null)
+      }
     })
     supabase.auth.getSession().then(({ data: current }) => {
       if (!gotEvent) setSession(current.session)
@@ -107,6 +132,22 @@ export function AuthProvider({ children }) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profile, userId])
+
+  // 4. Audit: a provider's login is logged (action 'provider_login'). Failure
+  // (for example offline) is ignored here; the next page load tries again.
+  const providerId = profile?.role === 'provider' ? profile.id : null
+  useEffect(() => {
+    if (!providerId) {
+      auditedFor.current = null
+      return
+    }
+    if (auditedFor.current === providerId) return
+    auditedFor.current = providerId
+    if (loginAlreadyLogged(providerId)) return
+    writeAudit(AUDIT.PROVIDER_LOGIN).then(({ ok }) => {
+      if (ok) markLoginLogged(providerId)
+    })
+  }, [providerId])
 
   // Saves the language through set_my_language (migration 002). That function
   // changes only profiles.language, so the app needs no update right on the table.
