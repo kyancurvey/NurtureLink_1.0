@@ -151,7 +151,63 @@
       "body": "Ito ang admin account. Ginagawa ang mga gawain ng admin sa Supabase SQL Editor, hindi sa app na ito. Gumamit ng account ng pasyente o provider para subukan ang app."
     }
   },
-  "terms": {},
+  "terms": {
+    "saving": "Sine-save…",
+    "item": {
+      "required": "Kinakailangan",
+      "optional": "Opsyonal",
+      "updated": "Bagong bersyon",
+      "version": "Bersyon {{version}}",
+      "fallback": "Wala pa ang aytem na ito sa wikang {{wanted}}. Ipinapakita ito sa wikang {{shown}}.",
+      "read": "Basahin ang buong teksto",
+      "hide": "Itago ang teksto",
+      "agree": "Sumasang-ayon ako: {{title}}"
+    },
+    "gate": {
+      "title": "Bago ka magsimula",
+      "intro": "Basahin ang bawat aytem at tsekan ang kahon nito kung sumasang-ayon ka. Kailangan mong sumang-ayon sa bawat kinakailangang aytem para magamit ang NurtureLink.",
+      "languageHint": "Sumusunod ang teksto sa wikang pipiliin mo gamit ang EN | FIL na button sa itaas.",
+      "updated": "May mga dokumentong nagbago. Basahin at tanggapin ang mga bagong bersyon.",
+      "languageChanged": "Binago mo ang wika kaya nabura ang mga tsek. Tsekan muli ang mga ito para tumugma ang itatabi namin sa tekstong binasa mo.",
+      "requiredHeading": "Kinakailangan",
+      "optionalHeading": "Opsyonal",
+      "optionalHint": "Opsyonal ang aytem na ito. Magagamit mo ang NurtureLink kahit wala ito.",
+      "remaining": "Mga kahon na kailangan pang tsekan: {{n}}",
+      "continue": "Magpatuloy"
+    },
+    "exit": {
+      "title": "Hindi pa handang sumang-ayon?",
+      "body": "Maaari kang mag-log out anumang oras gamit ang button sa itaas. Maaari mo ring hilingin na burahin namin ang iyong datos."
+    },
+    "loadError": {
+      "title": "Hindi namin ma-load ang mga dokumento"
+    },
+    "unavailable": {
+      "title": "Hindi pa handa ang mga dokumento",
+      "body": "Hindi pa maaaring hingin ng NurtureLink ang iyong pagsang-ayon dahil hindi pa nailalathala ang mga dokumento. Sabihin sa may-ari ng proyekto, pagkatapos ay subukan muli."
+    },
+    "delete": {
+      "title": "Humiling na burahin ang datos",
+      "body": "Maaari mong hilingin na burahin namin ang iyong account at ang datos na kaugnay nito. Susuriin ng project team ang bawat kahilingan at makikita mo rito ang status nito.",
+      "button": "Humiling na burahin ang datos",
+      "sent": "Naipadala ang iyong kahilingan.",
+      "status": {
+        "pending": "Naghihintay ng pagsusuri ang iyong kahilingan.",
+        "completed": "Natapos na ang iyong kahilingan.",
+        "declined": "Tinanggihan ang iyong kahilingan."
+      },
+      "requestedOn": "Hiniling noong {{date}}.",
+      "pendingNote": "May naghihintay ka nang kahilingan. Hindi mo na kailangang magpadala ng isa pa.",
+      "modal": {
+        "title": "Hihilingin mo bang burahin ang iyong datos?",
+        "warning": "Kapag nabura ang iyong datos, mawawala ang iyong account, mga reading at kasaysayan sa NurtureLink. Hindi na ito maibabalik. Maaaring may mga record na kailangang itago kung hinihingi ng batas.",
+        "noteLabel": "May gusto ka bang sabihin sa amin? (opsyonal)",
+        "noteHint": "Huwag magsulat dito ng mga detalye tungkol sa kalusugan. Hanggang 1000 karakter.",
+        "cancel": "Kanselahin",
+        "confirm": "Ipadala ang kahilingan"
+      }
+    }
+  },
   "patient": {
     "tabs": {
       "home": "Tahanan",
@@ -159,6 +215,66 @@
       "alerts": "Abiso",
       "care": "Konsulta",
       "profile": "Ako"
+    },
+    "profile": {
+      "privacyLink": "Privacy at pahintulot",
+      "privacyHint": "Ang sinang-ayunan mo, kopyang ida-download, pag-atras, at pagbura ng datos"
+    },
+    "privacy": {
+      "title": "Privacy at pahintulot",
+      "subtitle": "Tingnan ang sinang-ayunan mo, mag-download ng kopya, bawiin ang pahintulot, o hilingin na burahin ang iyong datos.",
+      "backToProfile": "Bumalik sa Profile",
+      "loading": "Naglo-load…",
+      "accepted": {
+        "title": "Ang sinang-ayunan mo",
+        "empty": "Wala ka pang sinasang-ayunang dokumento."
+      },
+      "record": {
+        "meta": "Bersyon {{version}} · {{language}} · Sinang-ayunan noong {{date}}",
+        "active": "Aktibo",
+        "withdrawnOn": "Binawi noong {{date}}",
+        "textUnavailable": "Wala na ang teksto ng bersyong ito."
+      },
+      "withdraw": {
+        "button": "Bawiin",
+        "title": "Babawiin mo ba ang iyong pahintulot?",
+        "warningRequired": "Kapag binawi mo ito, titigil ang paggana ng NurtureLink para sa iyo. Titigil ang pagsubaybay, ang mga abiso, at ang pagbabahagi ng iyong mga reading sa iyong provider. Dadalhin ka agad sa screen ng pahintulot, at magagamit mo lamang muli ang app pagkatapos mong sumang-ayon ulit.",
+        "warningStudy": "Ititigil na namin ang paggamit ng iyong anonymized na datos para sa pag-aaral mula ngayon. Maaaring hindi na maalis ang datos na naisama na sa mga resulta. Patuloy na gagana ang iba pang bahagi ng NurtureLink.",
+        "cancel": "Panatilihin",
+        "confirm": "Oo, bawiin",
+        "done": "Nabawi ang iyong pahintulot.",
+        "nothingChanged": "Nabawi na ang pahintulot na ito."
+      },
+      "study": {
+        "title": "Datos para sa pag-aaral (opsyonal)",
+        "off": "Hindi ka pa pumapayag dito. Opsyonal ito.",
+        "button": "Basahin at sumang-ayon",
+        "cancel": "Kanselahin",
+        "confirm": "Sumasang-ayon ako",
+        "done": "Salamat. Nai-save ang iyong pagsang-ayon."
+      },
+      "history": {
+        "title": "Mga binawing pahintulot"
+      },
+      "download": {
+        "title": "Mag-download ng kopya",
+        "body": "Mag-save ng text file ng iyong kasaysayan ng pahintulot: ang sinang-ayunan mo, anong bersyon, sa anong wika, at kailan.",
+        "button": "I-download ang aking mga pahintulot"
+      },
+      "file": {
+        "title": "NurtureLink: ang aking talaan ng pahintulot",
+        "created": "Ginawa: {{date}}",
+        "draftNote": "Ang ilan sa mga dokumentong ito ay DRAFT na teksto na naghihintay pa ng pagsusuri ng ethics at legal.",
+        "none": "Wala ka pang sinasang-ayunang dokumento.",
+        "unknownDocument": "Dokumento (wala na ang teksto)",
+        "type": "Uri",
+        "version": "Bersyon",
+        "language": "Wika",
+        "accepted": "Sinang-ayunan",
+        "withdrawn": "Binawi",
+        "status": "Status",
+        "active": "Aktibo"
+      }
     }
   },
   "provider": {

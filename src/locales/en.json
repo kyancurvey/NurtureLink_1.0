@@ -151,7 +151,63 @@
       "body": "This is the admin account. Admin tasks are done in the Supabase SQL Editor, not in this app. Use a patient or provider account to try the app."
     }
   },
-  "terms": {},
+  "terms": {
+    "saving": "Saving…",
+    "item": {
+      "required": "Required",
+      "optional": "Optional",
+      "updated": "Updated version",
+      "version": "Version {{version}}",
+      "fallback": "This item is not available in {{wanted}} yet. It is shown in {{shown}}.",
+      "read": "Read the full text",
+      "hide": "Hide the text",
+      "agree": "I agree: {{title}}"
+    },
+    "gate": {
+      "title": "Before you start",
+      "intro": "Please read each item and tick its box to agree. You need to agree to every required item to use NurtureLink.",
+      "languageHint": "The text follows the language you pick with the EN | FIL button at the top.",
+      "updated": "Some documents have changed. Please read and accept the new versions.",
+      "languageChanged": "You changed the language, so the boxes were cleared. Please tick them again so that what we save matches the text you read.",
+      "requiredHeading": "Required",
+      "optionalHeading": "Optional",
+      "optionalHint": "This item is optional. You can use NurtureLink without it.",
+      "remaining": "Boxes still to tick: {{n}}",
+      "continue": "Continue"
+    },
+    "exit": {
+      "title": "Not ready to agree?",
+      "body": "You can log out at any time using the button at the top. You can also ask us to delete your data."
+    },
+    "loadError": {
+      "title": "We could not load the documents"
+    },
+    "unavailable": {
+      "title": "The documents are not ready yet",
+      "body": "NurtureLink cannot ask for your agreement yet because the documents have not been published. Please tell the project owner, then try again."
+    },
+    "delete": {
+      "title": "Request data deletion",
+      "body": "You can ask us to delete your account and the data linked to it. The project team reviews each request, and you can follow its status here.",
+      "button": "Request data deletion",
+      "sent": "Your request was sent.",
+      "status": {
+        "pending": "Your request is waiting for review.",
+        "completed": "Your request was completed.",
+        "declined": "Your request was declined."
+      },
+      "requestedOn": "Requested on {{date}}.",
+      "pendingNote": "You already have a request waiting. You do not need to send another.",
+      "modal": {
+        "title": "Ask us to delete your data?",
+        "warning": "If your data is deleted, you lose your account, your readings and your history in NurtureLink. This cannot be undone. Some records may have to be kept if the law requires it.",
+        "noteLabel": "Anything you want us to know (optional)",
+        "noteHint": "Please do not write health details here. Up to 1000 characters.",
+        "cancel": "Cancel",
+        "confirm": "Send request"
+      }
+    }
+  },
   "patient": {
     "tabs": {
       "home": "Home",
@@ -159,6 +215,66 @@
       "alerts": "Alerts",
       "care": "Care",
       "profile": "Profile"
+    },
+    "profile": {
+      "privacyLink": "Privacy and consent",
+      "privacyHint": "What you agreed to, a copy to download, withdrawing, and data deletion"
+    },
+    "privacy": {
+      "title": "Privacy and consent",
+      "subtitle": "See what you agreed to, download a copy, withdraw a consent, or ask us to delete your data.",
+      "backToProfile": "Back to Profile",
+      "loading": "Loading…",
+      "accepted": {
+        "title": "What you agreed to",
+        "empty": "You have not agreed to any documents yet."
+      },
+      "record": {
+        "meta": "Version {{version}} · {{language}} · Agreed on {{date}}",
+        "active": "Active",
+        "withdrawnOn": "Withdrawn on {{date}}",
+        "textUnavailable": "The text of this version is not available any more."
+      },
+      "withdraw": {
+        "button": "Withdraw",
+        "title": "Withdraw your consent?",
+        "warningRequired": "If you withdraw this, NurtureLink stops working for you. Monitoring, alerts and sharing your readings with your provider stop. You will go straight to the consent screen, and you can use the app again only after you agree again.",
+        "warningStudy": "We will stop using your anonymized data for the study from now on. Data that was already combined into results may not be possible to take out. The rest of NurtureLink keeps working.",
+        "cancel": "Keep it",
+        "confirm": "Yes, withdraw",
+        "done": "Your consent was withdrawn.",
+        "nothingChanged": "This consent was already withdrawn."
+      },
+      "study": {
+        "title": "Study data (optional)",
+        "off": "You have not agreed to this. It is optional.",
+        "button": "Read and agree",
+        "cancel": "Cancel",
+        "confirm": "I agree",
+        "done": "Thank you. Your agreement was saved."
+      },
+      "history": {
+        "title": "Withdrawn consents"
+      },
+      "download": {
+        "title": "Download a copy",
+        "body": "Save a text file with your consent history: what you agreed to, which version, in which language, and when.",
+        "button": "Download my consents"
+      },
+      "file": {
+        "title": "NurtureLink: my consent record",
+        "created": "Created: {{date}}",
+        "draftNote": "Some of these documents are DRAFT texts that are still waiting for ethics and legal review.",
+        "none": "You have not agreed to any documents yet.",
+        "unknownDocument": "Document (text no longer available)",
+        "type": "Type",
+        "version": "Version",
+        "language": "Language",
+        "accepted": "Agreed",
+        "withdrawn": "Withdrawn",
+        "status": "Status",
+        "active": "Active"
+      }
     }
   },
   "provider": {
