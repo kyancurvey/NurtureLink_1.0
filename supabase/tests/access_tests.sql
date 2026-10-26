@@ -28,7 +28,8 @@
 -- WHAT TO SEND BACK IF ANYTHING FAILS: the SUMMARY row and every FAIL row
 -- (test and detail columns), as text or an export. Nothing else.
 --
--- DEPENDS ON: 000 to 005 already run. READ-ONLY for your real data.
+-- DEPENDS ON: 000 to 005 and 008 already run (the reading-time checks need 008).
+-- READ-ONLY for your real data.
 -- SAFE TO RE-RUN: yes, any number of times.
 -- HOW TO UNDO: nothing to undo; the helper functions live only in this session.
 --
@@ -150,10 +151,10 @@ begin
     insert into public.pregnancy_profiles (patient_id, assigned_provider_id, due_date) values
       (a, p1, current_date + 100), (b, p2, current_date + 100), (c, null, current_date + 100);
     insert into public.devices (id, patient_id, kind) values (dev_a, a, 'belt'), (dev_b, b, 'belt');
-    insert into public.belt_readings (patient_id, fetal_hr_bpm, source, measured_at) values (a, 140, 'simulator', timestamp '2029-01-01 00:00+00');
-    insert into public.belt_readings (id, patient_id, fetal_hr_bpm, source, measured_at) values (belt_b, b, 140, 'simulator', timestamp '2029-01-01 00:00+00');
+    insert into public.belt_readings (patient_id, fetal_hr_bpm, source, measured_at) values (a, 140, 'simulator', now() - interval '10 days');
+    insert into public.belt_readings (id, patient_id, fetal_hr_bpm, source, measured_at) values (belt_b, b, 140, 'simulator', now() - interval '10 days');
     insert into public.maternal_vitals (patient_id, spo2_percent, source, measured_at) values
-      (a, 98, 'simulator', timestamp '2029-01-01 00:00+00'), (b, 98, 'simulator', timestamp '2029-01-01 00:00+00');
+      (a, 98, 'simulator', now() - interval '10 days'), (b, 98, 'simulator', now() - interval '10 days');
     insert into public.alerts (patient_id, alert_type, severity) values (a, 'low_spo2', 'warning'), (b, 'fever', 'warning');
     insert into public.appointments (id, patient_id, provider_id, starts_at, status) values
       (appt_a, a, p1, now() + interval '1 day', 'scheduled'), (appt_b, b, p2, now() + interval '1 day', 'scheduled');
@@ -205,7 +206,8 @@ begin
     r := r || pg_temp.ck('anon call set_my_language() is permission denied', pg_temp.x($q$select public.set_my_language('en')$q$, null, 'anon') like 'ERR 42501 permission denied for function%');
 
     for m in select unnest(array['handle_new_user()', 'create_alerts_from_reading()', 'guard_profile_role()',
-                                 'set_updated_at()', 'guard_threshold_update()', 'nl_enable_rls_on_new_tables()'])
+                                 'set_updated_at()', 'guard_threshold_update()', 'nl_enable_rls_on_new_tables()',
+                                 'guard_reading_time()'])
     loop
       r := r || pg_temp.ck('anon and signed-in users cannot call internal function ' || m,
         pg_temp.x('select public.' || m, null, 'anon') like 'ERR 42501%'
@@ -261,8 +263,8 @@ begin
 
     -- readings: append only, own only
     r := r || pg_temp.ck('A adds own belt reading with own device',
-      pg_temp.x(format($q$insert into public.belt_readings (patient_id, device_id, fetal_hr_bpm, source, measured_at) values (%L, %L, 140, 'device', timestamp '2029-02-01 00:00+00')$q$, a, dev_a), a) = 'ok');
-    r := r || pg_temp.ck('A adds own vitals', pg_temp.x(format($q$insert into public.maternal_vitals (patient_id, spo2_percent, temperature_c, source, measured_at) values (%L, 98, 36.8, 'device', timestamp '2029-02-01 00:00+00')$q$, a), a) = 'ok');
+      pg_temp.x(format($q$insert into public.belt_readings (patient_id, device_id, fetal_hr_bpm, source, measured_at) values (%L, %L, 140, 'device', now() - interval '9 days')$q$, a, dev_a), a) = 'ok');
+    r := r || pg_temp.ck('A adds own vitals', pg_temp.x(format($q$insert into public.maternal_vitals (patient_id, spo2_percent, temperature_c, source, measured_at) values (%L, 98, 36.8, 'device', now() - interval '9 days')$q$, a), a) = 'ok');
     r := r || pg_temp.ck('A cannot add a belt reading for B', pg_temp.x(format($q$insert into public.belt_readings (patient_id, fetal_hr_bpm, source) values (%L, 140, 'device')$q$, b), a) like 'ERR 42501 new row violates row-level security%');
     r := r || pg_temp.ck('A cannot add vitals for B', pg_temp.x(format($q$insert into public.maternal_vitals (patient_id, spo2_percent, source) values (%L, 98, 'device')$q$, b), a) like 'ERR 42501 new row violates row-level security%');
     r := r || pg_temp.ck('A cannot attach a reading to B device', pg_temp.x(format($q$insert into public.belt_readings (patient_id, device_id, fetal_hr_bpm, source) values (%L, %L, 140, 'device')$q$, a, dev_b), a) like 'ERR 42501 new row violates row-level security%');
@@ -273,6 +275,14 @@ begin
       and pg_temp.x(format('delete from public.maternal_vitals where patient_id = %L', a), a) like 'ERR 42501 permission denied%');
     r := r || pg_temp.ck('A cannot set the server-controlled created_at of a reading',
       pg_temp.x(format($q$insert into public.belt_readings (patient_id, fetal_hr_bpm, source, created_at) values (%L, 140, 'device', now() - interval '5 years')$q$, a), a) like 'ERR 42501 permission denied%');
+    -- 008: readings may be old (offline sync) but never from the future
+    r := r || pg_temp.ck('A cannot store a reading dated in the future (a wrong phone clock cannot hide later alerts)',
+      pg_temp.x(format($q$insert into public.belt_readings (patient_id, fetal_hr_bpm, source, measured_at) values (%L, 140, 'device', now() + interval '1 hour')$q$, a), a) like 'ERR P0001 reading_time_in_future%'
+      and pg_temp.x(format($q$insert into public.maternal_vitals (patient_id, spo2_percent, source, measured_at) values (%L, 98, 'device', now() + interval '1 hour')$q$, a), a) like 'ERR P0001 reading_time_in_future%');
+    -- (uses patient C so A's newest readings stay the ones the alert test below relies on)
+    r := r || pg_temp.ck('a reading dated one minute ahead (a slightly fast phone clock) is accepted',
+      pg_temp.x(format($q$insert into public.belt_readings (patient_id, fetal_hr_bpm, source, measured_at) values (%L, 140, 'device', now() + interval '1 minute')$q$, c), c) = 'ok'
+      and pg_temp.x(format($q$insert into public.maternal_vitals (patient_id, spo2_percent, source, measured_at) values (%L, 98, 'device', now() + interval '1 minute')$q$, c), c) = 'ok');
     r := r || pg_temp.ck('A reads own readings and vitals',
       pg_temp.q(format('select count(*)::int from public.belt_readings where patient_id = %L', a), a) >= 2
       and pg_temp.q(format('select count(*)::int from public.maternal_vitals where patient_id = %L', a), a) >= 2);
@@ -290,7 +300,7 @@ begin
 
     -- end to end: A's own bad readings create an alert (only for A), visible to P1 only
     for n in 1..3 loop
-      s := pg_temp.x(format($q$insert into public.belt_readings (patient_id, fetal_hr_bpm, source, measured_at) values (%L, 190, 'device', timestamp '2030-01-01 00:00+00' + %s * interval '1 minute')$q$, a, n), a);
+      s := pg_temp.x(format($q$insert into public.belt_readings (patient_id, fetal_hr_bpm, source, measured_at) values (%L, 190, 'device', now() - interval '1 day' + %s * interval '1 minute')$q$, a, n), a);
     end loop;
     r := r || pg_temp.ck('3 high readings sent by A create ONE open critical fhr alert for A',
       (select count(*) from public.alerts where patient_id = a and alert_type = 'fhr_out_of_range' and status = 'open' and severity = 'critical') = 1);
@@ -506,7 +516,9 @@ begin
     -- 5. Admin account
     ---------------------------------------------------------------
     r := r || pg_temp.ck('admin is recognised', pg_temp.q('select public.is_admin()::int', ad) = 1 and pg_temp.q('select public.is_provider()::int', ad) = 0);
-    r := r || pg_temp.ck('admin reads all deletion requests', pg_temp.q('select count(*)::int from public.deletion_requests', ad) = 2);
+    r := r || pg_temp.ck('admin reads all deletion requests (the 2 test ones, plus any real ones)',
+      pg_temp.q(format('select count(*)::int from public.deletion_requests where patient_id in (%L, %L)', a, b), ad) = 2
+      and pg_temp.q('select count(*)::int from public.deletion_requests', ad) >= 2);
     r := r || pg_temp.ck('admin sees draft consent documents', pg_temp.q(format('select count(*)::int from public.consent_documents where id = %L', doc_draft), ad) = 1);
     r := r || pg_temp.ck('admin account does not get patient data in the app',
       pg_temp.q('select count(*)::int from public.belt_readings', ad) = 0
