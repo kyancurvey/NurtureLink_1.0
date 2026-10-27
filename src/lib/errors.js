@@ -16,7 +16,7 @@ export function friendlyError(t, error) {
   const code = String(error?.code ?? error?.error_code ?? '')
   const status = Number(error?.status ?? 0)
 
-  // 1. Codes raised by our own functions (see migration 002).
+  // 1. Codes raised by our own functions and triggers (migrations 002, 008, 009).
   switch (message) {
     case 'not_signed_in':
       return { text: t('errors:not_signed_in') }
@@ -30,6 +30,12 @@ export function friendlyError(t, error) {
       return { text: t('errors:invalid_language') }
     case 'role_change_not_allowed':
       return { text: t('errors:role_change_not_allowed') }
+    // Migration 008: a reading dated more than 5 minutes ahead of the server clock.
+    case 'reading_time_in_future':
+      return { text: t('errors:reading_time_in_future') }
+    // Migration 009: a second SOS within 5 minutes of the patient's last one.
+    case 'sos_rate_limited':
+      return { text: t('errors:sos_rate_limited') }
     default:
       break
   }
