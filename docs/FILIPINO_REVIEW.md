@@ -1,7 +1,7 @@
 # Filipino wording review
 
 **Status: DRAFT, pending review by the midwife or medical officer.**
-Last generated: 2026-10-18, from `src/locales/en.json` and `src/locales/fil.json` (218 strings; the 81 added in step 2.4 are in section 5).
+Last generated: 2026-10-27, from `src/locales/en.json` and `src/locales/fil.json` (289 strings; the 81 added in step 2.4 are in section 5, the 71 added in step 3.1 are in section 6).
 
 NurtureLink is a monitoring and screening prototype, not a diagnostic device. The Filipino text was written in plain, calm wording. It has **not** been checked by a clinician yet.
 
@@ -286,6 +286,84 @@ Wording of the consent screen, the Profile > Privacy page and the data-deletion 
 | 80 | `patient:privacy.file.status` | Status | Status | - |  | |
 | 81 | `patient:privacy.file.active` | Active | Aktibo | - |  | |
 
+## 6. Home tab, SOS and errors (step 3.1)
+
+Wording here is shown to patients in the middle of worry, so read it for calm and for promises. Rules the wording follows: never "normal" without a recent check; never promise that a provider will respond; always point to local emergency services or a health facility. The English also needs the medical officer's eye (open item).
+
+| # | Key | English | Filipino | Flag | Notes for the reviewer | Reviewer: OK or better wording |
+|---|---|---|---|---|---|---|
+| 1 | `patient:home.status.loadingTitle` | Checking your status… | Sinusuri ang iyong katayuan… | - |  | |
+| 2 | `patient:home.status.unavailable` | Status unavailable | Hindi makita ang katayuan | - |  | |
+| 3 | `patient:home.status.noData` | No recent data | Walang bagong datos | ALERT TERM (priority) | Shown instead of "Normal" when there is no recent check. Must never read as good news. | |
+| 4 | `patient:home.status.okBody` | Your latest check is within the usual range. | Nasa karaniwang saklaw ang iyong pinakabagong check. | HEALTH TERM (priority) | Shown only when there is a recent check inside the limits and nothing open. Check the Filipino for "usual range". | |
+| 5 | `patient:home.status.asOf` | Based on your check on {{date}}. | Batay sa iyong check noong {{date}}. | - |  | |
+| 6 | `patient:home.status.noBelt` | There is no baby heart-rate check yet. Press Check now to see your status here. | Wala pang check sa tibok ng puso ng sanggol. Pindutin ang Mag-check ngayon para makita rito ang iyong katayuan. | ALERT TERM (priority) |  | |
+| 7 | `patient:home.status.stale` | There has been no baby heart-rate check in the last {{hours}} hours, so we cannot show a status. Your last check was on {{date}}. | Walang check sa tibok ng puso ng sanggol sa nakalipas na {{hours}} oras, kaya hindi namin maipapakita ang katayuan. Ang huli mong check ay noong {{date}}. | ALERT TERM (priority) | "{{hours}}" is the freshness window (default 14, setting status_fresh_hours, pending the medical officer). | |
+| 8 | `patient:home.reason.sos_open` | Your SOS alert is still open. | Bukas pa ang iyong SOS na abiso. | ALERT TERM (priority) |  | |
+| 9 | `patient:home.reason.alert_critical` | An urgent alert is open. | May bukas na agarang abiso. | ALERT TERM (priority) |  | |
+| 10 | `patient:home.reason.alert_open` | An alert is open. You can see it in the Alerts tab. | May bukas na abiso. Makikita mo ito sa tab na Abiso. | ALERT TERM (priority) |  | |
+| 11 | `patient:home.reason.signal_lost` | The belt did not get a clear signal on your last check. Check the belt position and try again. | Hindi nakakuha ng malinaw na signal ang belt sa huli mong check. Suriin ang posisyon ng belt at subukan muli. | HEALTH TERM (priority) |  | |
+| 12 | `patient:home.reason.fhr_out_of_range` | Your last baby heart-rate reading was outside the usual range. | Wala sa karaniwang saklaw ang huling reading ng tibok ng puso ng sanggol. | HEALTH TERM (priority) | English wording says "outside the usual range" on purpose (not "abnormal"). Please check it does not alarm or sound like a diagnosis. | |
+| 13 | `patient:home.reason.low_spo2` | Your last oxygen (SpO2) reading was lower than usual. | Mas mababa kaysa karaniwan ang huling reading ng oxygen (SpO2). | HEALTH TERM (priority) | Please check "oxygen" and "SpO2" are what patients recognise. | |
+| 14 | `patient:home.reason.fever` | Your last temperature reading was higher than usual. | Mas mataas kaysa karaniwan ang huling reading ng temperatura. | HEALTH TERM (priority) |  | |
+| 15 | `patient:home.guidance.emergency` | If you feel unwell or are worried about your baby, call local emergency services or go to a health facility now. | Kung masama ang pakiramdam mo o nag-aalala ka para sa iyong sanggol, tumawag agad sa lokal na emergency services o pumunta sa pasilidad pangkalusugan. | EMERGENCY WORDING (priority) | Must not promise a response. Check "lokal na emergency services": is there a number to name (911) or a better phrase? | |
+| 16 | `patient:home.guidance.contactProvider` | If you are worried, contact your provider. | Kung nag-aalala ka, makipag-ugnayan sa iyong provider. | EMERGENCY WORDING (priority) |  | |
+| 17 | `patient:home.guidance.providerMayNotSee` | Your provider can see urgent alerts in the app but may not see them right away. Do not wait for a reply. | Makikita ng iyong provider ang mga agarang abiso sa app, pero maaaring hindi agad. Huwag maghintay ng sagot. | EMERGENCY WORDING (priority) |  | |
+| 18 | `patient:home.guidance.noProvider` | You have no provider assigned yet, so no one else will see this. If you are worried, contact a health facility. | Wala ka pang nakatalagang provider, kaya walang ibang makakakita nito. Kung nag-aalala ka, makipag-ugnayan sa isang pasilidad pangkalusugan. | EMERGENCY WORDING (priority) | Shown to a patient with no assigned provider (like the demo patient10). Must not suggest anyone is watching. | |
+| 19 | `patient:home.noProvider.title` | No provider assigned yet | Wala pang nakatalagang provider | EMERGENCY WORDING (priority) | Shown on Home when no provider is assigned yet. | |
+| 20 | `patient:home.noProvider.body` | Your checks are saved, but no provider is watching them and no provider will see your alerts. To be linked with a provider, ask your clinic or the project team. | Nai-save ang iyong mga check, pero walang provider na nagbabantay sa mga ito at walang provider na makakakita ng iyong mga abiso. Para maiugnay sa isang provider, magtanong sa iyong klinika o sa project team. | EMERGENCY WORDING (priority) |  | |
+| 21 | `patient:home.notRecent` | Not recent | Hindi na bago | - |  | |
+| 22 | `patient:home.unit.bpm` | bpm | bpm | - |  | |
+| 23 | `patient:home.unit.percent` | % | % | - |  | |
+| 24 | `patient:home.unit.celsius` | °C | °C | - |  | |
+| 25 | `patient:home.fhr.title` | Baby's heart rate | Tibok ng puso ng sanggol | HEALTH TERM |  | |
+| 26 | `patient:home.fhr.none` | No baby heart-rate check yet. | Wala pang check sa tibok ng puso ng sanggol. | - |  | |
+| 27 | `patient:home.fhr.checked` | Checked {{date}} | Na-check noong {{date}} | - |  | |
+| 28 | `patient:home.fhr.signalLost` | No clear signal on this check. Check the belt position and try again. | Walang malinaw na signal sa check na ito. Suriin ang posisyon ng belt at subukan muli. | - |  | |
+| 29 | `patient:home.fhr.confidence` | Signal confidence: {{level}} ({{percent}}%) | Kumpiyansa ng signal: {{level}} ({{percent}}%) | HEALTH TERM |  | |
+| 30 | `patient:home.confidence.high` | High | Mataas | HEALTH TERM | UI description of the belt signal quality (80% and above = High, 50 to 79 = Medium, below 50 = Low). The cut-offs are placeholders for the medical officer. | |
+| 31 | `patient:home.confidence.medium` | Medium | Katamtaman | HEALTH TERM |  | |
+| 32 | `patient:home.confidence.low` | Low | Mababa | HEALTH TERM |  | |
+| 33 | `patient:home.vitals.title` | Your vital signs | Iyong mga vital sign | - |  | |
+| 34 | `patient:home.vitals.hr` | Your heart rate | Tibok ng iyong puso | HEALTH TERM |  | |
+| 35 | `patient:home.vitals.spo2` | Oxygen (SpO2) | Oxygen (SpO2) | HEALTH TERM |  | |
+| 36 | `patient:home.vitals.temp` | Temperature | Temperatura | HEALTH TERM |  | |
+| 37 | `patient:home.vitals.none` | Not measured yet | Wala pang sukat | - |  | |
+| 38 | `patient:home.check.button` | Check now | Mag-check ngayon | - |  | |
+| 39 | `patient:home.check.checking` | Checking… | Nagche-check… | - |  | |
+| 40 | `patient:home.check.done` | Your check was saved. | Nai-save ang iyong check. | - |  | |
+| 41 | `patient:home.check.note` | For now this saves a simulated check. Checks with the real belt come later. | Sa ngayon, nagse-save ito ng simulated na check. Darating pa ang mga check gamit ang tunay na belt. | - |  | |
+| 42 | `patient:home.device.title` | Your devices | Iyong mga device | - |  | |
+| 43 | `patient:home.device.belt` | Belt | Belt | - |  | |
+| 44 | `patient:home.device.band` | Wrist band | Wrist band | - |  | |
+| 45 | `patient:home.device.battery` | Battery {{percent}}% | Baterya {{percent}}% | - |  | |
+| 46 | `patient:home.device.batteryLow` | Low battery | Mahina ang baterya | - |  | |
+| 47 | `patient:home.device.batteryUnknown` | Battery not reported | Hindi iniulat ang baterya | - |  | |
+| 48 | `patient:home.device.lastSeen` | Last seen {{date}} | Huling nakita {{date}} | - |  | |
+| 49 | `patient:home.device.neverSeen` | Not seen yet | Hindi pa nakikita | - |  | |
+| 50 | `patient:home.device.none` | No device is paired yet. Pairing will be added in Profile. | Wala pang naka-pair na device. Idadagdag ang pag-pair sa Profile. | - |  | |
+| 51 | `patient:home.appt.title` | Next appointment | Susunod na appointment | - |  | |
+| 52 | `patient:home.appt.none` | No upcoming appointment. | Walang paparating na appointment. | - |  | |
+| 53 | `patient:home.appt.requested` | Requested | Hiniling | - |  | |
+| 54 | `patient:home.appt.scheduled` | Scheduled | Naka-iskedyul | - |  | |
+| 55 | `patient:home.sos.title` | Need help now? | Kailangan mo ba ng tulong ngayon? | EMERGENCY WORDING (priority) |  | |
+| 56 | `patient:home.sos.guidance` | In an emergency, call local emergency services or go to the nearest health facility. Do not wait for this app. | Sa oras ng emergency, tumawag sa lokal na emergency services o pumunta sa pinakamalapit na pasilidad pangkalusugan. Huwag maghintay sa app na ito. | EMERGENCY WORDING (priority) |  | |
+| 57 | `patient:home.sos.button` | SOS | SOS | - |  | |
+| 58 | `patient:home.sos.buttonHelp` | Emergency help | Tulong sa emergency | - |  | |
+| 59 | `patient:home.sos.confirmTitle` | Send an SOS alert? | Magpapadala ng SOS na abiso? | EMERGENCY WORDING (priority) |  | |
+| 60 | `patient:home.sos.helpTitle` | Emergency help | Tulong sa emergency | EMERGENCY WORDING (priority) |  | |
+| 61 | `patient:home.sos.confirmBody` | This sends an urgent alert to your provider in this app. It does not call anyone, and your provider may not see it right away. | Magpapadala ito ng agarang abiso sa iyong provider sa app na ito. Hindi ito tumatawag sa kahit sino, at maaaring hindi agad makita ng iyong provider. | EMERGENCY WORDING (priority) | Must say plainly that SOS does not call anyone and may not be seen right away. | |
+| 62 | `patient:home.sos.noProviderBody` | You have no provider assigned yet, so this app cannot send an alert to anyone. | Wala ka pang nakatalagang provider, kaya hindi makapagpapadala ng abiso ang app na ito sa kahit sino. | EMERGENCY WORDING (priority) |  | |
+| 63 | `patient:home.sos.unknownBody` | We could not check whether you have a provider assigned, so this app cannot send an alert right now. | Hindi namin masuri kung may nakatalaga kang provider, kaya hindi makapagpapadala ng abiso ang app na ito ngayon. | EMERGENCY WORDING (priority) |  | |
+| 64 | `patient:home.sos.cancel` | Cancel | Kanselahin | - |  | |
+| 65 | `patient:home.sos.send` | Send SOS | Ipadala ang SOS | - |  | |
+| 66 | `patient:home.sos.sending` | Sending… | Ipinapadala… | - |  | |
+| 67 | `patient:home.sos.sent` | Your SOS alert was sent to your provider in this app. This does not call anyone. If you are in danger, call local emergency services or go to a health facility now. | Naipadala ang iyong SOS na abiso sa iyong provider sa app na ito. Hindi ito tumatawag sa kahit sino. Kung nasa panganib ka, tumawag agad sa lokal na emergency services o pumunta sa pasilidad pangkalusugan. | EMERGENCY WORDING (priority) | Shown after SOS is stored. Must not promise a reply. | |
+| 68 | `patient:home.sos.failedAdvice` | If you are in danger, do not wait: call local emergency services or go to a health facility. | Kung nasa panganib ka, huwag maghintay: tumawag sa lokal na emergency services o pumunta sa pasilidad pangkalusugan. | EMERGENCY WORDING (priority) |  | |
+| 69 | `errors:reading_time_in_future` | The time on this reading is ahead of the real time, so it was not saved. Please check that your device's date and time are correct, then try again. | Nasa hinaharap ang oras ng reading na ito (mas huli kaysa sa tunay na oras), kaya hindi ito nai-save. Pakisuri kung tama ang petsa at oras ng iyong device, at subukan muli. | - | | |
+| 70 | `errors:sos_rate_limited` | Your SOS was already sent a moment ago, so a second one was not added. If you are in danger, call local emergency services or go to a health facility now. | Naipadala na ang iyong SOS ilang sandali lang ang nakalipas, kaya hindi nagdagdag ng pangalawa. Kung nasa panganib ka, tumawag agad sa lokal na emergency services o pumunta sa pasilidad pangkalusugan. | EMERGENCY WORDING (priority) | | |
+| 71 | `common:ui.loading` | Loading… | Naglo-load… | - |  | |
+
 ## Not yet written (later steps)
 
-Alerts text and patient and provider screen content. Each will be added here as it is written. Consent and legal text also needs ethics/legal review (see `PLAN.md`, open items).
+Alerts tab, Monitor, Care and Profile text, and provider screen content. Each will be added here as it is written. Consent and legal text also needs ethics/legal review (see `PLAN.md`, open items).
