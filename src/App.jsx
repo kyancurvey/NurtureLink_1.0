@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { HashRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AppHeader } from './components/layout/index.js'
 import { AuthProvider } from './lib/auth.jsx'
@@ -9,9 +10,12 @@ import ResetPasswordPage from './features/auth/ResetPasswordPage.jsx'
 import InvitePage from './features/auth/InvitePage.jsx'
 import AdminNoticePage from './features/auth/AdminNoticePage.jsx'
 import ConsentGate from './features/consent/ConsentGate.jsx'
-import PatientApp from './features/patient/PatientApp.jsx'
+import Splash from './components/Splash.jsx'
 import ProviderApp from './features/provider/ProviderApp.jsx'
 import DesignPage from './features/design/DesignPage.jsx'
+
+// The patient app is downloaded only when a patient opens it (code splitting).
+const PatientApp = lazy(() => import('./features/patient/PatientApp.jsx'))
 
 // HashRouter keeps deep links working on GitHub Pages, which has no
 // server-side routing. AuthProvider sits inside it so every screen can ask who
@@ -31,19 +35,21 @@ export default function App() {
         <div>
           <AppHeader />
           <AuthNotice />
-          <Routes>
-            <Route path="/" element={<HomeRedirect />} />
-            <Route path="/login" element={<PublicOnly><LoginPage /></PublicOnly>} />
-            <Route path="/signup" element={<PublicOnly><SignUpPage /></PublicOnly>} />
-            <Route path="/forgot-password" element={<PublicOnly><ForgotPasswordPage /></PublicOnly>} />
-            <Route path="/reset-password" element={<ResetPasswordPage />} />
-            <Route path="/invite" element={<InvitePage />} />
-            <Route path="/patient/*" element={<RequireRole role="patient"><ConsentGate><PatientApp /></ConsentGate></RequireRole>} />
-            <Route path="/provider/*" element={<RequireRole role="provider"><ConsentGate><ProviderApp /></ConsentGate></RequireRole>} />
-            <Route path="/admin" element={<RequireRole role="admin"><AdminNoticePage /></RequireRole>} />
-            <Route path="/design/*" element={<DesignPage />} />
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
+          <Suspense fallback={<Splash />}>
+            <Routes>
+              <Route path="/" element={<HomeRedirect />} />
+              <Route path="/login" element={<PublicOnly><LoginPage /></PublicOnly>} />
+              <Route path="/signup" element={<PublicOnly><SignUpPage /></PublicOnly>} />
+              <Route path="/forgot-password" element={<PublicOnly><ForgotPasswordPage /></PublicOnly>} />
+              <Route path="/reset-password" element={<ResetPasswordPage />} />
+              <Route path="/invite" element={<InvitePage />} />
+              <Route path="/patient/*" element={<RequireRole role="patient"><ConsentGate><PatientApp /></ConsentGate></RequireRole>} />
+              <Route path="/provider/*" element={<RequireRole role="provider"><ConsentGate><ProviderApp /></ConsentGate></RequireRole>} />
+              <Route path="/admin" element={<RequireRole role="admin"><AdminNoticePage /></RequireRole>} />
+              <Route path="/design/*" element={<DesignPage />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Suspense>
         </div>
       </AuthProvider>
     </HashRouter>

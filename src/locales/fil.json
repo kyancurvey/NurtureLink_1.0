@@ -21,7 +21,8 @@
       "close": "Isara",
       "dismiss": "Alisin",
       "on": "Naka-on",
-      "off": "Naka-off"
+      "off": "Naka-off",
+      "loading": "Naglo-load…"
     },
     "nav": {
       "main": "Pangunahing menu"
@@ -275,6 +276,100 @@
         "status": "Status",
         "active": "Aktibo"
       }
+    },
+    "home": {
+      "status": {
+        "loadingTitle": "Sinusuri ang iyong katayuan…",
+        "unavailable": "Hindi makita ang katayuan",
+        "noData": "Walang bagong datos",
+        "okBody": "Nasa karaniwang saklaw ang iyong pinakabagong check.",
+        "asOf": "Batay sa iyong check noong {{date}}.",
+        "noBelt": "Wala pang check sa tibok ng puso ng sanggol. Pindutin ang Mag-check ngayon para makita rito ang iyong katayuan.",
+        "stale": "Walang check sa tibok ng puso ng sanggol sa nakalipas na {{hours}} oras, kaya hindi namin maipapakita ang katayuan. Ang huli mong check ay noong {{date}}."
+      },
+      "reason": {
+        "sos_open": "Bukas pa ang iyong SOS na abiso.",
+        "alert_critical": "May bukas na agarang abiso.",
+        "alert_open": "May bukas na abiso. Makikita mo ito sa tab na Abiso.",
+        "signal_lost": "Hindi nakakuha ng malinaw na signal ang belt sa huli mong check. Suriin ang posisyon ng belt at subukan muli.",
+        "fhr_out_of_range": "Wala sa karaniwang saklaw ang huling reading ng tibok ng puso ng sanggol.",
+        "low_spo2": "Mas mababa kaysa karaniwan ang huling reading ng oxygen (SpO2).",
+        "fever": "Mas mataas kaysa karaniwan ang huling reading ng temperatura."
+      },
+      "guidance": {
+        "emergency": "Kung masama ang pakiramdam mo o nag-aalala ka para sa iyong sanggol, tumawag agad sa lokal na emergency services o pumunta sa pasilidad pangkalusugan.",
+        "contactProvider": "Kung nag-aalala ka, makipag-ugnayan sa iyong provider.",
+        "providerMayNotSee": "Makikita ng iyong provider ang mga agarang abiso sa app, pero maaaring hindi agad. Huwag maghintay ng sagot.",
+        "noProvider": "Wala ka pang nakatalagang provider, kaya walang ibang makakakita nito. Kung nag-aalala ka, makipag-ugnayan sa isang pasilidad pangkalusugan."
+      },
+      "noProvider": {
+        "title": "Wala pang nakatalagang provider",
+        "body": "Nai-save ang iyong mga check, pero walang provider na nagbabantay sa mga ito at walang provider na makakakita ng iyong mga abiso. Para maiugnay sa isang provider, magtanong sa iyong klinika o sa project team."
+      },
+      "notRecent": "Hindi na bago",
+      "unit": {
+        "bpm": "bpm",
+        "percent": "%",
+        "celsius": "°C"
+      },
+      "fhr": {
+        "title": "Tibok ng puso ng sanggol",
+        "none": "Wala pang check sa tibok ng puso ng sanggol.",
+        "checked": "Na-check noong {{date}}",
+        "signalLost": "Walang malinaw na signal sa check na ito. Suriin ang posisyon ng belt at subukan muli.",
+        "confidence": "Kumpiyansa ng signal: {{level}} ({{percent}}%)"
+      },
+      "confidence": {
+        "high": "Mataas",
+        "medium": "Katamtaman",
+        "low": "Mababa"
+      },
+      "vitals": {
+        "title": "Iyong mga vital sign",
+        "hr": "Tibok ng iyong puso",
+        "spo2": "Oxygen (SpO2)",
+        "temp": "Temperatura",
+        "none": "Wala pang sukat"
+      },
+      "check": {
+        "button": "Mag-check ngayon",
+        "checking": "Nagche-check…",
+        "done": "Nai-save ang iyong check.",
+        "note": "Sa ngayon, nagse-save ito ng simulated na check. Darating pa ang mga check gamit ang tunay na belt."
+      },
+      "device": {
+        "title": "Iyong mga device",
+        "belt": "Belt",
+        "band": "Wrist band",
+        "battery": "Baterya {{percent}}%",
+        "batteryLow": "Mahina ang baterya",
+        "batteryUnknown": "Hindi iniulat ang baterya",
+        "lastSeen": "Huling nakita {{date}}",
+        "neverSeen": "Hindi pa nakikita",
+        "none": "Wala pang naka-pair na device. Idadagdag ang pag-pair sa Profile."
+      },
+      "appt": {
+        "title": "Susunod na appointment",
+        "none": "Walang paparating na appointment.",
+        "requested": "Hiniling",
+        "scheduled": "Naka-iskedyul"
+      },
+      "sos": {
+        "title": "Kailangan mo ba ng tulong ngayon?",
+        "guidance": "Sa oras ng emergency, tumawag sa lokal na emergency services o pumunta sa pinakamalapit na pasilidad pangkalusugan. Huwag maghintay sa app na ito.",
+        "button": "SOS",
+        "buttonHelp": "Tulong sa emergency",
+        "confirmTitle": "Magpapadala ng SOS na abiso?",
+        "helpTitle": "Tulong sa emergency",
+        "confirmBody": "Magpapadala ito ng agarang abiso sa iyong provider sa app na ito. Hindi ito tumatawag sa kahit sino, at maaaring hindi agad makita ng iyong provider.",
+        "noProviderBody": "Wala ka pang nakatalagang provider, kaya hindi makapagpapadala ng abiso ang app na ito sa kahit sino.",
+        "unknownBody": "Hindi namin masuri kung may nakatalaga kang provider, kaya hindi makapagpapadala ng abiso ang app na ito ngayon.",
+        "cancel": "Kanselahin",
+        "send": "Ipadala ang SOS",
+        "sending": "Ipinapadala…",
+        "sent": "Naipadala ang iyong SOS na abiso sa iyong provider sa app na ito. Hindi ito tumatawag sa kahit sino. Kung nasa panganib ka, tumawag agad sa lokal na emergency services o pumunta sa pasilidad pangkalusugan.",
+        "failedAdvice": "Kung nasa panganib ka, huwag maghintay: tumawag sa lokal na emergency services o pumunta sa pasilidad pangkalusugan."
+      }
     }
   },
   "provider": {
@@ -320,6 +415,8 @@
     "profile_title": "Hindi namin ma-load ang iyong account",
     "retry": "Subukan muli",
     "language_not_saved": "Hindi nai-save sa iyong account ang napili mong wika. Gumagana pa rin ito sa device na ito.",
-    "email_not_authorized": "Hindi pa makapagpadala ng email ang aming serbisyo sa address na ito. Pakisabi sa may-ari ng proyekto."
+    "email_not_authorized": "Hindi pa makapagpadala ng email ang aming serbisyo sa address na ito. Pakisabi sa may-ari ng proyekto.",
+    "reading_time_in_future": "Nasa hinaharap ang oras ng reading na ito (mas huli kaysa sa tunay na oras), kaya hindi ito nai-save. Pakisuri kung tama ang petsa at oras ng iyong device, at subukan muli.",
+    "sos_rate_limited": "Naipadala na ang iyong SOS ilang sandali lang ang nakalipas, kaya hindi nagdagdag ng pangalawa. Kung nasa panganib ka, tumawag agad sa lokal na emergency services o pumunta sa pasilidad pangkalusugan."
   }
 }

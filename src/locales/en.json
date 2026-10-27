@@ -21,7 +21,8 @@
       "close": "Close",
       "dismiss": "Dismiss",
       "on": "On",
-      "off": "Off"
+      "off": "Off",
+      "loading": "Loading…"
     },
     "nav": {
       "main": "Main navigation"
@@ -275,6 +276,100 @@
         "status": "Status",
         "active": "Active"
       }
+    },
+    "home": {
+      "status": {
+        "loadingTitle": "Checking your status…",
+        "unavailable": "Status unavailable",
+        "noData": "No recent data",
+        "okBody": "Your latest check is within the usual range.",
+        "asOf": "Based on your check on {{date}}.",
+        "noBelt": "There is no baby heart-rate check yet. Press Check now to see your status here.",
+        "stale": "There has been no baby heart-rate check in the last {{hours}} hours, so we cannot show a status. Your last check was on {{date}}."
+      },
+      "reason": {
+        "sos_open": "Your SOS alert is still open.",
+        "alert_critical": "An urgent alert is open.",
+        "alert_open": "An alert is open. You can see it in the Alerts tab.",
+        "signal_lost": "The belt did not get a clear signal on your last check. Check the belt position and try again.",
+        "fhr_out_of_range": "Your last baby heart-rate reading was outside the usual range.",
+        "low_spo2": "Your last oxygen (SpO2) reading was lower than usual.",
+        "fever": "Your last temperature reading was higher than usual."
+      },
+      "guidance": {
+        "emergency": "If you feel unwell or are worried about your baby, call local emergency services or go to a health facility now.",
+        "contactProvider": "If you are worried, contact your provider.",
+        "providerMayNotSee": "Your provider can see urgent alerts in the app but may not see them right away. Do not wait for a reply.",
+        "noProvider": "You have no provider assigned yet, so no one else will see this. If you are worried, contact a health facility."
+      },
+      "noProvider": {
+        "title": "No provider assigned yet",
+        "body": "Your checks are saved, but no provider is watching them and no provider will see your alerts. To be linked with a provider, ask your clinic or the project team."
+      },
+      "notRecent": "Not recent",
+      "unit": {
+        "bpm": "bpm",
+        "percent": "%",
+        "celsius": "°C"
+      },
+      "fhr": {
+        "title": "Baby's heart rate",
+        "none": "No baby heart-rate check yet.",
+        "checked": "Checked {{date}}",
+        "signalLost": "No clear signal on this check. Check the belt position and try again.",
+        "confidence": "Signal confidence: {{level}} ({{percent}}%)"
+      },
+      "confidence": {
+        "high": "High",
+        "medium": "Medium",
+        "low": "Low"
+      },
+      "vitals": {
+        "title": "Your vital signs",
+        "hr": "Your heart rate",
+        "spo2": "Oxygen (SpO2)",
+        "temp": "Temperature",
+        "none": "Not measured yet"
+      },
+      "check": {
+        "button": "Check now",
+        "checking": "Checking…",
+        "done": "Your check was saved.",
+        "note": "For now this saves a simulated check. Checks with the real belt come later."
+      },
+      "device": {
+        "title": "Your devices",
+        "belt": "Belt",
+        "band": "Wrist band",
+        "battery": "Battery {{percent}}%",
+        "batteryLow": "Low battery",
+        "batteryUnknown": "Battery not reported",
+        "lastSeen": "Last seen {{date}}",
+        "neverSeen": "Not seen yet",
+        "none": "No device is paired yet. Pairing will be added in Profile."
+      },
+      "appt": {
+        "title": "Next appointment",
+        "none": "No upcoming appointment.",
+        "requested": "Requested",
+        "scheduled": "Scheduled"
+      },
+      "sos": {
+        "title": "Need help now?",
+        "guidance": "In an emergency, call local emergency services or go to the nearest health facility. Do not wait for this app.",
+        "button": "SOS",
+        "buttonHelp": "Emergency help",
+        "confirmTitle": "Send an SOS alert?",
+        "helpTitle": "Emergency help",
+        "confirmBody": "This sends an urgent alert to your provider in this app. It does not call anyone, and your provider may not see it right away.",
+        "noProviderBody": "You have no provider assigned yet, so this app cannot send an alert to anyone.",
+        "unknownBody": "We could not check whether you have a provider assigned, so this app cannot send an alert right now.",
+        "cancel": "Cancel",
+        "send": "Send SOS",
+        "sending": "Sending…",
+        "sent": "Your SOS alert was sent to your provider in this app. This does not call anyone. If you are in danger, call local emergency services or go to a health facility now.",
+        "failedAdvice": "If you are in danger, do not wait: call local emergency services or go to a health facility."
+      }
     }
   },
   "provider": {
@@ -320,6 +415,8 @@
     "profile_title": "We could not load your account",
     "retry": "Try again",
     "language_not_saved": "Your language choice could not be saved to your account. It still works on this device.",
-    "email_not_authorized": "Our email service cannot send to this address yet. Please tell the project owner."
+    "email_not_authorized": "Our email service cannot send to this address yet. Please tell the project owner.",
+    "reading_time_in_future": "The time on this reading is ahead of the real time, so it was not saved. Please check that your device's date and time are correct, then try again.",
+    "sos_rate_limited": "Your SOS was already sent a moment ago, so a second one was not added. If you are in danger, call local emergency services or go to a health facility now."
   }
 }
