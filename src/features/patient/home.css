@@ -1,0 +1,189 @@
+/* Patient Home tab. Colors, spacing and type come from tokens.css only.
+   Status colors (green / amber / red) are separate from brand coral and are
+   always paired with an icon and text. */
+
+.nl-home {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.nl-home p {
+  margin: 0;
+}
+.nl-home__muted {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+.nl-home__notice {
+  position: sticky;
+  top: var(--header-offset);
+  z-index: 5;
+}
+
+/* ---------- Status banner ---------- */
+.nl-home__banner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  border: 2px solid;
+  border-radius: var(--radius-lg);
+}
+.nl-home__banner-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.nl-home__banner-title {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  line-height: 1.2;
+}
+.nl-home__banner-list {
+  margin: 0;
+  padding-left: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.nl-home__banner-guidance {
+  font-weight: 700;
+}
+.nl-home__banner--ok {
+  color: var(--color-success-text);
+  background: var(--color-success-bg);
+  border-color: var(--color-success);
+}
+.nl-home__banner--attention {
+  color: var(--color-warning-text);
+  background: var(--color-warning-bg);
+  border-color: var(--color-warning);
+}
+.nl-home__banner--urgent {
+  color: var(--color-danger-text);
+  background: var(--color-danger-bg);
+  border-color: var(--color-danger);
+}
+.nl-home__banner--neutral {
+  color: var(--color-brand-purple);
+  background: var(--color-bg-tint-strong);
+  border-color: var(--color-border-input);
+}
+
+/* ---------- No provider notice ---------- */
+.nl-home__noprovider {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--space-4);
+  color: var(--color-brand-purple);
+  background: var(--color-bg-tint);
+  border: 2px solid var(--color-border-input);
+  border-radius: var(--radius-md);
+}
+.nl-home__noprovider-title {
+  margin: 0 0 var(--space-1);
+  font-size: var(--font-size-lg);
+}
+
+/* ---------- Cards ---------- */
+.nl-home__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+.nl-home__big {
+  line-height: 1.1;
+}
+.nl-home__num {
+  font-size: var(--font-size-name);
+  font-weight: 800;
+  color: var(--color-text);
+}
+.nl-home__num--sm {
+  font-size: var(--font-size-lg);
+}
+.nl-home__unit {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+.nl-home__conf,
+.nl-home__lost,
+.nl-home__low {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 700;
+}
+.nl-home__conf--high {
+  color: var(--color-success-text);
+}
+.nl-home__conf--medium,
+.nl-home__conf--low,
+.nl-home__lost,
+.nl-home__low {
+  color: var(--color-warning-text);
+}
+.nl-home__fhr > *:not(:last-child) {
+  margin-bottom: var(--space-3);
+}
+.nl-home__check {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+.nl-home__tiles {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+.nl-home__tile {
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-bg-tint);
+  border-radius: var(--radius-md);
+}
+.nl-home__tile-title {
+  margin: 0 0 var(--space-1);
+  font-size: var(--font-size-sm);
+  color: var(--color-brand-purple);
+}
+.nl-home__devices {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.nl-home__device {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.nl-home__problem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+.nl-home__sos {
+  border: 2px solid var(--color-danger);
+}
+.nl-home__sos > p {
+  margin-bottom: var(--space-4);
+}
+
+/* ---------- Wider screens: two columns, status stays full width ---------- */
+@media (min-width: 900px) {
+  .nl-home__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+  .nl-home__vitals {
+    grid-column: 1 / -1;
+  }
+  .nl-home__tiles {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
