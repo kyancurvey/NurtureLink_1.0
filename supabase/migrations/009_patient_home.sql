@@ -283,13 +283,13 @@ create trigger alerts_guard_sos_rate
 select 'setting' as what, 'status_fresh_hours = ' || s.value as detail
 from public.app_settings s where s.key = 'status_fresh_hours'
 union all
-select 'function', p.proname || ': security_definer = ' || p.prosecdef
-       || ', anon can run = ' || has_function_privilege('anon', p.oid, 'execute')
-       || ', signed-in can run = ' || has_function_privilege('authenticated', p.oid, 'execute')
+select 'function', p.proname::text || ': security_definer = ' || p.prosecdef::text
+       || ', anon can run = ' || has_function_privilege('anon', p.oid, 'execute')::text
+       || ', signed-in can run = ' || has_function_privilege('authenticated', p.oid, 'execute')::text
 from pg_proc p join pg_namespace n on n.oid = p.pronamespace
 where n.nspname = 'public' and p.proname in ('my_home_status', 'guard_sos_rate')
 union all
-select 'trigger', t.tgname || ': enabled = ' || t.tgenabled
+select 'trigger', t.tgname::text || ': enabled = ' || t.tgenabled::text
 from pg_trigger t
 where t.tgrelid = 'public.alerts'::regclass and t.tgname = 'alerts_guard_sos_rate' and not t.tgisinternal
 order by 1, 2;
