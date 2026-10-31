@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { supabase } from './supabase.js'
 import { useAuth } from './auth.jsx'
 
@@ -335,4 +335,138 @@ export async function saveManualReading({ patientId, values, ids }) {
   })
   if (vitals.error && !alreadySaved(vitals.error)) return { error: vitals.error, savedBelt: true }
   return { error: null, savedBelt: true }
+}
+
+// ---------------------------------------------------------------------
+// Step 3.3: Alerts tab
+// ---------------------------------------------------------------------
+
+// How many alerts the list loads (the newest). The screen says when it is cut.
+export const ALERTS_LIMIT = 100
+// While live updates are paused, the list is fetched again this often.
+export const ALERTS_POLL_MS = 30 * 1000
+const ALERT_FIELDS =
+  'id, alert_type, severity, status, details, created_at, acknowledged_at, resolved_at, seen_by_patient_at'
+
+// Each subscription gets its own channel name, so React's double effect run in
+// development (subscribe, clean up, subscribe again) never reuses a closed channel.
+let alertChannelCount = 0
+
+// The signed-in patient's own alerts, newest first, kept up to date.
+//
+//  - Normal path: Supabase Realtime. Any insert or update of one of the patient's
+//    alerts (the database applies the alerts_select policy to every event, so
+//    only their own arrive) makes the list load again. The list is always
+//    re-read from the database, never built from the event, so a missed or
+//    odd event cannot leave a wrong list.
+//  - Fallback: if the live connection is not working (live === 'paused'), the list
+//    is fetched again every 30 seconds until the connection returns. The screen
+//    says so calmly. The list is also fetched again when the person comes back
+//    to the app and every time the connection (re)joins.
+//  - A failed REFRESH keeps the last good list and sets refreshFailed; only a
+//    failed FIRST load shows an error and no list.
+//
+// Returns { data, error, loaded, refreshFailed, live, reload }
+//   data  array of alerts (maybe empty), or null before the first answer
+//   live  'connecting' | 'live' | 'paused'
+export function useAlerts() {
+  const id = usePatientId()
+  const [state, setState] = useState({ data: null, error: null, loaded: false, refreshFailed: false })
+  const [live, setLive] = useState('connecting')
+  const latest = useRef(0) // only the newest request may change the screen
+
+  const load = useCallback(async () => {
+    if (!supabase || !id) return
+    const mine = ++latest.current
+    let result
+    try {
+      result = await supabase
+        .from('alerts')
+        .select(ALERT_FIELDS)
+        .eq('patient_id', id)
+        .order('created_at', { ascending: false })
+        .limit(ALERTS_LIMIT)
+    } catch (error) {
+      result = { data: null, error }
+    }
+    if (mine !== latest.current) return
+    if (result.error) {
+      setState((s) =>
+        s.data
+          ? { ...s, refreshFailed: true }
+          : { data: null, error: result.error, loaded: true, refreshFailed: false },
+      )
+    } else {
+      setState({ data: result.data ?? [], error: null, loaded: true, refreshFailed: false })
+    }
+  }, [id])
+
+  // First load (and a new load if the patient changes).
+  useEffect(() => {
+    if (!supabase) {
+      setState({ data: null, error: { message: 'not_configured' }, loaded: true, refreshFailed: false })
+      return undefined
+    }
+    setState({ data: null, error: null, loaded: false, refreshFailed: false })
+    load()
+    return () => {
+      latest.current += 1 // drop any answer still on its way
+    }
+  }, [id, load])
+
+  // Realtime. RLS is the protection; the patient_id filter only saves traffic.
+  useEffect(() => {
+    if (!supabase || !id) return undefined
+    let active = true
+    const channel = supabase
+      .channel(`patient-alerts-${id}-${++alertChannelCount}`)
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'alerts', filter: `patient_id=eq.${id}` },
+        () => {
+          if (active) load()
+        },
+      )
+      .subscribe((status) => {
+        if (!active) return
+        if (status === 'SUBSCRIBED') {
+          setLive('live')
+          load() // catch anything that arrived while the connection was down
+        } else if (status === 'CHANNEL_ERROR' || status === 'TIMED_OUT' || status === 'CLOSED') {
+          setLive('paused')
+        }
+      })
+    return () => {
+      active = false
+      supabase.removeChannel(channel)
+    }
+  }, [id, load])
+
+  // Fallback while live updates are paused.
+  useEffect(() => {
+    if (live !== 'paused') return undefined
+    const timer = setInterval(load, ALERTS_POLL_MS)
+    return () => clearInterval(timer)
+  }, [live, load])
+
+  // Fetch again when the person comes back to the app.
+  useEffect(() => {
+    const onVisible = () => {
+      if (document.visibilityState === 'visible') load()
+    }
+    document.addEventListener('visibilitychange', onVisible)
+    return () => document.removeEventListener('visibilitychange', onVisible)
+  }, [load])
+
+  return { ...state, live, reload: load }
+}
+
+// "Mark as seen" (migration 011, mark_alert_seen). The database sets the time,
+// only on the caller's own alert, and only once.
+// Returns { error, marked }: marked is true if this call set the time, false if
+// nothing changed (already seen, or not the caller's alert; both look the same).
+export async function markAlertSeen(alertId) {
+  if (!supabase) return { error: { message: 'not_configured' }, marked: false }
+  const { data, error } = await supabase.rpc('mark_alert_seen', { p_alert_id: alertId })
+  return { error: error ?? null, marked: data === true }
 }
