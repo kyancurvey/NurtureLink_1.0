@@ -1,7 +1,7 @@
 # Filipino wording review
 
 **Status: DRAFT, pending review by the midwife or medical officer.**
-Last generated: 2026-10-31, from `src/locales/en.json` and `src/locales/fil.json` (359 strings; the 81 added in step 2.4 are in section 5, the 71 added in step 3.1 are in section 6, the 70 added in step 3.2 are in section 7 at the end).
+Last generated: 2026-11-01, from `src/locales/en.json` and `src/locales/fil.json` (407 strings; the 81 added in step 2.4 are in section 5, the 71 added in step 3.1 are in section 6, the 70 added in step 3.2 are in section 7, the 48 added in step 3.3 are in section 8 at the end).
 
 NurtureLink is a monitoring and screening prototype, not a diagnostic device. The Filipino text was written in plain, calm wording. It has **not** been checked by a clinician yet.
 
@@ -441,6 +441,61 @@ Charts, history, the Adjust belt guidance and the manual reading form. Review th
 | 140 | `patient:monitor.manual.errRange` | Please enter a value between {{min}} and {{max}}. | Maglagay ng halagang nasa pagitan ng {{min}} at {{max}}. | - | Validation message with the allowed range. | |
 | 141 | `errors:manual_reading_invalid` | That reading could not be saved because a value looks wrong. Please check the numbers and try again. | Hindi na-save ang sukat dahil mukhang mali ang isang halaga. Pakisuri ang mga numero at subukan muli. | - |  | |
 
+## 8. Alerts tab (step 3.3)
+
+The patient Alerts list: wording built from the numbers in each alert, filters, SOS history and the Contact provider card. Review the rows flagged **EMERGENCY WORDING** and **ALERT TERM** first. Strings reused from earlier sections are not repeated: "Urgent" and "Needs attention" (section 1), "Tibok ng puso ng sanggol" and "Temperatura" (section 6), "Oxygen (SpO2)" (the same in both languages on purpose), and the emergency sentence and "Wala pang nakatalagang provider" (section 6, Home guidance). Alert sentences name numbers only; nothing from the database is shown as text.
+
+| # | Key | English | Filipino | Flag | Notes for the reviewer | Reviewer: OK or better wording |
+|---|---|---|---|---|---|---|
+| 142 | `patient:alerts.intro` | Alerts the app recorded from your checks. They are screening notes, not a diagnosis. | Mga abisong naitala ng app mula sa iyong mga check. Mga tala ito ng screening, hindi diyagnosis. | - |  | |
+| 143 | `patient:alerts.timeNote` | Times are shown in Philippine time. | Ipinapakita ang oras sa oras ng Pilipinas. | - |  | |
+| 144 | `patient:alerts.summary` | Open alerts (including SOS): {{count}} | Mga bukas na abiso (kasama ang SOS): {{count}} | - |  | |
+| 145 | `patient:alerts.live.paused` | Live updates are paused. This list will refresh every 30 seconds until the connection returns. | Naka-pause ang live na pag-update. Magre-refresh ang listahang ito kada 30 segundo hanggang bumalik ang koneksyon. | - | Calm line when live updates are down. | |
+| 146 | `patient:alerts.live.stale` | We could not refresh just now. The list below may be out of date. | Hindi namin ma-refresh ngayon. Maaaring luma na ang listahan sa ibaba. | - |  | |
+| 147 | `patient:alerts.contact.title` | Contact your provider | Makipag-ugnayan sa iyong provider | - |  | |
+| 148 | `patient:alerts.contact.placeholder` | Chat with your provider is not available yet. It will arrive in a later update. | Wala pa ang chat sa iyong provider. Darating ito sa susunod na update. | - | Placeholder until chat arrives (Phase 6). | |
+| 149 | `patient:alerts.contact.button` | Go to the Care tab | Pumunta sa tab na Konsulta | - |  | |
+| 150 | `patient:alerts.contact.noProviderBody` | No provider will see your alerts yet. If you are worried, go to or contact your nearest health facility. In an emergency, call local emergency services now. | Wala pang provider na makakakita ng iyong mga abiso. Kung nag-aalala ka, pumunta o makipag-ugnayan sa pinakamalapit na pasilidad pangkalusugan. Sa emergency, tumawag agad sa lokal na emergency services. | EMERGENCY WORDING | Patient with no provider. Must point to a health facility or local emergency services and promise nothing. | |
+| 151 | `patient:alerts.contact.unknownBody` | We could not check whether you have a provider assigned. If you are worried, contact your nearest health facility. In an emergency, call local emergency services now. | Hindi namin masuri kung may nakatalaga kang provider. Kung nag-aalala ka, makipag-ugnayan sa pinakamalapit na pasilidad pangkalusugan. Sa emergency, tumawag agad sa lokal na emergency services. | EMERGENCY WORDING | Shown when the app could not check whether a provider is assigned. | |
+| 152 | `patient:alerts.filter.label` | Show | Ipakita | - |  | |
+| 153 | `patient:alerts.filter.open` | Open | Bukas | ALERT TERM (priority) | "Bukas" = open (not yet handled). | |
+| 154 | `patient:alerts.filter.handled` | Handled | Naasikaso na | ALERT TERM (priority) | "Naasikaso na" = taken care of. Alternatives: "Natugunan na", "Tapos na". Means a provider acknowledged or resolved the alert. | |
+| 155 | `patient:alerts.filter.withCount` | {{label}} ({{count}}) | {{label}} ({{count}}) | - |  | |
+| 156 | `patient:alerts.list.title` | Your alerts | Iyong mga abiso | - |  | |
+| 157 | `patient:alerts.list.emptyOpen` | There are no open alerts right now. | Walang bukas na abiso sa ngayon. | - |  | |
+| 158 | `patient:alerts.list.emptyHandled` | There are no handled alerts yet. | Wala pang naasikasong abiso. | - |  | |
+| 159 | `patient:alerts.severity.info` | For your information | Para sa iyong kaalaman | ALERT TERM (priority) | Lowest severity (information only). Urgent and Needs attention reuse section 1. | |
+| 160 | `patient:alerts.type.signal_loss` | Belt signal | Signal ng belt | - |  | |
+| 161 | `patient:alerts.type.sos` | SOS alert | SOS na abiso | - |  | |
+| 162 | `patient:alerts.type.other` | Alert | Abiso | - |  | |
+| 163 | `patient:alerts.text.fhr` | Your last {{readings}} baby heart-rate checks in a row were outside the app's usual range of {{min}} to {{max}} bpm. The most recent was {{value}} bpm. | Ang huling {{readings}} sunod-sunod na check sa tibok ng puso ng sanggol ay wala sa karaniwang saklaw ng app na {{min}} hanggang {{max}} bpm. Ang pinakahuli ay {{value}} bpm. | ALERT TERM (priority) | Built from the numbers in the alert. Says what was recorded, not what it means. "karaniwang saklaw ng app" = the app's usual range (the limits are defaults not yet confirmed by the medical officer). Is this calm enough, and is "sunod-sunod" (in a row) clear? | |
+| 164 | `patient:alerts.text.fhrShort` | A baby heart-rate check was outside the app's usual range. | May check sa tibok ng puso ng sanggol na wala sa karaniwang saklaw ng app. | ALERT TERM (priority) | Shown when the alert has no numbers. | |
+| 165 | `patient:alerts.text.signalLoss` | The belt did not get a clear signal on your last {{readings}} checks in a row. Check the belt position and try again. | Hindi nakakuha ng malinaw na signal ang belt sa huling {{readings}} sunod-sunod mong check. Suriin ang posisyon ng belt at subukan muli. | HEALTH TERM | About the belt, not the baby. Check the belt advice. | |
+| 166 | `patient:alerts.text.signalLossShort` | The belt did not get a clear signal on your recent checks. Check the belt position and try again. | Hindi nakakuha ng malinaw na signal ang belt sa mga huli mong check. Suriin ang posisyon ng belt at subukan muli. | HEALTH TERM | Shown when the alert has no numbers. | |
+| 167 | `patient:alerts.text.spo2` | Your last {{readings}} oxygen (SpO2) readings in a row were lower than the app's usual minimum of {{min}} %. The most recent was {{value}} %. | Ang huling {{readings}} sunod-sunod na reading ng oxygen (SpO2) ay mas mababa sa karaniwang pinakamababa ng app na {{min}} %. Ang pinakahuli ay {{value}} %. | ALERT TERM (priority) | "mas mababa sa karaniwang pinakamababa ng app" = lower than the app's usual minimum. Confirm it does not sound like a diagnosis. | |
+| 168 | `patient:alerts.text.spo2Short` | An oxygen (SpO2) reading was lower than usual. | May reading ng oxygen (SpO2) na mas mababa kaysa karaniwan. | ALERT TERM (priority) | Shown when the alert has no numbers. | |
+| 169 | `patient:alerts.text.fever` | Your last {{readings}} temperature readings in a row were higher than the app's usual maximum of {{max}} °C. The most recent was {{value}} °C. | Ang huling {{readings}} sunod-sunod na reading ng temperatura ay mas mataas sa karaniwang pinakamataas ng app na {{max}} °C. Ang pinakahuli ay {{value}} °C. | ALERT TERM (priority) | "mas mataas sa karaniwang pinakamataas ng app" = higher than the app's usual maximum. The word "lagnat" (fever) is deliberately NOT used. Should it be? | |
+| 170 | `patient:alerts.text.feverShort` | A temperature reading was higher than usual. | May reading ng temperatura na mas mataas kaysa karaniwan. | ALERT TERM (priority) | Shown when the alert has no numbers. | |
+| 171 | `patient:alerts.text.sos` | You sent an SOS alert. | Nagpadala ka ng SOS na abiso. | - |  | |
+| 172 | `patient:alerts.text.other` | The app recorded an alert. | May naitalang abiso ang app. | - |  | |
+| 173 | `patient:alerts.raised` | Raised {{date}} | Naitala noong {{date}} | - |  | |
+| 174 | `patient:alerts.status.open` | Open | Bukas | - |  | |
+| 175 | `patient:alerts.status.openNote` | Not marked as handled yet. | Hindi pa namarkahang naasikaso. | ALERT TERM (priority) | "Hindi pa namarkahang naasikaso" = not marked as handled yet. Deliberately does not say anyone will handle it. | |
+| 176 | `patient:alerts.status.handled` | Handled | Naasikaso na | - |  | |
+| 177 | `patient:alerts.status.handledOn` | Your provider marked this as handled on {{date}}. | Minarkahan ng iyong provider na naasikaso ito noong {{date}}. | ALERT TERM (priority) | Shown only when a provider acknowledged the alert. Must not imply the problem is solved. | |
+| 178 | `patient:alerts.status.resolvedOn` | Your provider marked this as resolved on {{date}}. | Minarkahan ng iyong provider na nalutas na ito noong {{date}}. | ALERT TERM (priority) | Shown only when a provider resolved the alert. | |
+| 179 | `patient:alerts.seen.button` | Mark as seen | Markahan bilang nakita | HEALTH TERM | "Markahan bilang nakita" = Mark as seen. Only means the patient read it. | |
+| 180 | `patient:alerts.seen.marking` | Saving… | Sine-save… | - |  | |
+| 181 | `patient:alerts.seen.done` | Seen by you on {{date}} | Nakita mo noong {{date}} | - | Shows when the patient marked it. | |
+| 182 | `patient:alerts.seen.saved` | Marked as seen. | Namarkahan bilang nakita. | - |  | |
+| 183 | `patient:alerts.seen.note` | Marking an alert as seen does not close it or change its status. | Hindi isinasara o binabago ng pagmamarka bilang nakita ang abiso o ang status nito. | HEALTH TERM | Says that marking as seen does not close the alert. | |
+| 184 | `patient:alerts.sos.title` | SOS history | Kasaysayan ng SOS | - |  | |
+| 185 | `patient:alerts.sos.note` | An SOS alert is shown to your provider in this app. It does not call anyone, and your provider may not see it right away. | Ipinapakita sa iyong provider sa app na ito ang SOS na abiso. Hindi ito tumatawag sa kahit sino, at maaaring hindi agad makita ng iyong provider. | EMERGENCY WORDING | Same meaning as the Home SOS wording (section 6). Must not promise a response. | |
+| 186 | `patient:alerts.sos.empty` | You have not sent any SOS alerts. | Wala ka pang naipadalang SOS na abiso. | - |  | |
+| 187 | `patient:alerts.sos.unavailable` | SOS history could not be loaded just now. | Hindi ma-load ang kasaysayan ng SOS ngayon. | - |  | |
+| 188 | `patient:alerts.sos.openGuidance` | This SOS is still open. Do not wait for a reply. If you are in danger, call local emergency services or go to a health facility now. | Bukas pa ang SOS na ito. Huwag maghintay ng sagot. Kung nasa panganib ka, tumawag agad sa lokal na emergency services o pumunta sa pasilidad pangkalusugan. | EMERGENCY WORDING | Shown under an open SOS. "Huwag maghintay ng sagot" = do not wait for a reply. Is this the right instruction? | |
+| 189 | `patient:alerts.truncated` | Showing your newest {{count}} alerts. | Ipinapakita ang pinakabago mong {{count}} na abiso. | - |  | |
+
 ## Not yet written (later steps)
 
-Alerts tab, Care and Profile text, and provider screen content. Each will be added here as it is written. Consent and legal text also needs ethics/legal review (see `PLAN.md`, open items).
+Care and Profile text, and provider screen content. Each will be added here as it is written. Consent and legal text also needs ethics/legal review (see `PLAN.md`, open items).
