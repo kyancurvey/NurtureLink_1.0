@@ -1,0 +1,205 @@
+/* Patient Alerts tab. Colors, spacing and type come from tokens.css only.
+   Status colors (green / amber / red) are separate from brand coral and are
+   always paired with an icon AND text. Coral is never used here. */
+
+.nl-alerts {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.nl-alerts p {
+  margin: 0;
+}
+.nl-alerts__muted {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+.nl-alerts__strong {
+  font-weight: 700;
+}
+.nl-alerts__notice {
+  position: sticky;
+  top: var(--header-offset);
+  z-index: 5;
+}
+.nl-alerts__top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.nl-alerts__summary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+  color: var(--color-brand-purple);
+}
+.nl-alerts__line {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-brand-purple);
+  background: var(--color-bg-tint);
+  border: 2px solid var(--color-border-input);
+  border-radius: var(--radius-md);
+}
+.nl-alerts__line svg {
+  flex: none;
+}
+
+/* ---------- Layout ---------- */
+.nl-alerts__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+.nl-alerts__side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.nl-alerts__problem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+/* ---------- Filters ---------- */
+.nl-alerts__filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+.nl-alerts__filters-label {
+  font-weight: 700;
+  color: var(--color-brand-purple);
+  margin-right: var(--space-2);
+}
+.nl-alerts__filter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--touch-min);
+  min-width: 5rem;
+  padding: 0 var(--space-4);
+  font: inherit;
+  font-weight: 700;
+  color: var(--color-brand-purple);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border-input);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+.nl-alerts__filter[aria-pressed='true'] {
+  color: var(--color-text-on-action);
+  background: var(--color-brand-purple);
+  border-color: var(--color-brand-purple);
+}
+.nl-alerts__filter:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* ---------- Alert list ---------- */
+.nl-alerts__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.nl-alerts__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-left-width: 8px;
+  border-radius: var(--radius-md);
+}
+.nl-alerts__item--danger {
+  border-left-color: var(--color-danger);
+}
+.nl-alerts__item--warning {
+  border-left-color: var(--color-warning);
+}
+.nl-alerts__item--info {
+  border-left-color: var(--color-brand-purple);
+}
+.nl-alerts__item-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+}
+.nl-alerts__item-title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+}
+.nl-alerts__badge-info {
+  color: var(--color-brand-purple);
+  background: var(--color-bg-tint-strong);
+}
+.nl-alerts__status {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+}
+.nl-alerts__status svg {
+  flex: none;
+}
+.nl-alerts__status--handled {
+  color: var(--color-success-text);
+}
+.nl-alerts__seen {
+  margin-top: var(--space-1);
+}
+.nl-alerts__seen-done {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-brand-purple);
+}
+.nl-alerts__empty {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+}
+.nl-alerts__empty svg {
+  flex: none;
+}
+
+/* ---------- Side cards ---------- */
+.nl-alerts__contact > *:not(:last-child),
+.nl-alerts__sos > *:not(:last-child) {
+  margin-bottom: var(--space-3);
+}
+.nl-alerts__contact--none {
+  background: var(--color-bg-tint);
+}
+.nl-alerts__link {
+  text-decoration: none;
+}
+.nl-alerts__sos {
+  border: 2px solid var(--color-danger);
+}
+
+/* ---------- Wider screens: list on the left, help on the right ---------- */
+@media (min-width: 900px) {
+  .nl-alerts__grid {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: start;
+  }
+}

@@ -8,11 +8,12 @@ import { useT } from '../../lib/useT.js'
 // splitting), so the first download stays small. The shell and tab bar are not lazy.
 const Home = lazy(() => import('./Home.jsx'))
 const Monitor = lazy(() => import('./Monitor.jsx'))
+const AlertsPage = lazy(() => import('./AlertsPage.jsx'))
 const ProfilePage = lazy(() => import('./ProfilePage.jsx'))
 const PrivacyPage = lazy(() => import('./PrivacyPage.jsx'))
 
 // The patient app: five tabs (bottom bar on phones, sidebar on laptops).
-// Home (step 3.1) and Monitor (step 3.2) are built; the other tabs are placeholders until later steps.
+// Home (step 3.1), Monitor (step 3.2) and Alerts (step 3.3) are built; Care is a placeholder until a later step.
 const TABS = [
   { to: '/patient', labelKey: 'patient:tabs.home', icon: <HomeIcon />, end: true },
   { to: '/patient/monitor', labelKey: 'patient:tabs.monitor', icon: <ActivityIcon /> },
@@ -38,7 +39,7 @@ export default function PatientApp() {
         <Routes>
           <Route index element={<Home />} />
           <Route path="monitor" element={<Monitor />} />
-          <Route path="alerts" element={<TabPlaceholder title={t('patient:tabs.alerts')} />} />
+          <Route path="alerts" element={<AlertsPage />} />
           <Route path="care" element={<TabPlaceholder title={t('patient:tabs.care')} />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="profile/privacy" element={<PrivacyPage />} />
