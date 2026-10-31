@@ -459,6 +459,76 @@
         "errWhole": "Please enter a whole number.",
         "errRange": "Please enter a value between {{min}} and {{max}}."
       }
+    },
+    "alerts": {
+      "intro": "Alerts the app recorded from your checks. They are screening notes, not a diagnosis.",
+      "timeNote": "Times are shown in Philippine time.",
+      "summary": "Open alerts (including SOS): {{count}}",
+      "live": {
+        "paused": "Live updates are paused. This list will refresh every 30 seconds until the connection returns.",
+        "stale": "We could not refresh just now. The list below may be out of date."
+      },
+      "contact": {
+        "title": "Contact your provider",
+        "placeholder": "Chat with your provider is not available yet. It will arrive in a later update.",
+        "button": "Go to the Care tab",
+        "noProviderBody": "No provider will see your alerts yet. If you are worried, go to or contact your nearest health facility. In an emergency, call local emergency services now.",
+        "unknownBody": "We could not check whether you have a provider assigned. If you are worried, contact your nearest health facility. In an emergency, call local emergency services now."
+      },
+      "filter": {
+        "label": "Show",
+        "open": "Open",
+        "handled": "Handled",
+        "withCount": "{{label}} ({{count}})"
+      },
+      "list": {
+        "title": "Your alerts",
+        "emptyOpen": "There are no open alerts right now.",
+        "emptyHandled": "There are no handled alerts yet."
+      },
+      "severity": {
+        "info": "For your information"
+      },
+      "type": {
+        "signal_loss": "Belt signal",
+        "sos": "SOS alert",
+        "other": "Alert"
+      },
+      "text": {
+        "fhr": "Your last {{readings}} baby heart-rate checks in a row were outside the app's usual range of {{min}} to {{max}} bpm. The most recent was {{value}} bpm.",
+        "fhrShort": "A baby heart-rate check was outside the app's usual range.",
+        "signalLoss": "The belt did not get a clear signal on your last {{readings}} checks in a row. Check the belt position and try again.",
+        "signalLossShort": "The belt did not get a clear signal on your recent checks. Check the belt position and try again.",
+        "spo2": "Your last {{readings}} oxygen (SpO2) readings in a row were lower than the app's usual minimum of {{min}} %. The most recent was {{value}} %.",
+        "spo2Short": "An oxygen (SpO2) reading was lower than usual.",
+        "fever": "Your last {{readings}} temperature readings in a row were higher than the app's usual maximum of {{max}} °C. The most recent was {{value}} °C.",
+        "feverShort": "A temperature reading was higher than usual.",
+        "sos": "You sent an SOS alert.",
+        "other": "The app recorded an alert."
+      },
+      "raised": "Raised {{date}}",
+      "status": {
+        "open": "Open",
+        "openNote": "Not marked as handled yet.",
+        "handled": "Handled",
+        "handledOn": "Your provider marked this as handled on {{date}}.",
+        "resolvedOn": "Your provider marked this as resolved on {{date}}."
+      },
+      "seen": {
+        "button": "Mark as seen",
+        "marking": "Saving…",
+        "done": "Seen by you on {{date}}",
+        "saved": "Marked as seen.",
+        "note": "Marking an alert as seen does not close it or change its status."
+      },
+      "sos": {
+        "title": "SOS history",
+        "note": "An SOS alert is shown to your provider in this app. It does not call anyone, and your provider may not see it right away.",
+        "empty": "You have not sent any SOS alerts.",
+        "unavailable": "SOS history could not be loaded just now.",
+        "openGuidance": "This SOS is still open. Do not wait for a reply. If you are in danger, call local emergency services or go to a health facility now."
+      },
+      "truncated": "Showing your newest {{count}} alerts."
     }
   },
   "provider": {

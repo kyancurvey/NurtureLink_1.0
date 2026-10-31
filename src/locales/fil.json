@@ -459,6 +459,76 @@
         "errWhole": "Maglagay ng buong numero.",
         "errRange": "Maglagay ng halagang nasa pagitan ng {{min}} at {{max}}."
       }
+    },
+    "alerts": {
+      "intro": "Mga abisong naitala ng app mula sa iyong mga check. Mga tala ito ng screening, hindi diyagnosis.",
+      "timeNote": "Ipinapakita ang oras sa oras ng Pilipinas.",
+      "summary": "Mga bukas na abiso (kasama ang SOS): {{count}}",
+      "live": {
+        "paused": "Naka-pause ang live na pag-update. Magre-refresh ang listahang ito kada 30 segundo hanggang bumalik ang koneksyon.",
+        "stale": "Hindi namin ma-refresh ngayon. Maaaring luma na ang listahan sa ibaba."
+      },
+      "contact": {
+        "title": "Makipag-ugnayan sa iyong provider",
+        "placeholder": "Wala pa ang chat sa iyong provider. Darating ito sa susunod na update.",
+        "button": "Pumunta sa tab na Konsulta",
+        "noProviderBody": "Wala pang provider na makakakita ng iyong mga abiso. Kung nag-aalala ka, pumunta o makipag-ugnayan sa pinakamalapit na pasilidad pangkalusugan. Sa emergency, tumawag agad sa lokal na emergency services.",
+        "unknownBody": "Hindi namin masuri kung may nakatalaga kang provider. Kung nag-aalala ka, makipag-ugnayan sa pinakamalapit na pasilidad pangkalusugan. Sa emergency, tumawag agad sa lokal na emergency services."
+      },
+      "filter": {
+        "label": "Ipakita",
+        "open": "Bukas",
+        "handled": "Naasikaso na",
+        "withCount": "{{label}} ({{count}})"
+      },
+      "list": {
+        "title": "Iyong mga abiso",
+        "emptyOpen": "Walang bukas na abiso sa ngayon.",
+        "emptyHandled": "Wala pang naasikasong abiso."
+      },
+      "severity": {
+        "info": "Para sa iyong kaalaman"
+      },
+      "type": {
+        "signal_loss": "Signal ng belt",
+        "sos": "SOS na abiso",
+        "other": "Abiso"
+      },
+      "text": {
+        "fhr": "Ang huling {{readings}} sunod-sunod na check sa tibok ng puso ng sanggol ay wala sa karaniwang saklaw ng app na {{min}} hanggang {{max}} bpm. Ang pinakahuli ay {{value}} bpm.",
+        "fhrShort": "May check sa tibok ng puso ng sanggol na wala sa karaniwang saklaw ng app.",
+        "signalLoss": "Hindi nakakuha ng malinaw na signal ang belt sa huling {{readings}} sunod-sunod mong check. Suriin ang posisyon ng belt at subukan muli.",
+        "signalLossShort": "Hindi nakakuha ng malinaw na signal ang belt sa mga huli mong check. Suriin ang posisyon ng belt at subukan muli.",
+        "spo2": "Ang huling {{readings}} sunod-sunod na reading ng oxygen (SpO2) ay mas mababa sa karaniwang pinakamababa ng app na {{min}} %. Ang pinakahuli ay {{value}} %.",
+        "spo2Short": "May reading ng oxygen (SpO2) na mas mababa kaysa karaniwan.",
+        "fever": "Ang huling {{readings}} sunod-sunod na reading ng temperatura ay mas mataas sa karaniwang pinakamataas ng app na {{max}} °C. Ang pinakahuli ay {{value}} °C.",
+        "feverShort": "May reading ng temperatura na mas mataas kaysa karaniwan.",
+        "sos": "Nagpadala ka ng SOS na abiso.",
+        "other": "May naitalang abiso ang app."
+      },
+      "raised": "Naitala noong {{date}}",
+      "status": {
+        "open": "Bukas",
+        "openNote": "Hindi pa namarkahang naasikaso.",
+        "handled": "Naasikaso na",
+        "handledOn": "Minarkahan ng iyong provider na naasikaso ito noong {{date}}.",
+        "resolvedOn": "Minarkahan ng iyong provider na nalutas na ito noong {{date}}."
+      },
+      "seen": {
+        "button": "Markahan bilang nakita",
+        "marking": "Sine-save…",
+        "done": "Nakita mo noong {{date}}",
+        "saved": "Namarkahan bilang nakita.",
+        "note": "Hindi isinasara o binabago ng pagmamarka bilang nakita ang abiso o ang status nito."
+      },
+      "sos": {
+        "title": "Kasaysayan ng SOS",
+        "note": "Ipinapakita sa iyong provider sa app na ito ang SOS na abiso. Hindi ito tumatawag sa kahit sino, at maaaring hindi agad makita ng iyong provider.",
+        "empty": "Wala ka pang naipadalang SOS na abiso.",
+        "unavailable": "Hindi ma-load ang kasaysayan ng SOS ngayon.",
+        "openGuidance": "Bukas pa ang SOS na ito. Huwag maghintay ng sagot. Kung nasa panganib ka, tumawag agad sa lokal na emergency services o pumunta sa pasilidad pangkalusugan."
+      },
+      "truncated": "Ipinapakita ang pinakabago mong {{count}} na abiso."
     }
   },
   "provider": {
