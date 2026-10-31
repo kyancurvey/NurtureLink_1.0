@@ -1,0 +1,310 @@
+/* Patient Monitor tab. Colors, spacing and type come from tokens.css only.
+   Status colors (green / amber / red) are separate from brand coral and are
+   always paired with an icon or shape AND text. Coral is never used here. */
+
+.nl-mon {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.nl-mon p {
+  margin: 0;
+}
+.nl-mon__muted {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+.nl-mon__notice {
+  position: sticky;
+  top: var(--header-offset);
+  z-index: 5;
+}
+.nl-mon__problem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+/* ---------- Range switch ---------- */
+.nl-mon__ranges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+.nl-mon__ranges-label {
+  font-weight: 700;
+  color: var(--color-brand-purple);
+  margin-right: var(--space-2);
+}
+.nl-mon__range {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--touch-min);
+  min-width: 5rem;
+  padding: 0 var(--space-4);
+  font: inherit;
+  font-weight: 700;
+  color: var(--color-brand-purple);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border-input);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+.nl-mon__range[aria-pressed='true'] {
+  color: var(--color-text-on-action);
+  background: var(--color-brand-purple);
+  border-color: var(--color-brand-purple);
+}
+.nl-mon__range:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+/* ---------- Charts ---------- */
+.nl-mon__plot {
+  width: 100%;
+  min-height: 230px;
+}
+.nl-mon__plot .recharts-cartesian-grid line {
+  stroke: var(--color-border);
+}
+.nl-mon__plot .recharts-cartesian-axis-line,
+.nl-mon__plot .recharts-cartesian-axis-tick-line {
+  stroke: var(--color-border-input);
+}
+.nl-mon__plot .recharts-cartesian-axis-tick-value {
+  fill: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+.nl-mon__plot .nl-mon__line .recharts-line-curve {
+  stroke: var(--color-brand-purple);
+  fill: none;
+}
+.nl-mon__plot .nl-mon__band .recharts-reference-area-rect {
+  fill: var(--color-success-bg);
+  fill-opacity: 1;
+  stroke: none;
+}
+.nl-mon__pt {
+  fill: var(--color-brand-purple);
+  stroke: var(--color-white);
+  stroke-width: 1.5;
+}
+/* Outside the normal range: a triangle with "!" (shape and mark, not only color). */
+.nl-mon__out-shape {
+  fill: var(--color-danger);
+  stroke: var(--color-white);
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+.nl-mon__out-mark {
+  fill: none;
+  stroke: var(--color-white);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.nl-mon__out-dot {
+  fill: var(--color-white);
+}
+.nl-mon__tip {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border-input);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
+}
+.nl-mon__tip-out {
+  font-weight: 700;
+  color: var(--color-danger-text);
+}
+
+.nl-mon__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+.nl-mon__legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.nl-mon__swatch {
+  display: inline-block;
+  width: 1.25rem;
+  height: 0.9rem;
+  background: var(--color-success-bg);
+  border: 1px solid var(--color-success);
+  border-radius: 3px;
+}
+.nl-mon__gapmark {
+  fill: none;
+  stroke: var(--color-text-muted);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.nl-mon__notes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+.nl-mon__flag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 700;
+  color: var(--color-danger-text);
+}
+.nl-mon__warnnote {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 700;
+  color: var(--color-warning-text);
+}
+
+/* ---------- Empty state ---------- */
+.nl-mon__empty {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--space-4);
+  color: var(--color-brand-purple);
+  background: var(--color-bg-tint);
+  border: 2px solid var(--color-border-input);
+  border-radius: var(--radius-md);
+}
+.nl-mon__empty-title {
+  margin: 0 0 var(--space-1);
+  font-size: var(--font-size-lg);
+}
+
+/* ---------- Adjust belt ---------- */
+.nl-mon__belt {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  color: var(--color-warning-text);
+  background: var(--color-warning-bg);
+  border: 2px solid var(--color-warning);
+  border-radius: var(--radius-lg);
+}
+.nl-mon__belt-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.nl-mon__belt-title {
+  margin: 0;
+  font-size: var(--font-size-xl);
+  line-height: 1.2;
+}
+.nl-mon__belt ol {
+  margin: 0;
+  padding-left: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.nl-mon__belt-worried {
+  font-weight: 700;
+}
+
+/* ---------- History ---------- */
+.nl-mon__hist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+.nl-mon__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-1);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-border);
+}
+.nl-mon__row:first-child {
+  border-top: 0;
+}
+.nl-mon__when {
+  font-weight: 700;
+}
+.nl-mon__lbl {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+.nl-mon__more {
+  margin-top: var(--space-3);
+}
+
+/* ---------- Manual entry ---------- */
+.nl-mon__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.nl-mon__note {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-brand-purple);
+  background: var(--color-bg-tint);
+  border: 2px solid var(--color-border-input);
+  border-radius: var(--radius-md);
+}
+.nl-mon__confirm {
+  margin: 0 0 var(--space-3);
+  padding-left: var(--space-5);
+}
+
+/* ---------- Layout ---------- */
+.nl-mon__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+@media (min-width: 900px) {
+  .nl-mon__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+  .nl-mon__wide {
+    grid-column: 1 / -1;
+  }
+  .nl-mon__vitals {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+    align-items: start;
+  }
+}
+/* From 600px up: the time on its own line, then heart rate, signal quality and source side by side. */
+@media (min-width: 600px) {
+  .nl-mon__row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-1) var(--space-3);
+  }
+  .nl-mon__when {
+    grid-column: 1 / -1;
+  }
+}
