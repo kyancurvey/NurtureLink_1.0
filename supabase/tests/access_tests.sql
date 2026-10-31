@@ -28,8 +28,8 @@
 -- WHAT TO SEND BACK IF ANYTHING FAILS: the SUMMARY row and every FAIL row
 -- (test and detail columns), as text or an export. Nothing else.
 --
--- DEPENDS ON: 000 to 005, 008 and 009 already run (the reading-time checks need 008;
--- the list of client functions below includes my_home_status from 009).
+-- DEPENDS ON: 000 to 005, 008, 009 and 010 already run (the reading-time checks need 008;
+-- the list of client functions below includes my_home_status from 009 and my_normal_ranges from 010).
 -- READ-ONLY for your real data.
 -- SAFE TO RE-RUN: yes, any number of times.
 -- HOW TO UNDO: nothing to undo; the helper functions live only in this session.
@@ -581,11 +581,11 @@ begin
       and not has_column_privilege('authenticated', 'public.alerts', 'severity', 'UPDATE')
       and not has_column_privilege('authenticated', 'public.consent_records', 'accepted_at', 'INSERT')
       and not has_column_privilege('authenticated', 'public.belt_readings', 'created_at', 'INSERT'));
-    r := r || pg_temp.ck('signed-in users can execute exactly the 6 client functions',
+    r := r || pg_temp.ck('signed-in users can execute exactly the 7 client functions',
       (select coalesce(string_agg(p.proname, ',' order by p.proname), '') from pg_proc p join pg_namespace ns on ns.oid = p.pronamespace
         where ns.nspname = 'public' and p.proname <> 'rls_auto_enable' and has_function_privilege('authenticated', p.oid, 'EXECUTE')
           and not exists (select 1 from pg_depend dd where dd.objid = p.oid and dd.deptype = 'e'))
-      = 'is_admin,is_assigned_provider,is_provider,my_home_status,redeem_provider_invite,set_my_language',
+      = 'is_admin,is_assigned_provider,is_provider,my_home_status,my_normal_ranges,redeem_provider_invite,set_my_language',
       (select string_agg(p.proname, ',' order by p.proname) from pg_proc p join pg_namespace ns on ns.oid = p.pronamespace
         where ns.nspname = 'public' and p.proname <> 'rls_auto_enable' and has_function_privilege('authenticated', p.oid, 'EXECUTE')));
     r := r || pg_temp.ck('every SECURITY DEFINER function in public has a fixed search_path',
