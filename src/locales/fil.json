@@ -370,6 +370,95 @@
         "sent": "Naipadala ang iyong SOS na abiso sa iyong provider sa app na ito. Hindi ito tumatawag sa kahit sino. Kung nasa panganib ka, tumawag agad sa lokal na emergency services o pumunta sa pasilidad pangkalusugan.",
         "failedAdvice": "Kung nasa panganib ka, huwag maghintay: tumawag sa lokal na emergency services o pumunta sa pasilidad pangkalusugan."
       }
+    },
+    "monitor": {
+      "range": {
+        "label": "Saklaw ng oras",
+        "day": "Araw",
+        "week": "Linggo",
+        "month": "Buwan",
+        "dayLong": "nakaraang 24 oras",
+        "weekLong": "nakaraang 7 araw",
+        "monthLong": "nakaraang 30 araw"
+      },
+      "empty": {
+        "title": "Wala pang check",
+        "body": "Kapag pinindot mo ang Mag-check ngayon sa Tahanan, o nag-save ka ng sukat nang mano-mano sa ibaba, lalabas dito ang iyong mga chart at kasaysayan."
+      },
+      "chart": {
+        "none": "Walang naitala sa saklaw ng oras na ito.",
+        "shown": "Mga halagang ipinapakita: {{count}}",
+        "lost": "Mga check na walang signal: {{count}}. Ipinapakita ang mga ito bilang puwang, hindi bilang guhit.",
+        "out": "Mga halagang wala sa karaniwang saklaw: {{count}}",
+        "outside": "Wala sa karaniwang saklaw",
+        "aria": "{{title}}, {{range}}. {{count}} halaga ang ipinapakita.",
+        "failed": "Hindi ma-load ang chart. Gumagana pa rin ang kasaysayan at ang mano-manong pagpasok sa ibaba.",
+        "reload": "I-reload",
+        "truncated": "Ang pinakabagong 1000 tala lang sa saklaw ng oras na ito ang ipinapakita."
+      },
+      "band": {
+        "default": "May kulay na bahagi: karaniwang saklaw na {{range}}. Ito ay default na limitasyon na hindi pa kinukumpirma ng medical officer.",
+        "confirmed": "May kulay na bahagi: karaniwang saklaw na {{range}}.",
+        "none": "Walang itinakdang karaniwang saklaw para rito, kaya walang kulay na bahaging ipinapakita.",
+        "unavailable": "Hindi ma-load ang karaniwang saklaw, kaya walang kulay na bahaging ipinapakita.",
+        "both": "{{min}} hanggang {{max}} {{unit}}",
+        "minOnly": "{{min}} {{unit}} o mas mataas",
+        "maxOnly": "{{max}} {{unit}} o mas mababa"
+      },
+      "legend": {
+        "inRange": "Nasa karaniwang saklaw",
+        "outside": "Wala sa karaniwang saklaw",
+        "band": "Karaniwang saklaw (may kulay na bahagi)",
+        "gap": "Puwang: walang signal, o matagal na walang check"
+      },
+      "history": {
+        "title": "Kasaysayan ng mga check",
+        "fhr": "Tibok ng puso ng sanggol",
+        "quality": "Kalidad ng signal",
+        "source": "Pinagmulan",
+        "signalLost": "Walang maaasahang sukat (nawala ang signal)",
+        "qualityValue": "{{level}} ({{percent}}%)",
+        "qualityNone": "Hindi naitala",
+        "more": "Magpakita pa",
+        "none": "Wala pang check.",
+        "outside": "Wala sa karaniwang saklaw"
+      },
+      "source": {
+        "device": "Device",
+        "simulator": "Simulator",
+        "manual": "Mano-mano (tinype)"
+      },
+      "belt": {
+        "title": "Ayusin ang belt",
+        "intro": "Mahina o nawala ang signal sa mga huli mong check (huling check: {{date}}). Madalas makatulong ang mga hakbang na ito:",
+        "step1": "Magpahinga muna nang isang minuto. Umupo o sumandal nang komportable at huwag gumalaw habang nagche-check ang belt.",
+        "step2": "Siguraduhing dumidikit ang sensor ng belt sa iyong hubad na balat. Dapat sapat ang higpit ng belt, hindi masikip.",
+        "step3": "Ilipat nang kaunti ang sensor sa ibang bahagi ng iyong tiyan, saka maghintay nang ilang segundo.",
+        "step4": "Tiyaking may sapat na charge ang belt at nakakonekta ito.",
+        "step5": "Pindutin ang Mag-check ngayon sa Tahanan para subukan muli.",
+        "worried": "Kung nag-aalala ka para sa iyong sanggol, huwag maghintay sa app. Makipag-ugnayan sa iyong provider o pumunta sa pasilidad pangkalusugan."
+      },
+      "manual": {
+        "title": "Magpasok ng sukat nang mano-mano",
+        "intro": "Gamitin ito kung offline o hindi gumagana ang iyong belt o wrist band.",
+        "selfReported": "Ang mga sukat na tinype mo ay ikaw mismo ang nag-ulat. Hindi ito masusuri ng app, at mas hindi maaasahan ang mga ito kaysa sa sukat mula sa belt. Nase-save ang mga ito kasama ang oras na pinindot mo ang Save.",
+        "optional": "opsyonal",
+        "hint": "Sa pagitan ng {{min}} at {{max}}",
+        "review": "Suriin",
+        "reviewTitle": "Suriin bago i-save",
+        "reviewBody": "Hindi mo na mababago o mabubura ang sukat kapag nai-save na ito. Pakisuri ang mga numero.",
+        "line": "{{label}}: {{value}} {{unit}}",
+        "back": "Bumalik at i-edit",
+        "save": "I-save ang sukat",
+        "saving": "Nagse-save…",
+        "saved": "Nai-save ang iyong sukat.",
+        "partial": "Nai-save ang tibok ng puso ng iyong sanggol, pero hindi pa ang sarili mong mga sukat. Pindutin muli ang I-save ang sukat para matapos. Walang mase-save nang dalawang beses.",
+        "outOfRange": "May halagang inilagay mo na wala sa karaniwang saklaw. Maaaring abisuhan ng app ang iyong provider kung magpapatuloy ito. Hindi nito pinapalitan ang pagsusuri ng isang health professional. Kung nag-aalala ka, makipag-ugnayan sa iyong provider o sa pasilidad pangkalusugan.",
+        "errRequired": "Maglagay ng halaga.",
+        "errNumber": "Maglagay ng numero.",
+        "errWhole": "Maglagay ng buong numero.",
+        "errRange": "Maglagay ng halagang nasa pagitan ng {{min}} at {{max}}."
+      }
     }
   },
   "provider": {
@@ -417,6 +506,7 @@
     "language_not_saved": "Hindi nai-save sa iyong account ang napili mong wika. Gumagana pa rin ito sa device na ito.",
     "email_not_authorized": "Hindi pa makapagpadala ng email ang aming serbisyo sa address na ito. Pakisabi sa may-ari ng proyekto.",
     "reading_time_in_future": "Nasa hinaharap ang oras ng reading na ito (mas huli kaysa sa tunay na oras), kaya hindi ito nai-save. Pakisuri kung tama ang petsa at oras ng iyong device, at subukan muli.",
-    "sos_rate_limited": "Naipadala na ang iyong SOS ilang sandali lang ang nakalipas, kaya hindi nagdagdag ng pangalawa. Kung nasa panganib ka, tumawag agad sa lokal na emergency services o pumunta sa pasilidad pangkalusugan."
+    "sos_rate_limited": "Naipadala na ang iyong SOS ilang sandali lang ang nakalipas, kaya hindi nagdagdag ng pangalawa. Kung nasa panganib ka, tumawag agad sa lokal na emergency services o pumunta sa pasilidad pangkalusugan.",
+    "manual_reading_invalid": "Hindi na-save ang sukat dahil mukhang mali ang isang halaga. Pakisuri ang mga numero at subukan muli."
   }
 }

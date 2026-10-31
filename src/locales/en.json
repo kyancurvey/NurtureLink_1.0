@@ -370,6 +370,95 @@
         "sent": "Your SOS alert was sent to your provider in this app. This does not call anyone. If you are in danger, call local emergency services or go to a health facility now.",
         "failedAdvice": "If you are in danger, do not wait: call local emergency services or go to a health facility."
       }
+    },
+    "monitor": {
+      "range": {
+        "label": "Time range",
+        "day": "Day",
+        "week": "Week",
+        "month": "Month",
+        "dayLong": "last 24 hours",
+        "weekLong": "last 7 days",
+        "monthLong": "last 30 days"
+      },
+      "empty": {
+        "title": "No checks yet",
+        "body": "When you press Check now on the Home tab, or save a reading by hand below, your charts and history will appear here."
+      },
+      "chart": {
+        "none": "Nothing was recorded in this time range.",
+        "shown": "Values shown: {{count}}",
+        "lost": "Checks with no signal: {{count}}. They are shown as gaps, never as a line.",
+        "out": "Values outside the normal range: {{count}}",
+        "outside": "Outside the normal range",
+        "aria": "{{title}}, {{range}}. {{count}} values shown.",
+        "failed": "The chart could not be loaded. Your history and manual entry below still work.",
+        "reload": "Reload",
+        "truncated": "Only the newest 1000 entries in this time range are shown."
+      },
+      "band": {
+        "default": "Shaded area: normal range {{range}}. This is a default limit that a medical officer has not confirmed yet.",
+        "confirmed": "Shaded area: normal range {{range}}.",
+        "none": "No normal range is set for this measure, so no shaded area is shown.",
+        "unavailable": "The normal range could not be loaded, so no shaded area is shown.",
+        "both": "{{min}} to {{max}} {{unit}}",
+        "minOnly": "{{min}} {{unit}} or higher",
+        "maxOnly": "{{max}} {{unit}} or lower"
+      },
+      "legend": {
+        "inRange": "Within the normal range",
+        "outside": "Outside the normal range",
+        "band": "Normal range (shaded area)",
+        "gap": "Gap: no signal, or no check for a long time"
+      },
+      "history": {
+        "title": "Check history",
+        "fhr": "Baby's heart rate",
+        "quality": "Signal quality",
+        "source": "Source",
+        "signalLost": "No reliable reading (signal lost)",
+        "qualityValue": "{{level}} ({{percent}}%)",
+        "qualityNone": "Not recorded",
+        "more": "Show more",
+        "none": "No checks yet.",
+        "outside": "Outside the normal range"
+      },
+      "source": {
+        "device": "Device",
+        "simulator": "Simulator",
+        "manual": "Manual (typed by hand)"
+      },
+      "belt": {
+        "title": "Adjust the belt",
+        "intro": "Your recent checks had a weak or lost signal (latest check: {{date}}). These steps often help:",
+        "step1": "Rest for a minute. Sit or lie back comfortably and stay still while the belt checks.",
+        "step2": "Make sure the belt sensor touches your bare skin. The belt should be snug, not tight.",
+        "step3": "Move the sensor a little to another spot on your belly, then wait a few seconds.",
+        "step4": "Check that the belt is charged and connected.",
+        "step5": "Press Check now on the Home tab to try again.",
+        "worried": "If you are worried about your baby, do not wait for the app. Contact your provider or go to a health facility."
+      },
+      "manual": {
+        "title": "Enter a reading by hand",
+        "intro": "Use this if your belt or wrist band is offline or not working.",
+        "selfReported": "Readings typed by hand are self-reported. The app cannot check them, and they are less reliable than a reading from the belt. They are saved with the time you press Save.",
+        "optional": "optional",
+        "hint": "Between {{min}} and {{max}}",
+        "review": "Review",
+        "reviewTitle": "Check before saving",
+        "reviewBody": "You cannot change or delete a reading after it is saved. Please check the numbers.",
+        "line": "{{label}}: {{value}} {{unit}}",
+        "back": "Go back and edit",
+        "save": "Save reading",
+        "saving": "Saving…",
+        "saved": "Your reading was saved.",
+        "partial": "Your baby's heart rate was saved, but your own values were not. Press Save reading again to finish. Nothing will be saved twice.",
+        "outOfRange": "A value you entered is outside the normal range. The app may alert your provider if this continues. It does not replace a check by a health professional. If you are worried, contact your provider or a health facility.",
+        "errRequired": "Please enter a value.",
+        "errNumber": "Please enter a number.",
+        "errWhole": "Please enter a whole number.",
+        "errRange": "Please enter a value between {{min}} and {{max}}."
+      }
     }
   },
   "provider": {
@@ -417,6 +506,7 @@
     "language_not_saved": "Your language choice could not be saved to your account. It still works on this device.",
     "email_not_authorized": "Our email service cannot send to this address yet. Please tell the project owner.",
     "reading_time_in_future": "The time on this reading is ahead of the real time, so it was not saved. Please check that your device's date and time are correct, then try again.",
-    "sos_rate_limited": "Your SOS was already sent a moment ago, so a second one was not added. If you are in danger, call local emergency services or go to a health facility now."
+    "sos_rate_limited": "Your SOS was already sent a moment ago, so a second one was not added. If you are in danger, call local emergency services or go to a health facility now.",
+    "manual_reading_invalid": "That reading could not be saved because a value looks wrong. Please check the numbers and try again."
   }
 }
