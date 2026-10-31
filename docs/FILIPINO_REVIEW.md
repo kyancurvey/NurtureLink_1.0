@@ -1,7 +1,7 @@
 # Filipino wording review
 
 **Status: DRAFT, pending review by the midwife or medical officer.**
-Last generated: 2026-10-27, from `src/locales/en.json` and `src/locales/fil.json` (289 strings; the 81 added in step 2.4 are in section 5, the 71 added in step 3.1 are in section 6).
+Last generated: 2026-10-31, from `src/locales/en.json` and `src/locales/fil.json` (359 strings; the 81 added in step 2.4 are in section 5, the 71 added in step 3.1 are in section 6, the 70 added in step 3.2 are in section 7 at the end).
 
 NurtureLink is a monitoring and screening prototype, not a diagnostic device. The Filipino text was written in plain, calm wording. It has **not** been checked by a clinician yet.
 
@@ -364,6 +364,83 @@ Wording here is shown to patients in the middle of worry, so read it for calm an
 | 70 | `errors:sos_rate_limited` | Your SOS was already sent a moment ago, so a second one was not added. If you are in danger, call local emergency services or go to a health facility now. | Naipadala na ang iyong SOS ilang sandali lang ang nakalipas, kaya hindi nagdagdag ng pangalawa. Kung nasa panganib ka, tumawag agad sa lokal na emergency services o pumunta sa pasilidad pangkalusugan. | EMERGENCY WORDING (priority) | | |
 | 71 | `common:ui.loading` | Loading… | Naglo-load… | - |  | |
 
+## 7. Monitor tab, Adjust belt and manual entry (step 3.2)
+
+Charts, history, the Adjust belt guidance and the manual reading form. Review the rows flagged **EMERGENCY WORDING** and **HEALTH TERM** first. Words reused from the Home tab (for example "Tibok ng puso ng sanggol", "Oxygen (SpO2)", "Temperatura") are not repeated here.
+
+| # | Key | English | Filipino | Flag | Notes for the reviewer | Reviewer: OK or better wording |
+|---|---|---|---|---|---|---|
+| 72 | `patient:monitor.range.label` | Time range | Saklaw ng oras | - |  | |
+| 73 | `patient:monitor.range.day` | Day | Araw | - |  | |
+| 74 | `patient:monitor.range.week` | Week | Linggo | - |  | |
+| 75 | `patient:monitor.range.month` | Month | Buwan | - |  | |
+| 76 | `patient:monitor.range.dayLong` | last 24 hours | nakaraang 24 oras | - |  | |
+| 77 | `patient:monitor.range.weekLong` | last 7 days | nakaraang 7 araw | - |  | |
+| 78 | `patient:monitor.range.monthLong` | last 30 days | nakaraang 30 araw | - |  | |
+| 79 | `patient:monitor.empty.title` | No checks yet | Wala pang check | - |  | |
+| 80 | `patient:monitor.empty.body` | When you press Check now on the Home tab, or save a reading by hand below, your charts and history will appear here. | Kapag pinindot mo ang Mag-check ngayon sa Tahanan, o nag-save ka ng sukat nang mano-mano sa ibaba, lalabas dito ang iyong mga chart at kasaysayan. | - |  | |
+| 81 | `patient:monitor.chart.none` | Nothing was recorded in this time range. | Walang naitala sa saklaw ng oras na ito. | - |  | |
+| 82 | `patient:monitor.chart.shown` | Values shown: {{count}} | Mga halagang ipinapakita: {{count}} | - |  | |
+| 83 | `patient:monitor.chart.lost` | Checks with no signal: {{count}}. They are shown as gaps, never as a line. | Mga check na walang signal: {{count}}. Ipinapakita ang mga ito bilang puwang, hindi bilang guhit. | HEALTH TERM | Explains the gaps in the chart. "Puwang" = gap. | |
+| 84 | `patient:monitor.chart.out` | Values outside the normal range: {{count}} | Mga halagang wala sa karaniwang saklaw: {{count}} | HEALTH TERM | Count of values outside the normal range. Shown with a warning icon. | |
+| 85 | `patient:monitor.chart.outside` | Outside the normal range | Wala sa karaniwang saklaw | HEALTH TERM |  | |
+| 86 | `patient:monitor.chart.aria` | {{title}}, {{range}}. {{count}} values shown. | {{title}}, {{range}}. {{count}} halaga ang ipinapakita. | - |  | |
+| 87 | `patient:monitor.chart.failed` | The chart could not be loaded. Your history and manual entry below still work. | Hindi ma-load ang chart. Gumagana pa rin ang kasaysayan at ang mano-manong pagpasok sa ibaba. | - |  | |
+| 88 | `patient:monitor.chart.reload` | Reload | I-reload | - |  | |
+| 89 | `patient:monitor.chart.truncated` | Only the newest 1000 entries in this time range are shown. | Ang pinakabagong 1000 tala lang sa saklaw ng oras na ito ang ipinapakita. | - |  | |
+| 90 | `patient:monitor.band.default` | Shaded area: normal range {{range}}. This is a default limit that a medical officer has not confirmed yet. | May kulay na bahagi: karaniwang saklaw na {{range}}. Ito ay default na limitasyon na hindi pa kinukumpirma ng medical officer. | HEALTH TERM | "medical officer" is kept in English as in the rest of the app. States plainly that the limits are not yet confirmed. | |
+| 91 | `patient:monitor.band.confirmed` | Shaded area: normal range {{range}}. | May kulay na bahagi: karaniwang saklaw na {{range}}. | HEALTH TERM |  | |
+| 92 | `patient:monitor.band.none` | No normal range is set for this measure, so no shaded area is shown. | Walang itinakdang karaniwang saklaw para rito, kaya walang kulay na bahaging ipinapakita. | HEALTH TERM |  | |
+| 93 | `patient:monitor.band.unavailable` | The normal range could not be loaded, so no shaded area is shown. | Hindi ma-load ang karaniwang saklaw, kaya walang kulay na bahaging ipinapakita. | HEALTH TERM |  | |
+| 94 | `patient:monitor.band.both` | {{min}} to {{max}} {{unit}} | {{min}} hanggang {{max}} {{unit}} | HEALTH TERM |  | |
+| 95 | `patient:monitor.band.minOnly` | {{min}} {{unit}} or higher | {{min}} {{unit}} o mas mataas | HEALTH TERM | Used for oxygen (SpO2): a lowest normal value only. | |
+| 96 | `patient:monitor.band.maxOnly` | {{max}} {{unit}} or lower | {{max}} {{unit}} o mas mababa | HEALTH TERM | Used for temperature: a highest normal value only. | |
+| 97 | `patient:monitor.legend.inRange` | Within the normal range | Nasa karaniwang saklaw | HEALTH TERM |  | |
+| 98 | `patient:monitor.legend.outside` | Outside the normal range | Wala sa karaniwang saklaw | HEALTH TERM |  | |
+| 99 | `patient:monitor.legend.band` | Normal range (shaded area) | Karaniwang saklaw (may kulay na bahagi) | HEALTH TERM |  | |
+| 100 | `patient:monitor.legend.gap` | Gap: no signal, or no check for a long time | Puwang: walang signal, o matagal na walang check | HEALTH TERM | "Puwang" = gap in the line. | |
+| 101 | `patient:monitor.history.title` | Check history | Kasaysayan ng mga check | - |  | |
+| 102 | `patient:monitor.history.fhr` | Baby's heart rate | Tibok ng puso ng sanggol | HEALTH TERM | Same term as Home: "Tibok ng puso ng sanggol". | |
+| 103 | `patient:monitor.history.quality` | Signal quality | Kalidad ng signal | HEALTH TERM |  | |
+| 104 | `patient:monitor.history.source` | Source | Pinagmulan | - |  | |
+| 105 | `patient:monitor.history.signalLost` | No reliable reading (signal lost) | Walang maaasahang sukat (nawala ang signal) | HEALTH TERM | Shown instead of a number when the signal was lost. No value is invented. | |
+| 106 | `patient:monitor.history.qualityValue` | {{level}} ({{percent}}%) | {{level}} ({{percent}}%) | HEALTH TERM |  | |
+| 107 | `patient:monitor.history.qualityNone` | Not recorded | Hindi naitala | HEALTH TERM |  | |
+| 108 | `patient:monitor.history.more` | Show more | Magpakita pa | - |  | |
+| 109 | `patient:monitor.history.none` | No checks yet. | Wala pang check. | - |  | |
+| 110 | `patient:monitor.history.outside` | Outside the normal range | Wala sa karaniwang saklaw | HEALTH TERM |  | |
+| 111 | `patient:monitor.source.device` | Device | Device | - | Kept as "Device" like the Home tab. | |
+| 112 | `patient:monitor.source.simulator` | Simulator | Simulator | HEALTH TERM | Kept as "Simulator" (developer/demo wording). | |
+| 113 | `patient:monitor.source.manual` | Manual (typed by hand) | Mano-mano (tinype) | HEALTH TERM | "tinype" is informal (typed). Better word welcome. | |
+| 114 | `patient:monitor.belt.title` | Adjust the belt | Ayusin ang belt | HEALTH TERM |  | |
+| 115 | `patient:monitor.belt.intro` | Your recent checks had a weak or lost signal (latest check: {{date}}). These steps often help: | Mahina o nawala ang signal sa mga huli mong check (huling check: {{date}}). Madalas makatulong ang mga hakbang na ito: | HEALTH TERM | "Mahina o nawala ang signal" = weak or lost signal. {{date}} is in Philippine time. | |
+| 116 | `patient:monitor.belt.step1` | Rest for a minute. Sit or lie back comfortably and stay still while the belt checks. | Magpahinga muna nang isang minuto. Umupo o sumandal nang komportable at huwag gumalaw habang nagche-check ang belt. | HEALTH TERM | Practical advice for a belt or sensor check. Clinician: is this the advice you would give? | |
+| 117 | `patient:monitor.belt.step2` | Make sure the belt sensor touches your bare skin. The belt should be snug, not tight. | Siguraduhing dumidikit ang sensor ng belt sa iyong hubad na balat. Dapat sapat ang higpit ng belt, hindi masikip. | HEALTH TERM | "Snug, not tight". Please confirm this is safe and clear advice. | |
+| 118 | `patient:monitor.belt.step3` | Move the sensor a little to another spot on your belly, then wait a few seconds. | Ilipat nang kaunti ang sensor sa ibang bahagi ng iyong tiyan, saka maghintay nang ilang segundo. | HEALTH TERM | Moving the sensor slightly. Please confirm the wording and that it is appropriate to suggest. | |
+| 119 | `patient:monitor.belt.step4` | Check that the belt is charged and connected. | Tiyaking may sapat na charge ang belt at nakakonekta ito. | HEALTH TERM | About the device, not health advice. | |
+| 120 | `patient:monitor.belt.step5` | Press Check now on the Home tab to try again. | Pindutin ang Mag-check ngayon sa Tahanan para subukan muli. | HEALTH TERM | Refers to the Check now button on Home (Filipino label "Mag-check ngayon"). | |
+| 121 | `patient:monitor.belt.worried` | If you are worried about your baby, do not wait for the app. Contact your provider or go to a health facility. | Kung nag-aalala ka para sa iyong sanggol, huwag maghintay sa app. Makipag-ugnayan sa iyong provider o pumunta sa pasilidad pangkalusugan. | EMERGENCY WORDING (priority) | Same safety message as the SOS card: do not wait for the app. Check it names the right people ("provider", "pasilidad pangkalusugan"). | |
+| 122 | `patient:monitor.manual.title` | Enter a reading by hand | Magpasok ng sukat nang mano-mano | - |  | |
+| 123 | `patient:monitor.manual.intro` | Use this if your belt or wrist band is offline or not working. | Gamitin ito kung offline o hindi gumagana ang iyong belt o wrist band. | - |  | |
+| 124 | `patient:monitor.manual.selfReported` | Readings typed by hand are self-reported. The app cannot check them, and they are less reliable than a reading from the belt. They are saved with the time you press Save. | Ang mga sukat na tinype mo ay ikaw mismo ang nag-ulat. Hindi ito masusuri ng app, at mas hindi maaasahan ang mga ito kaysa sa sukat mula sa belt. Nase-save ang mga ito kasama ang oras na pinindot mo ang Save. | HEALTH TERM | Self-reported: "ikaw mismo ang nag-ulat". Please check this is clear. | |
+| 125 | `patient:monitor.manual.optional` | optional | opsyonal | - |  | |
+| 126 | `patient:monitor.manual.hint` | Between {{min}} and {{max}} | Sa pagitan ng {{min}} at {{max}} | - | Shows the allowed range under each field. | |
+| 127 | `patient:monitor.manual.review` | Review | Suriin | - |  | |
+| 128 | `patient:monitor.manual.reviewTitle` | Check before saving | Suriin bago i-save | - |  | |
+| 129 | `patient:monitor.manual.reviewBody` | You cannot change or delete a reading after it is saved. Please check the numbers. | Hindi mo na mababago o mabubura ang sukat kapag nai-save na ito. Pakisuri ang mga numero. | HEALTH TERM | Readings cannot be edited or deleted by the patient after saving. | |
+| 130 | `patient:monitor.manual.line` | {{label}}: {{value}} {{unit}} | {{label}}: {{value}} {{unit}} | - |  | |
+| 131 | `patient:monitor.manual.back` | Go back and edit | Bumalik at i-edit | - |  | |
+| 132 | `patient:monitor.manual.save` | Save reading | I-save ang sukat | - |  | |
+| 133 | `patient:monitor.manual.saving` | Saving… | Nagse-save… | - |  | |
+| 134 | `patient:monitor.manual.saved` | Your reading was saved. | Nai-save ang iyong sukat. | - |  | |
+| 135 | `patient:monitor.manual.partial` | Your baby's heart rate was saved, but your own values were not. Press Save reading again to finish. Nothing will be saved twice. | Nai-save ang tibok ng puso ng iyong sanggol, pero hindi pa ang sarili mong mga sukat. Pindutin muli ang I-save ang sukat para matapos. Walang mase-save nang dalawang beses. | HEALTH TERM | Shown when the baby's heart rate was saved but the mother's own values were not. Pressing Save again does not save anything twice. | |
+| 136 | `patient:monitor.manual.outOfRange` | A value you entered is outside the normal range. The app may alert your provider if this continues. It does not replace a check by a health professional. If you are worried, contact your provider or a health facility. | May halagang inilagay mo na wala sa karaniwang saklaw. Maaaring abisuhan ng app ang iyong provider kung magpapatuloy ito. Hindi nito pinapalitan ang pagsusuri ng isang health professional. Kung nag-aalala ka, makipag-ugnayan sa iyong provider o sa pasilidad pangkalusugan. | EMERGENCY WORDING (priority) | Shown after saving a typed value outside the normal range. Says the app "may" alert the provider (it only does so after several values in a row) and that it does not replace a health professional. | |
+| 137 | `patient:monitor.manual.errRequired` | Please enter a value. | Maglagay ng halaga. | - |  | |
+| 138 | `patient:monitor.manual.errNumber` | Please enter a number. | Maglagay ng numero. | - |  | |
+| 139 | `patient:monitor.manual.errWhole` | Please enter a whole number. | Maglagay ng buong numero. | - |  | |
+| 140 | `patient:monitor.manual.errRange` | Please enter a value between {{min}} and {{max}}. | Maglagay ng halagang nasa pagitan ng {{min}} at {{max}}. | - | Validation message with the allowed range. | |
+| 141 | `errors:manual_reading_invalid` | That reading could not be saved because a value looks wrong. Please check the numbers and try again. | Hindi na-save ang sukat dahil mukhang mali ang isang halaga. Pakisuri ang mga numero at subukan muli. | - |  | |
+
 ## Not yet written (later steps)
 
-Alerts tab, Monitor, Care and Profile text, and provider screen content. Each will be added here as it is written. Consent and legal text also needs ethics/legal review (see `PLAN.md`, open items).
+Alerts tab, Care and Profile text, and provider screen content. Each will be added here as it is written. Consent and legal text also needs ethics/legal review (see `PLAN.md`, open items).
