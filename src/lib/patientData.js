@@ -470,3 +470,64 @@ export async function markAlertSeen(alertId) {
   const { data, error } = await supabase.rpc('mark_alert_seen', { p_alert_id: alertId })
   return { error: error ?? null, marked: data === true }
 }
+
+// ---------------------------------------------------------------------
+// Step 3.4: Care tab
+// ---------------------------------------------------------------------
+
+// The most appointments the Care tab loads (newest start times first).
+export const APPOINTMENTS_LIMIT = 200
+
+// All of the patient's own appointments, newest start time first.
+// data = array (maybe empty) of { id, starts_at, duration_minutes, status, provider_id }.
+// provider_id is only used to tell "has a provider" from "none"; it is never shown.
+// There is no Realtime on this table: the screen reloads on focus and after actions.
+export function useAppointments() {
+  const id = usePatientId()
+  return useQuery(
+    () =>
+      supabase
+        .from('appointments')
+        .select('id, starts_at, duration_minutes, status, provider_id')
+        .eq('patient_id', id)
+        .order('starts_at', { ascending: false })
+        .limit(APPOINTMENTS_LIMIT),
+    id,
+  )
+}
+
+// The display name of the patient's own assigned provider (migration 012,
+// my_provider_name()). data = text, or null when there is none or it is blank.
+// Show it as plain text only.
+export function useProviderName() {
+  const id = usePatientId()
+  return useQuery(() => supabase.rpc('my_provider_name'), id)
+}
+
+// The three patient appointment actions. Patients have no direct write access to
+// appointments (migration 012); these database functions are the only way.
+// Each returns { error } (null on success). The cancel and reschedule functions
+// return false when nothing changed (not the caller's, not allowed, already
+// closed, in the past); that becomes the error 'appointment_not_changed'.
+async function callAppointmentFunction(name, args, mustReturnTrue) {
+  if (!supabase) return { error: { message: 'not_configured' } }
+  const { data, error } = await supabase.rpc(name, args)
+  if (error) return { error }
+  if (mustReturnTrue && data !== true) return { error: { message: 'appointment_not_changed' } }
+  return { error: null }
+}
+
+// startsAtIso: a UTC moment as ISO text (careTime.manilaToUtcIso). The provider
+// is chosen by the database from the patient's own assignment; it is never sent.
+export function requestAppointment(startsAtIso) {
+  return callAppointmentFunction('request_appointment', { p_starts_at: startsAtIso }, false)
+}
+
+export function cancelAppointment(appointmentId) {
+  return callAppointmentFunction('cancel_my_appointment', { p_id: appointmentId }, true)
+}
+
+// Only works on the patient's own requested appointment (never a confirmed one).
+export function rescheduleAppointment(appointmentId, startsAtIso) {
+  return callAppointmentFunction('request_reschedule', { p_id: appointmentId, p_new_starts_at: startsAtIso }, true)
+}

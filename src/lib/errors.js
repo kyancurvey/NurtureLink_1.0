@@ -16,7 +16,7 @@ export function friendlyError(t, error) {
   const code = String(error?.code ?? error?.error_code ?? '')
   const status = Number(error?.status ?? 0)
 
-  // 1. Codes raised by our own functions and triggers (migrations 002, 008, 009, 010).
+  // 1. Codes raised by our own functions and triggers (migrations 002, 008, 009, 010, 012).
   switch (message) {
     case 'not_signed_in':
       return { text: t('errors:not_signed_in') }
@@ -40,6 +40,21 @@ export function friendlyError(t, error) {
     // the entry limits, or it names a device, or it is back-dated).
     case 'manual_reading_invalid':
       return { text: t('errors:manual_reading_invalid') }
+    // Migration 012 (Care tab): appointment requests and changes.
+    case 'no_provider':
+      return { text: t('errors:no_provider') }
+    case 'appointment_time_invalid':
+      return { text: t('errors:appointment_time_invalid') }
+    case 'appointment_too_soon':
+      return { text: t('errors:appointment_too_soon') }
+    case 'appointment_too_far':
+      return { text: t('errors:appointment_too_far') }
+    case 'too_many_open_requests':
+      return { text: t('errors:too_many_open_requests') }
+    // Not from the database: patientData.js uses this when cancel or reschedule
+    // answered "false" (the appointment was not the patient's, or not allowed any more).
+    case 'appointment_not_changed':
+      return { text: t('errors:appointment_not_changed') }
     default:
       break
   }
