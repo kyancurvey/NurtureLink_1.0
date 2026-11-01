@@ -1,0 +1,219 @@
+/* Patient Care tab. Colors, spacing and type come from tokens.css only.
+   Appointment status is always an icon AND words AND a colour. The alert colours
+   (red, amber) are not used for appointment status, and brand coral is not used here. */
+
+.nl-care {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.nl-care p {
+  margin: 0;
+}
+.nl-care__muted {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+.nl-care__strong {
+  font-weight: 700;
+}
+.nl-care__notice {
+  position: sticky;
+  top: var(--header-offset);
+  z-index: 5;
+}
+.nl-care__top {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.nl-care__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.nl-care__subtitle {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  color: var(--color-brand-purple);
+}
+
+/* ---------- Layout ---------- */
+.nl-care__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+.nl-care__main,
+.nl-care__side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+.nl-care__side-card > *:not(:last-child) {
+  margin-bottom: var(--space-3);
+}
+.nl-care__side-card--none {
+  background: var(--color-bg-tint);
+}
+.nl-care__provider-name {
+  font-size: var(--font-size-lg);
+  font-weight: 800;
+  color: var(--color-brand-purple);
+  overflow-wrap: anywhere; /* a long name must not widen the page */
+}
+
+/* ---------- Request form ---------- */
+.nl-care__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.nl-care__when {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+}
+.nl-care__form input[type='date'],
+.nl-care__form input[type='time'] {
+  min-height: var(--touch-min);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.nl-care__line {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-brand-purple);
+  background: var(--color-bg-tint);
+  border: 2px solid var(--color-border-input);
+  border-radius: var(--radius-md);
+}
+.nl-care__line svg {
+  flex: none;
+}
+.nl-care__problem {
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-danger-text);
+  background: var(--color-danger-bg);
+  border: 2px solid var(--color-danger);
+  border-radius: var(--radius-md);
+}
+.nl-care__problem-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+
+/* ---------- Appointment list ---------- */
+.nl-care__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.nl-care__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-left-width: 8px;
+  border-radius: var(--radius-md);
+}
+.nl-care__item--requested {
+  border-left-color: var(--color-brand-purple-soft);
+}
+.nl-care__item--scheduled {
+  border-left-color: var(--color-success);
+}
+.nl-care__item--completed {
+  border-left-color: var(--color-brand-purple);
+}
+.nl-care__item--cancelled,
+.nl-care__item--notConfirmed {
+  border-left-color: var(--color-border-input);
+}
+.nl-care__item-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+}
+.nl-care__item-title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  overflow-wrap: anywhere;
+}
+.nl-care__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-1);
+}
+
+/* Status badges: colour + icon + words (the icon and words come from the component). */
+.nl-care__badge--requested {
+  color: var(--color-brand-purple);
+  background: var(--color-bg-tint-strong);
+  border-color: var(--color-brand-purple-soft);
+}
+.nl-care__badge--scheduled {
+  color: var(--color-success-text);
+  background: var(--color-success-bg);
+  border-color: var(--color-success);
+}
+.nl-care__badge--completed {
+  color: var(--color-text-on-action);
+  background: var(--color-brand-purple);
+  border-color: var(--color-brand-purple);
+}
+.nl-care__badge--cancelled,
+.nl-care__badge--notConfirmed {
+  color: var(--color-text-muted);
+  background: var(--color-disabled-bg);
+  border-color: var(--color-border-input);
+}
+
+.nl-care__empty,
+.nl-care__placeholder,
+.nl-care__soon {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+}
+.nl-care__empty svg,
+.nl-care__placeholder svg,
+.nl-care__soon svg {
+  flex: none;
+}
+.nl-care__placeholder {
+  padding: var(--space-3) var(--space-4);
+  border: 2px dashed var(--color-border-input);
+  border-radius: var(--radius-md);
+}
+.nl-care__soon {
+  font-weight: 800;
+  color: var(--color-brand-purple);
+}
+
+/* ---------- Wider screens: appointments on the left, provider and later features on the right ---------- */
+@media (min-width: 600px) {
+  .nl-care__when {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 900px) {
+  .nl-care__grid {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: start;
+  }
+}

@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { Navigate, Route, Routes } from 'react-router-dom'
-import { AppShell, TabPlaceholder } from '../../components/layout/index.js'
+import { AppShell } from '../../components/layout/index.js'
 import { ActivityIcon, BellIcon, HeartIcon, HomeIcon, UserIcon } from '../../components/ui/index.js'
 import { useT } from '../../lib/useT.js'
 
@@ -9,11 +9,12 @@ import { useT } from '../../lib/useT.js'
 const Home = lazy(() => import('./Home.jsx'))
 const Monitor = lazy(() => import('./Monitor.jsx'))
 const AlertsPage = lazy(() => import('./AlertsPage.jsx'))
+const CarePage = lazy(() => import('./CarePage.jsx'))
 const ProfilePage = lazy(() => import('./ProfilePage.jsx'))
 const PrivacyPage = lazy(() => import('./PrivacyPage.jsx'))
 
 // The patient app: five tabs (bottom bar on phones, sidebar on laptops).
-// Home (step 3.1), Monitor (step 3.2) and Alerts (step 3.3) are built; Care is a placeholder until a later step.
+// Home (step 3.1), Monitor (step 3.2), Alerts (step 3.3) and Care (step 3.4) are built; Profile is from Phase 2.
 const TABS = [
   { to: '/patient', labelKey: 'patient:tabs.home', icon: <HomeIcon />, end: true },
   { to: '/patient/monitor', labelKey: 'patient:tabs.monitor', icon: <ActivityIcon /> },
@@ -32,7 +33,6 @@ function RouteLoading() {
 }
 
 export default function PatientApp() {
-  const t = useT()
   return (
     <AppShell tabs={TABS}>
       <Suspense fallback={<RouteLoading />}>
@@ -40,7 +40,7 @@ export default function PatientApp() {
           <Route index element={<Home />} />
           <Route path="monitor" element={<Monitor />} />
           <Route path="alerts" element={<AlertsPage />} />
-          <Route path="care" element={<TabPlaceholder title={t('patient:tabs.care')} />} />
+          <Route path="care" element={<CarePage />} />
           <Route path="profile" element={<ProfilePage />} />
           <Route path="profile/privacy" element={<PrivacyPage />} />
           <Route path="*" element={<Navigate to="/patient" replace />} />
