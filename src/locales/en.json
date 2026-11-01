@@ -352,7 +352,7 @@
         "title": "Next appointment",
         "none": "No upcoming appointment.",
         "requested": "Requested",
-        "scheduled": "Scheduled"
+        "scheduled": "Confirmed"
       },
       "sos": {
         "title": "Need help now?",
@@ -529,6 +529,90 @@
         "openGuidance": "This SOS is still open. Do not wait for a reply. If you are in danger, call local emergency services or go to a health facility now."
       },
       "truncated": "Showing your newest {{count}} alerts."
+    },
+    "care": {
+      "intro": "Ask for an appointment and see your appointments here.",
+      "timeNote": "Times are shown in Philippine time.",
+      "provider": {
+        "title": "Your provider",
+        "noName": "Your provider's name is not shown yet.",
+        "note": "Your provider can see your appointment requests in this app but may not see them right away.",
+        "unknown": "We could not check whether you have a provider assigned, so appointment requests are paused for now."
+      },
+      "noProvider": {
+        "title": "No provider assigned yet",
+        "body": "Appointment requests need a provider. To be linked with a provider, ask your clinic or the project team. If you are worried, contact a health facility."
+      },
+      "request": {
+        "title": "Request an appointment",
+        "dateLabel": "Date",
+        "timeLabel": "Time",
+        "hint": "Choose a date and time at least {{minutes}} minutes from now and no more than {{days}} days ahead. Philippine time.",
+        "durationNote": "Each appointment is planned for {{minutes}} minutes.",
+        "submit": "Request this time",
+        "sending": "Sending…",
+        "dateRequired": "Please choose a date.",
+        "timeRequired": "Please choose a time.",
+        "disabled": "You cannot request an appointment until a provider is assigned.",
+        "disabledUnknown": "Requests are paused until we can check your provider.",
+        "sent": "Your request was sent. It is not confirmed until your provider confirms it.",
+        "reminder": "A request is not confirmed until your provider confirms it. Your provider may not see it right away, so do not wait for a reply if you are worried."
+      },
+      "list": {
+        "title": "Your appointments",
+        "upcoming": "Upcoming",
+        "past": "Past",
+        "emptyUpcoming": "No upcoming appointments.",
+        "emptyPast": "No past appointments.",
+        "showMore": "Show more",
+        "truncated": "Showing your newest {{count}} appointments."
+      },
+      "appt": {
+        "duration": "{{minutes}} minutes",
+        "status": {
+          "requested": "Requested",
+          "scheduled": "Confirmed",
+          "completed": "Completed",
+          "cancelled": "Cancelled",
+          "notConfirmed": "Not confirmed"
+        },
+        "note": {
+          "requested": "Not confirmed yet.",
+          "requestedNoProvider": "No provider is linked to this request, so no one will confirm it. You can cancel it.",
+          "scheduled": "Your provider confirmed this time. To change a confirmed time, cancel it and request a new time.",
+          "notConfirmed": "This time passed without a confirmation."
+        },
+        "cancel": "Cancel",
+        "change": "Change time"
+      },
+      "cancel": {
+        "title": "Cancel this appointment?",
+        "requestedBody": "This request will be marked as cancelled.",
+        "confirmedBody": "This releases the time slot. Your provider will see the visit as cancelled.",
+        "keep": "Keep it",
+        "confirm": "Yes, cancel it",
+        "cancelling": "Cancelling…",
+        "done": "The appointment was cancelled."
+      },
+      "change": {
+        "title": "Change the time",
+        "body": "Choose a new date and time for this request. It is not confirmed until your provider confirms it.",
+        "current": "Current time: {{date}}",
+        "submit": "Save new time",
+        "saving": "Saving…",
+        "close": "Close",
+        "done": "The new time was saved. It is not confirmed until your provider confirms it."
+      },
+      "tele": {
+        "title": "Chat and video visits",
+        "badge": "Coming soon",
+        "body": "Chat and video visits with your provider are planned for a later update. They are not available yet. For now, request an appointment here or contact your health facility."
+      },
+      "history": {
+        "title": "Consult history",
+        "empty": "Nothing to show yet.",
+        "body": "Your past consults will be listed here in a later update."
+      }
     }
   },
   "provider": {
@@ -577,6 +661,12 @@
     "email_not_authorized": "Our email service cannot send to this address yet. Please tell the project owner.",
     "reading_time_in_future": "The time on this reading is ahead of the real time, so it was not saved. Please check that your device's date and time are correct, then try again.",
     "sos_rate_limited": "Your SOS was already sent a moment ago, so a second one was not added. If you are in danger, call local emergency services or go to a health facility now.",
-    "manual_reading_invalid": "That reading could not be saved because a value looks wrong. Please check the numbers and try again."
+    "manual_reading_invalid": "That reading could not be saved because a value looks wrong. Please check the numbers and try again.",
+    "no_provider": "You do not have a provider assigned yet, so an appointment cannot be requested here. To be linked with a provider, ask your clinic or the project team.",
+    "appointment_time_invalid": "Please choose a date and a time.",
+    "appointment_too_soon": "That time is too soon or has already passed. Please choose a time a little later.",
+    "appointment_too_far": "That time is too far ahead. Please choose an earlier date.",
+    "too_many_open_requests": "You already have several requests waiting. To make a new one, cancel one of them or wait until one is confirmed or its time has passed.",
+    "appointment_not_changed": "This appointment can no longer be changed here. It may already be cancelled, confirmed or past. The list has been refreshed."
   }
 }

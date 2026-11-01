@@ -352,7 +352,7 @@
         "title": "Susunod na appointment",
         "none": "Walang paparating na appointment.",
         "requested": "Hiniling",
-        "scheduled": "Naka-iskedyul"
+        "scheduled": "Kumpirmado"
       },
       "sos": {
         "title": "Kailangan mo ba ng tulong ngayon?",
@@ -529,6 +529,90 @@
         "openGuidance": "Bukas pa ang SOS na ito. Huwag maghintay ng sagot. Kung nasa panganib ka, tumawag agad sa lokal na emergency services o pumunta sa pasilidad pangkalusugan."
       },
       "truncated": "Ipinapakita ang pinakabago mong {{count}} na abiso."
+    },
+    "care": {
+      "intro": "Humiling ng appointment at makita rito ang iyong mga appointment.",
+      "timeNote": "Ipinapakita ang oras sa oras ng Pilipinas.",
+      "provider": {
+        "title": "Ang iyong provider",
+        "noName": "Hindi pa ipinapakita ang pangalan ng iyong provider.",
+        "note": "Nakikita ng iyong provider ang mga hiling mo ng appointment sa app na ito, pero maaaring hindi niya ito agad makita.",
+        "unknown": "Hindi namin masuri kung may nakatalagang provider sa iyo, kaya pansamantalang naka-pause ang paghiling ng appointment."
+      },
+      "noProvider": {
+        "title": "Wala pang nakatalagang provider",
+        "body": "Kailangan ng provider para makahiling ng appointment. Para maiugnay sa isang provider, magtanong sa iyong klinika o sa project team. Kung nag-aalala ka, makipag-ugnayan sa isang pasilidad pangkalusugan."
+      },
+      "request": {
+        "title": "Humiling ng appointment",
+        "dateLabel": "Petsa",
+        "timeLabel": "Oras",
+        "hint": "Pumili ng petsa at oras na hindi bababa sa {{minutes}} minuto mula ngayon at hindi hihigit sa {{days}} araw mula ngayon. Oras sa Pilipinas.",
+        "durationNote": "Nakaplanong {{minutes}} minuto ang haba ng bawat appointment.",
+        "submit": "Hilingin ang oras na ito",
+        "sending": "Ipinapadala…",
+        "dateRequired": "Pumili ng petsa.",
+        "timeRequired": "Pumili ng oras.",
+        "disabled": "Hindi ka pa makakahiling ng appointment hangga't wala kang nakatalagang provider.",
+        "disabledUnknown": "Naka-pause ang paghiling hangga't hindi pa namin nasusuri ang iyong provider.",
+        "sent": "Naipadala ang iyong hiling. Hindi pa ito kumpirmado hangga't hindi ito kinukumpirma ng iyong provider.",
+        "reminder": "Hindi pa kumpirmado ang hiling hangga't hindi ito kinukumpirma ng iyong provider. Maaaring hindi ito agad makita ng iyong provider, kaya huwag maghintay ng sagot kung nag-aalala ka."
+      },
+      "list": {
+        "title": "Mga appointment mo",
+        "upcoming": "Paparating",
+        "past": "Nakaraan",
+        "emptyUpcoming": "Walang paparating na appointment.",
+        "emptyPast": "Walang nakaraang appointment.",
+        "showMore": "Magpakita pa",
+        "truncated": "Ipinapakita ang pinakabago mong {{count}} na appointment."
+      },
+      "appt": {
+        "duration": "{{minutes}} minuto",
+        "status": {
+          "requested": "Hiniling",
+          "scheduled": "Kumpirmado",
+          "completed": "Natapos na",
+          "cancelled": "Kinansela",
+          "notConfirmed": "Hindi nakumpirma"
+        },
+        "note": {
+          "requested": "Hindi pa kumpirmado.",
+          "requestedNoProvider": "Walang provider na nakaugnay sa hiling na ito, kaya walang magkukumpirma nito. Maaari mo itong kanselahin.",
+          "scheduled": "Kinumpirma ng iyong provider ang oras na ito. Para baguhin ang kumpirmadong oras, kanselahin ito at humiling ng bagong oras.",
+          "notConfirmed": "Lumipas ang oras na ito nang walang kumpirmasyon."
+        },
+        "cancel": "Kanselahin",
+        "change": "Baguhin ang oras"
+      },
+      "cancel": {
+        "title": "Kanselahin ang appointment na ito?",
+        "requestedBody": "Mamarkahang kinansela ang hiling na ito.",
+        "confirmedBody": "Mapapalaya nito ang oras. Makikita ng iyong provider na kinansela ang pagbisita.",
+        "keep": "Huwag kanselahin",
+        "confirm": "Oo, kanselahin",
+        "cancelling": "Kinakansela…",
+        "done": "Kinansela ang appointment."
+      },
+      "change": {
+        "title": "Baguhin ang oras",
+        "body": "Pumili ng bagong petsa at oras para sa hiling na ito. Hindi pa ito kumpirmado hangga't hindi ito kinukumpirma ng iyong provider.",
+        "current": "Kasalukuyang oras: {{date}}",
+        "submit": "I-save ang bagong oras",
+        "saving": "Sine-save…",
+        "close": "Isara",
+        "done": "Na-save ang bagong oras. Hindi pa ito kumpirmado hangga't hindi ito kinukumpirma ng iyong provider."
+      },
+      "tele": {
+        "title": "Chat at video na konsulta",
+        "badge": "Malapit na",
+        "body": "Ang chat at video na konsulta sa iyong provider ay nakaplano sa susunod na update. Hindi pa ito available. Sa ngayon, humiling ng appointment dito o makipag-ugnayan sa iyong pasilidad pangkalusugan."
+      },
+      "history": {
+        "title": "Kasaysayan ng konsulta",
+        "empty": "Wala pang maipapakita.",
+        "body": "Ililista rito ang iyong mga nakaraang konsulta sa susunod na update."
+      }
     }
   },
   "provider": {
@@ -577,6 +661,12 @@
     "email_not_authorized": "Hindi pa makapagpadala ng email ang aming serbisyo sa address na ito. Pakisabi sa may-ari ng proyekto.",
     "reading_time_in_future": "Nasa hinaharap ang oras ng reading na ito (mas huli kaysa sa tunay na oras), kaya hindi ito nai-save. Pakisuri kung tama ang petsa at oras ng iyong device, at subukan muli.",
     "sos_rate_limited": "Naipadala na ang iyong SOS ilang sandali lang ang nakalipas, kaya hindi nagdagdag ng pangalawa. Kung nasa panganib ka, tumawag agad sa lokal na emergency services o pumunta sa pasilidad pangkalusugan.",
-    "manual_reading_invalid": "Hindi na-save ang sukat dahil mukhang mali ang isang halaga. Pakisuri ang mga numero at subukan muli."
+    "manual_reading_invalid": "Hindi na-save ang sukat dahil mukhang mali ang isang halaga. Pakisuri ang mga numero at subukan muli.",
+    "no_provider": "Wala ka pang nakatalagang provider, kaya hindi pa makakahiling ng appointment dito. Para maiugnay sa isang provider, magtanong sa iyong klinika o sa project team.",
+    "appointment_time_invalid": "Pumili ng petsa at oras.",
+    "appointment_too_soon": "Masyadong malapit o lumipas na ang oras na iyon. Pumili ng mas huling oras.",
+    "appointment_too_far": "Masyadong malayo ang oras na iyon. Pumili ng mas maagang petsa.",
+    "too_many_open_requests": "Marami ka nang naghihintay na hiling. Para makagawa ng bago, kanselahin ang isa o hintaying makumpirma ang isa o lumipas ang oras nito.",
+    "appointment_not_changed": "Hindi na mababago rito ang appointment na ito. Maaaring kinansela, kinumpirma o lumipas na ito. Na-refresh na ang listahan."
   }
 }
