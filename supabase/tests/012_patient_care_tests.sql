@@ -207,13 +207,14 @@ declare
   pe  uuid := gen_random_uuid();   -- patient E, "assigned" to an account that is NOT a provider (pb)
   pf  uuid := gen_random_uuid();   -- patient F, assigned to P1, no appointments (time limits)
   ph  uuid := gen_random_uuid();   -- patient H, assigned to P1 (limit of 3 open requests)
+  pk  uuid := gen_random_uuid();   -- patient K, assigned to P1, no appointments (the first plain request test; A already has 4 open fixture rows, over the limit)
   p1  uuid := gen_random_uuid();   -- provider 1 (name with spaces around it)
   p2  uuid := gen_random_uuid();   -- provider 2 (blank name)
   -- A's appointments
   a_req      uuid := gen_random_uuid();  -- future requested: cancelled through the function
   a_req2     uuid := gen_random_uuid();  -- future requested: a provider tries the patient function
   a_req3     uuid := gen_random_uuid();  -- future requested: rescheduled through the function
-  a_req4     uuid := gen_random_uuid();  -- future requested: provider confirms, moves, completes
+  a_req4     uuid := gen_random_uuid();  -- future requested: provider confirms, moves, completes (A has 4 open fixture rows on purpose: more than the limit of 3 allows through the function)
   a_sch      uuid := gen_random_uuid();  -- future scheduled: patient cancels it
   a_sch2     uuid := gen_random_uuid();  -- future scheduled: direct attempts (the worst gap)
   a_sch3     uuid := gen_random_uuid();  -- future scheduled: reschedule refused
@@ -253,14 +254,14 @@ begin
     ---------------------------------------------------------------
     insert into auth.users (id, email, email_confirmed_at, raw_user_meta_data)
     select u, 'nl-care-' || u || '@nurturelink-test.invalid', now(), '{}'::jsonb
-    from unnest(array[pa, pb, pc, pd, pe, pf, ph, p1, p2]) u;
+    from unnest(array[pa, pb, pc, pd, pe, pf, ph, pk, p1, p2]) u;
     update public.profiles set role = 'provider' where id in (p1, p2);
     update public.profiles set display_name = '  Test Provider One ' where id = p1;
     update public.profiles set display_name = '   ' where id = p2;
     insert into public.pregnancy_profiles (patient_id, assigned_provider_id, due_date) values
       (pa, p1, current_date + 100), (pb, p1, current_date + 100), (pc, null, current_date + 100),
       (pd, p2, current_date + 100), (pe, pb, current_date + 100), (pf, p1, current_date + 100),
-      (ph, p1, current_date + 100);
+      (ph, p1, current_date + 100), (pk, p1, current_date + 100);
 
     insert into public.appointments (id, patient_id, provider_id, starts_at, status) values
       (a_req,      pa, p1, now() + interval '10 days', 'requested'),
@@ -442,16 +443,16 @@ begin
     -- 2. request_appointment
     ---------------------------------------------------------------
     v_ts := now() + interval '2 days';
-    s := pg_temp.req(pa, v_ts);
+    s := pg_temp.req(pk, v_ts);
     v_id := pg_temp.asuuid(s);
     r := r || pg_temp.ck('a patient requests an appointment: the function returns the new id', v_id is not null, s);
     r := r || pg_temp.ck('the new row is the patient''s, with THEIR assigned provider, status requested, the requested time and 30 minutes',
-      exists (select 1 from public.appointments where id = v_id and patient_id = pa and provider_id = p1
+      exists (select 1 from public.appointments where id = v_id and patient_id = pk and provider_id = p1
                 and status = 'requested' and starts_at = v_ts and duration_minutes = 30));
     r := r || pg_temp.ck('the provider can see it (assigned provider P1 reads it)',
       pg_temp.cnt(format('select count(*)::int from public.appointments where id = %L', v_id), p1) = 1);
     r := r || pg_temp.ck('the patient can read it back',
-      pg_temp.cnt(format('select count(*)::int from public.appointments where id = %L', v_id), pa) = 1);
+      pg_temp.cnt(format('select count(*)::int from public.appointments where id = %L', v_id), pk) = 1);
     r := r || pg_temp.ck('another provider (P2) and another patient (B) cannot see it',
       pg_temp.cnt(format('select count(*)::int from public.appointments where id = %L', v_id), p2) = 0
       and pg_temp.cnt(format('select count(*)::int from public.appointments where id = %L', v_id), pb) = 0);
