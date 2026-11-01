@@ -210,24 +210,19 @@ create policy alerts_update_provider on public.alerts
 
 
 -- ===== appointments =================================================
--- Patient: request (status 'requested', with their own assigned provider or
---   none), then reschedule or cancel. A patient cannot confirm or complete.
+-- Patient: reads own appointments. Patients have NO direct INSERT or UPDATE
+--   policy here any more (changed in step 3.4): they request, cancel and
+--   reschedule only through the functions in 012_patient_care.sql
+--   (request_appointment, cancel_my_appointment, request_reschedule).
+--   Why: the old patient policies could not limit columns or times, so a patient
+--   could change starts_at and duration_minutes freely and even flip a confirmed
+--   ('scheduled') visit back to 'requested'. If 012 has not been run, patients
+--   cannot request or cancel appointments after this file runs.
 -- Provider: schedule, confirm, complete, cancel for assigned patients.
 drop policy if exists appointments_select on public.appointments;
 create policy appointments_select on public.appointments
   for select to authenticated
   using (patient_id = (select auth.uid()) or public.is_assigned_provider(patient_id));
-
-drop policy if exists appointments_insert_patient on public.appointments;
-create policy appointments_insert_patient on public.appointments
-  for insert to authenticated
-  with check (
-    patient_id = (select auth.uid())
-    and status = 'requested'
-    and (provider_id is null
-         or provider_id = (select pp.assigned_provider_id from public.pregnancy_profiles pp
-                           where pp.patient_id = (select auth.uid())))
-  );
 
 drop policy if exists appointments_insert_provider on public.appointments;
 create policy appointments_insert_provider on public.appointments
@@ -236,12 +231,6 @@ create policy appointments_insert_provider on public.appointments
     public.is_assigned_provider(patient_id)
     and (provider_id is null or provider_id = (select auth.uid()))
   );
-
-drop policy if exists appointments_update_patient on public.appointments;
-create policy appointments_update_patient on public.appointments
-  for update to authenticated
-  using (patient_id = (select auth.uid()) and status in ('requested', 'scheduled'))
-  with check (patient_id = (select auth.uid()) and status in ('requested', 'cancelled'));
 
 drop policy if exists appointments_update_provider on public.appointments;
 create policy appointments_update_provider on public.appointments
