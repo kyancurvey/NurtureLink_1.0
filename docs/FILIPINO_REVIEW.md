@@ -1,7 +1,7 @@
 # Filipino wording review
 
 **Status: DRAFT, pending review by the midwife or medical officer.**
-Last generated: 2026-11-01, from `src/locales/en.json` and `src/locales/fil.json` (407 strings; the 81 added in step 2.4 are in section 5, the 71 added in step 3.1 are in section 6, the 70 added in step 3.2 are in section 7, the 48 added in step 3.3 are in section 8 at the end).
+Last generated: 2026-11-01 (step 3.4 added), from `src/locales/en.json` and `src/locales/fil.json` (473 strings; the 81 added in step 2.4 are in section 5, the 71 added in step 3.1 are in section 6, the 70 added in step 3.2 are in section 7, the 48 added in step 3.3 are in section 8, the 66 added in step 3.4 are in section 9 at the end).
 
 NurtureLink is a monitoring and screening prototype, not a diagnostic device. The Filipino text was written in plain, calm wording. It has **not** been checked by a clinician yet.
 
@@ -345,7 +345,7 @@ Wording here is shown to patients in the middle of worry, so read it for calm an
 | 51 | `patient:home.appt.title` | Next appointment | Susunod na appointment | - |  | |
 | 52 | `patient:home.appt.none` | No upcoming appointment. | Walang paparating na appointment. | - |  | |
 | 53 | `patient:home.appt.requested` | Requested | Hiniling | - |  | |
-| 54 | `patient:home.appt.scheduled` | Scheduled | Naka-iskedyul | - |  | |
+| 54 | `patient:home.appt.scheduled` | Confirmed | Kumpirmado | SCHEDULING TERM (priority) | Changed in step 3.4 (was "Scheduled" / "Naka-iskedyul"). Same word as `patient:care.appt.status.scheduled`; see section 9. | |
 | 55 | `patient:home.sos.title` | Need help now? | Kailangan mo ba ng tulong ngayon? | EMERGENCY WORDING (priority) |  | |
 | 56 | `patient:home.sos.guidance` | In an emergency, call local emergency services or go to the nearest health facility. Do not wait for this app. | Sa oras ng emergency, tumawag sa lokal na emergency services o pumunta sa pinakamalapit na pasilidad pangkalusugan. Huwag maghintay sa app na ito. | EMERGENCY WORDING (priority) |  | |
 | 57 | `patient:home.sos.button` | SOS | SOS | - |  | |
@@ -496,6 +496,81 @@ The patient Alerts list: wording built from the numbers in each alert, filters, 
 | 188 | `patient:alerts.sos.openGuidance` | This SOS is still open. Do not wait for a reply. If you are in danger, call local emergency services or go to a health facility now. | Bukas pa ang SOS na ito. Huwag maghintay ng sagot. Kung nasa panganib ka, tumawag agad sa lokal na emergency services o pumunta sa pasilidad pangkalusugan. | EMERGENCY WORDING | Shown under an open SOS. "Huwag maghintay ng sagot" = do not wait for a reply. Is this the right instruction? | |
 | 189 | `patient:alerts.truncated` | Showing your newest {{count}} alerts. | Ipinapakita ang pinakabago mong {{count}} na abiso. | - |  | |
 
+## 9. Care tab (step 3.4)
+
+The patient Care tab: requesting, cancelling and changing the time of an appointment, appointment status words, the provider card, and placeholders for chat/video and consult history. Review the rows flagged **SCHEDULING TERM** and **NO-PROMISE WORDING** first: the app must never suggest that a provider will respond or that a request is booked before the provider confirms it. The database status "scheduled" is shown to the patient as **Confirmed** ("Kumpirmado"). The limits mentioned in the hint (at least 60 minutes ahead, at most 90 days ahead, at most 3 open requests) are defaults pending review.
+
+Changed in this step (not a new key): `patient:home.appt.scheduled` was "Scheduled" / "Naka-iskedyul" and is now **Confirmed** / **Kumpirmado**, so the Home card and the Care tab use the same word. The row in section 6 (row 54) is updated.
+
+| # | Key | English | Filipino | Flag | Notes for the reviewer | Reviewer: OK or better wording |
+|---|---|---|---|---|---|---|
+| 190 | `patient:care.intro` | Ask for an appointment and see your appointments here. | Humiling ng appointment at makita rito ang iyong mga appointment. | - |  | |
+| 191 | `patient:care.timeNote` | Times are shown in Philippine time. | Ipinapakita ang oras sa oras ng Pilipinas. | - |  | |
+| 192 | `patient:care.provider.title` | Your provider | Ang iyong provider | - |  | |
+| 193 | `patient:care.provider.noName` | Your provider's name is not shown yet. | Hindi pa ipinapakita ang pangalan ng iyong provider. | - |  | |
+| 194 | `patient:care.provider.note` | Your provider can see your appointment requests in this app but may not see them right away. | Nakikita ng iyong provider ang mga hiling mo ng appointment sa app na ito, pero maaaring hindi niya ito agad makita. | NO-PROMISE WORDING (priority) | Says the provider can see requests in the app but may not see them right away. Check it does not imply a reply. | |
+| 195 | `patient:care.provider.unknown` | We could not check whether you have a provider assigned, so appointment requests are paused for now. | Hindi namin masuri kung may nakatalagang provider sa iyo, kaya pansamantalang naka-pause ang paghiling ng appointment. | NO-PROMISE WORDING (priority) | Shown when the app could not check whether the patient has a provider. | |
+| 196 | `patient:care.noProvider.title` | No provider assigned yet | Wala pang nakatalagang provider | NO-PROMISE WORDING (priority) | Same wording as patient:home.noProvider.title. | |
+| 197 | `patient:care.noProvider.body` | Appointment requests need a provider. To be linked with a provider, ask your clinic or the project team. If you are worried, contact a health facility. | Kailangan ng provider para makahiling ng appointment. Para maiugnay sa isang provider, magtanong sa iyong klinika o sa project team. Kung nag-aalala ka, makipag-ugnayan sa isang pasilidad pangkalusugan. | NO-PROMISE WORDING (priority) | Must not promise that a provider will be assigned or will respond. Ends by pointing to a health facility. | |
+| 198 | `patient:care.request.title` | Request an appointment | Humiling ng appointment | - |  | |
+| 199 | `patient:care.request.dateLabel` | Date | Petsa | - |  | |
+| 200 | `patient:care.request.timeLabel` | Time | Oras | - |  | |
+| 201 | `patient:care.request.hint` | Choose a date and time at least {{minutes}} minutes from now and no more than {{days}} days ahead. Philippine time. | Pumili ng petsa at oras na hindi bababa sa {{minutes}} minuto mula ngayon at hindi hihigit sa {{days}} araw mula ngayon. Oras sa Pilipinas. | SCHEDULING TERM (priority) | Tells the patient the earliest and latest time they can ask for. The numbers come from the app (60 minutes, 90 days); the database enforces them. Limits are pending review. | |
+| 202 | `patient:care.request.durationNote` | Each appointment is planned for {{minutes}} minutes. | Nakaplanong {{minutes}} minuto ang haba ng bawat appointment. | - |  | |
+| 203 | `patient:care.request.submit` | Request this time | Hilingin ang oras na ito | - |  | |
+| 204 | `patient:care.request.sending` | Sending… | Ipinapadala… | - |  | |
+| 205 | `patient:care.request.dateRequired` | Please choose a date. | Pumili ng petsa. | - |  | |
+| 206 | `patient:care.request.timeRequired` | Please choose a time. | Pumili ng oras. | - |  | |
+| 207 | `patient:care.request.disabled` | You cannot request an appointment until a provider is assigned. | Hindi ka pa makakahiling ng appointment hangga't wala kang nakatalagang provider. | NO-PROMISE WORDING (priority) | Shown beside the disabled form for a patient with no provider. Must not promise that a provider will be assigned. | |
+| 208 | `patient:care.request.disabledUnknown` | Requests are paused until we can check your provider. | Naka-pause ang paghiling hangga't hindi pa namin nasusuri ang iyong provider. | NO-PROMISE WORDING (priority) | Shown when the app could not check the provider assignment. | |
+| 209 | `patient:care.request.sent` | Your request was sent. It is not confirmed until your provider confirms it. | Naipadala ang iyong hiling. Hindi pa ito kumpirmado hangga't hindi ito kinukumpirma ng iyong provider. | NO-PROMISE WORDING (priority) | Shown after a request is sent. Check it does not sound like the visit is booked. | |
+| 210 | `patient:care.request.reminder` | A request is not confirmed until your provider confirms it. Your provider may not see it right away, so do not wait for a reply if you are worried. | Hindi pa kumpirmado ang hiling hangga't hindi ito kinukumpirma ng iyong provider. Maaaring hindi ito agad makita ng iyong provider, kaya huwag maghintay ng sagot kung nag-aalala ka. | NO-PROMISE WORDING (priority) | Must say plainly that a request is not confirmed until the provider confirms it, and must NOT promise a reply or a time. Check "huwag maghintay ng sagot kung nag-aalala ka" (do not wait for an answer if you are worried) is calm and clear. | |
+| 211 | `patient:care.list.title` | Your appointments | Mga appointment mo | - |  | |
+| 212 | `patient:care.list.upcoming` | Upcoming | Paparating | - |  | |
+| 213 | `patient:care.list.past` | Past | Nakaraan | - |  | |
+| 214 | `patient:care.list.emptyUpcoming` | No upcoming appointments. | Walang paparating na appointment. | - |  | |
+| 215 | `patient:care.list.emptyPast` | No past appointments. | Walang nakaraang appointment. | - |  | |
+| 216 | `patient:care.list.showMore` | Show more | Magpakita pa | - |  | |
+| 217 | `patient:care.list.truncated` | Showing your newest {{count}} appointments. | Ipinapakita ang pinakabago mong {{count}} na appointment. | - |  | |
+| 218 | `patient:care.appt.duration` | {{minutes}} minutes | {{minutes}} minuto | - |  | |
+| 219 | `patient:care.appt.status.requested` | Requested | Hiniling | SCHEDULING TERM (priority) | "Hiniling" = requested (same word as the Home card). It must read as "asked for, not yet agreed". | |
+| 220 | `patient:care.appt.status.scheduled` | Confirmed | Kumpirmado | SCHEDULING TERM (priority) | "Kumpirmado" = confirmed. The database status is "scheduled"; the app shows it as Confirmed because it means the provider confirmed the time. Also changes patient:home.appt.scheduled (see below). Alternatives: "Naka-iskedyul", "Nakumpirma". Which do patients read as "my provider agreed to this time"? | |
+| 221 | `patient:care.appt.status.completed` | Completed | Natapos na | SCHEDULING TERM (priority) | "Natapos na" = finished. Shown only when the provider marked the visit completed. | |
+| 222 | `patient:care.appt.status.cancelled` | Cancelled | Kinansela | SCHEDULING TERM (priority) | "Kinansela" = cancelled (by anyone). Used for both the patient's and the provider's cancellation. | |
+| 223 | `patient:care.appt.status.notConfirmed` | Not confirmed | Hindi nakumpirma | SCHEDULING TERM (priority) | Shown for a request whose time passed without confirmation. "Hindi nakumpirma" = was not confirmed. Check it does not sound like the patient did something wrong. | |
+| 224 | `patient:care.appt.note.requested` | Not confirmed yet. | Hindi pa kumpirmado. | SCHEDULING TERM (priority) | "Hindi pa kumpirmado" = not confirmed yet. | |
+| 225 | `patient:care.appt.note.requestedNoProvider` | No provider is linked to this request, so no one will confirm it. You can cancel it. | Walang provider na nakaugnay sa hiling na ito, kaya walang magkukumpirma nito. Maaari mo itong kanselahin. | NO-PROMISE WORDING (priority) | Shown on a request that has no provider (for example the demo request for patient10). It says honestly that no one will confirm it. | |
+| 226 | `patient:care.appt.note.scheduled` | Your provider confirmed this time. To change a confirmed time, cancel it and request a new time. | Kinumpirma ng iyong provider ang oras na ito. Para baguhin ang kumpirmadong oras, kanselahin ito at humiling ng bagong oras. | SCHEDULING TERM (priority) | Tells the patient that a confirmed time cannot be moved from the app: cancel it and request a new time. | |
+| 227 | `patient:care.appt.note.notConfirmed` | This time passed without a confirmation. | Lumipas ang oras na ito nang walang kumpirmasyon. | SCHEDULING TERM (priority) | "Lumipas ang oras na ito nang walang kumpirmasyon" = this time passed without a confirmation. | |
+| 228 | `patient:care.appt.cancel` | Cancel | Kanselahin | - |  | |
+| 229 | `patient:care.appt.change` | Change time | Baguhin ang oras | - |  | |
+| 230 | `patient:care.cancel.title` | Cancel this appointment? | Kanselahin ang appointment na ito? | SCHEDULING TERM (priority) |  | |
+| 231 | `patient:care.cancel.requestedBody` | This request will be marked as cancelled. | Mamarkahang kinansela ang hiling na ito. | SCHEDULING TERM (priority) | The confirm step before cancelling a request. | |
+| 232 | `patient:care.cancel.confirmedBody` | This releases the time slot. Your provider will see the visit as cancelled. | Mapapalaya nito ang oras. Makikita ng iyong provider na kinansela ang pagbisita. | SCHEDULING TERM (priority) | The confirm step before cancelling a confirmed visit. Says only that the slot is released and the provider will see it as cancelled. Check "Mapapalaya nito ang oras" is clear. | |
+| 233 | `patient:care.cancel.keep` | Keep it | Huwag kanselahin | - |  | |
+| 234 | `patient:care.cancel.confirm` | Yes, cancel it | Oo, kanselahin | - |  | |
+| 235 | `patient:care.cancel.cancelling` | Cancelling… | Kinakansela… | - |  | |
+| 236 | `patient:care.cancel.done` | The appointment was cancelled. | Kinansela ang appointment. | - |  | |
+| 237 | `patient:care.change.title` | Change the time | Baguhin ang oras | - |  | |
+| 238 | `patient:care.change.body` | Choose a new date and time for this request. It is not confirmed until your provider confirms it. | Pumili ng bagong petsa at oras para sa hiling na ito. Hindi pa ito kumpirmado hangga't hindi ito kinukumpirma ng iyong provider. | NO-PROMISE WORDING (priority) | Shown when changing the time of a request; repeats that it is not confirmed. | |
+| 239 | `patient:care.change.current` | Current time: {{date}} | Kasalukuyang oras: {{date}} | - |  | |
+| 240 | `patient:care.change.submit` | Save new time | I-save ang bagong oras | - |  | |
+| 241 | `patient:care.change.saving` | Saving… | Sine-save… | - |  | |
+| 242 | `patient:care.change.close` | Close | Isara | - |  | |
+| 243 | `patient:care.change.done` | The new time was saved. It is not confirmed until your provider confirms it. | Na-save ang bagong oras. Hindi pa ito kumpirmado hangga't hindi ito kinukumpirma ng iyong provider. | NO-PROMISE WORDING (priority) | Shown after a new time was saved; it must not sound confirmed. | |
+| 244 | `patient:care.tele.title` | Chat and video visits | Chat at video na konsulta | - |  | |
+| 245 | `patient:care.tele.badge` | Coming soon | Malapit na | - | "Malapit na" = coming soon. | |
+| 246 | `patient:care.tele.body` | Chat and video visits with your provider are planned for a later update. They are not available yet. For now, request an appointment here or contact your health facility. | Ang chat at video na konsulta sa iyong provider ay nakaplano sa susunod na update. Hindi pa ito available. Sa ngayon, humiling ng appointment dito o makipag-ugnayan sa iyong pasilidad pangkalusugan. | NO-PROMISE WORDING (priority) | Chat and video are not built yet (Phase 6). Must not suggest they work now or that a provider will answer. | |
+| 247 | `patient:care.history.title` | Consult history | Kasaysayan ng konsulta | - |  | |
+| 248 | `patient:care.history.empty` | Nothing to show yet. | Wala pang maipapakita. | - |  | |
+| 249 | `patient:care.history.body` | Your past consults will be listed here in a later update. | Ililista rito ang iyong mga nakaraang konsulta sa susunod na update. | - |  | |
+| 250 | `errors:no_provider` | You do not have a provider assigned yet, so an appointment cannot be requested here. To be linked with a provider, ask your clinic or the project team. | Wala ka pang nakatalagang provider, kaya hindi pa makakahiling ng appointment dito. Para maiugnay sa isang provider, magtanong sa iyong klinika o sa project team. | NO-PROMISE WORDING (priority) | Error shown when the database says there is no provider. Must not promise a provider will be assigned or will respond. | |
+| 251 | `errors:appointment_time_invalid` | Please choose a date and a time. | Pumili ng petsa at oras. | - |  | |
+| 252 | `errors:appointment_too_soon` | That time is too soon or has already passed. Please choose a time a little later. | Masyadong malapit o lumipas na ang oras na iyon. Pumili ng mas huling oras. | SCHEDULING TERM (priority) | Shown when the time is under 1 hour away or already passed. | |
+| 253 | `errors:appointment_too_far` | That time is too far ahead. Please choose an earlier date. | Masyadong malayo ang oras na iyon. Pumili ng mas maagang petsa. | SCHEDULING TERM (priority) | Shown when the time is more than 90 days away. | |
+| 254 | `errors:too_many_open_requests` | You already have several requests waiting. To make a new one, cancel one of them or wait until one is confirmed or its time has passed. | Marami ka nang naghihintay na hiling. Para makagawa ng bago, kanselahin ang isa o hintaying makumpirma ang isa o lumipas ang oras nito. | SCHEDULING TERM (priority) | Shown when the patient already has the most open requests allowed (3). The number is not shown. Check "wait until one is confirmed or its time has passed" is clear. | |
+| 255 | `errors:appointment_not_changed` | This appointment can no longer be changed here. It may already be cancelled, confirmed or past. The list has been refreshed. | Hindi na mababago rito ang appointment na ito. Maaaring kinansela, kinumpirma o lumipas na ito. Na-refresh na ang listahan. | SCHEDULING TERM (priority) | Shown when cancel or change did not apply (already cancelled, confirmed, past, or not the patient's). | |
+
 ## Not yet written (later steps)
 
-Care and Profile text, and provider screen content. Each will be added here as it is written. Consent and legal text also needs ethics/legal review (see `PLAN.md`, open items).
+Profile text, and provider screen content. Each will be added here as it is written. Consent and legal text also needs ethics/legal review (see `PLAN.md`, open items).
