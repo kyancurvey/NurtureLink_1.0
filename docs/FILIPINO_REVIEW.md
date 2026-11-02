@@ -1,7 +1,7 @@
 # Filipino wording review
 
 **Status: DRAFT, pending review by the midwife or medical officer.**
-Last generated: 2026-11-01 (step 3.4 added), from `src/locales/en.json` and `src/locales/fil.json` (473 strings; the 81 added in step 2.4 are in section 5, the 71 added in step 3.1 are in section 6, the 70 added in step 3.2 are in section 7, the 48 added in step 3.3 are in section 8, the 66 added in step 3.4 are in section 9 at the end).
+Last generated: 2026-11-02 (step 3.5 added), from `src/locales/en.json` and `src/locales/fil.json` (559 strings; the 81 added in step 2.4 are in section 5, the 71 added in step 3.1 are in section 6, the 70 added in step 3.2 are in section 7, the 48 added in step 3.3 are in section 8, the 66 added in step 3.4 are in section 9, the 86 added in step 3.5 are in section 10 at the end).
 
 NurtureLink is a monitoring and screening prototype, not a diagnostic device. The Filipino text was written in plain, calm wording. It has **not** been checked by a clinician yet.
 
@@ -341,7 +341,7 @@ Wording here is shown to patients in the middle of worry, so read it for calm an
 | 47 | `patient:home.device.batteryUnknown` | Battery not reported | Hindi iniulat ang baterya | - |  | |
 | 48 | `patient:home.device.lastSeen` | Last seen {{date}} | Huling nakita {{date}} | - |  | |
 | 49 | `patient:home.device.neverSeen` | Not seen yet | Hindi pa nakikita | - |  | |
-| 50 | `patient:home.device.none` | No device is paired yet. Pairing will be added in Profile. | Wala pang naka-pair na device. Idadagdag ang pag-pair sa Profile. | - |  | |
+| 50 | `patient:home.device.none` | No device is paired yet. Pairing will be added in a later version. | Wala pang naka-pair na device. Idadagdag ang pag-pair sa susunod na bersyon. | - | Changed in step 3.5 (was "...in Profile"). | |
 | 51 | `patient:home.appt.title` | Next appointment | Susunod na appointment | - |  | |
 | 52 | `patient:home.appt.none` | No upcoming appointment. | Walang paparating na appointment. | - |  | |
 | 53 | `patient:home.appt.requested` | Requested | Hiniling | - |  | |
@@ -571,6 +571,103 @@ Changed in this step (not a new key): `patient:home.appt.scheduled` was "Schedul
 | 254 | `errors:too_many_open_requests` | You already have several requests waiting. To make a new one, cancel one of them or wait until one is confirmed or its time has passed. | Marami ka nang naghihintay na hiling. Para makagawa ng bago, kanselahin ang isa o hintaying makumpirma ang isa o lumipas ang oras nito. | SCHEDULING TERM (priority) | Shown when the patient already has the most open requests allowed (3). The number is not shown. Check "wait until one is confirmed or its time has passed" is clear. | |
 | 255 | `errors:appointment_not_changed` | This appointment can no longer be changed here. It may already be cancelled, confirmed or past. The list has been refreshed. | Hindi na mababago rito ang appointment na ito. Maaaring kinansela, kinumpirma o lumipas na ito. Na-refresh na ang listahan. | SCHEDULING TERM (priority) | Shown when cancel or change did not apply (already cancelled, confirmed, past, or not the patient's). | |
 
+## 10. Profile tab (step 3.5)
+
+The patient Profile tab: pregnancy details (due date, weeks and trimester worked out by the app, obstetric history, conditions), display name, health record timeline, devices (read only), help placeholders, language and log out. Review the rows flagged **COMPLETED WEEKS**, **TRIMESTER BOUNDARIES**, **HEALTH WORDING**, **NOT DIAGNOSTIC** and **NOT-VERIFIED WORDING** first. All limits and boundaries behind these screens are draft, pending the medical officer.
+
+Changed in this step (not a new key): `patient:home.device.none` was "No device is paired yet. Pairing will be added in Profile." / "Wala pang naka-pair na device. Idadagdag ang pag-pair sa Profile." and is now "...Pairing will be added in a later version." / "...Idadagdag ang pag-pair sa susunod na bersyon." The row in section 6 is updated. The section numbers 5, 6 and 7 each appear twice above (steps 2.3 and 2.4/3.1/3.2); they are left as they are so the old row references still work.
+
+Words reused from earlier sections, not new keys: Alerts "Handled / Naasikaso na" and "Open / Bukas", Care "Confirmed / Kumpirmado" and "Not confirmed", the Home status words (Normal, Needs attention, Urgent) and the check-history wording from the Monitor tab.
+
+| # | Key | English | Filipino | Flag | Notes for the reviewer | Reviewer: OK or better wording |
+|---|---|---|---|---|---|---|
+| 256 | `patient:profile.intro` | Your pregnancy details, health record, devices and settings. | Ang iyong mga detalye ng pagbubuntis, talaan ng kalusugan, mga device at mga setting. | - |  | |
+| 257 | `patient:profile.comingSoon` | Coming soon | Malapit na | - |  | |
+| 258 | `patient:profile.preg.title` | Pregnancy details | Mga detalye ng pagbubuntis | - |  | |
+| 259 | `patient:profile.preg.intro` | Add your due date and a few short notes. Your assigned provider, if you have one, can see these details. The app works out your weeks from the due date as an estimate. It is not a medical assessment. | Ilagay ang iyong due date at ilang maikling tala. Makikita ng nakatalagang provider mo, kung mayroon, ang mga detalyeng ito. Tinataya ng app ang iyong mga linggo mula sa due date. Hindi ito medikal na pagsusuri. | NOT DIAGNOSTIC (priority) | Says the weeks are an estimate and not a medical assessment, and that an assigned provider can see these details. | |
+| 260 | `patient:profile.preg.dueDate` | Due date | Inaasahang petsa ng panganganak (due date) | HEALTH WORDING | Written as "Inaasahang petsa ng panganganak (due date)". Is that the clearest label? | |
+| 261 | `patient:profile.preg.dueDateHint` | Use the date your health provider gave you. | Gamitin ang petsang ibinigay ng iyong health provider. | - |  | |
+| 262 | `patient:profile.preg.dueInvalid` | Please enter a real date. | Maglagay ng tunay na petsa. | - |  | |
+| 263 | `patient:profile.preg.duePast` | This date is more than 2 weeks in the past. Please check it with your provider. | Mahigit 2 linggo nang lumipas ang petsang ito. Pakisuri ito sa iyong provider. | HEALTH WORDING (priority) | Shown when the due date is unusual or already passed. It must not diagnose, frighten or promise anything; it only asks the person to check the date with their provider or facility. | |
+| 264 | `patient:profile.preg.dueAhead` | This date is more than 40 weeks away. Please check it. | Mahigit 40 linggo pa ang petsang ito. Pakisuri ito. | HEALTH WORDING (priority) | Shown when the due date is unusual or already passed. It must not diagnose, frighten or promise anything; it only asks the person to check the date with their provider or facility. | |
+| 265 | `patient:profile.preg.ga.title` | Weeks of pregnancy | Mga linggo ng pagbubuntis | - |  | |
+| 266 | `patient:profile.preg.ga.unset` | Add your due date to see this. | Ilagay ang iyong due date para makita ito. | - |  | |
+| 267 | `patient:profile.preg.ga.beforeStart` | This due date is more than 40 weeks away. Please check it. | Mahigit 40 linggo pa ang due date na ito. Pakisuri ito. | HEALTH WORDING (priority) | Shown when the due date is unusual or already passed. It must not diagnose, frighten or promise anything; it only asks the person to check the date with their provider or facility. | |
+| 268 | `patient:profile.preg.ga.over42` | More than 42 weeks. Please check the due date with your provider or health facility. | Lampas na sa 42 linggo. Pakisuri ang due date sa iyong provider o pasilidad pangkalusugan. | HEALTH WORDING (priority) | Shown when the due date is unusual or already passed. It must not diagnose, frighten or promise anything; it only asks the person to check the date with their provider or facility. | |
+| 269 | `patient:profile.preg.ga.pastDue` | Your due date has passed. Please check with your provider or health facility. | Lampas na ang iyong due date. Pakikonsulta sa iyong provider o pasilidad pangkalusugan. | HEALTH WORDING (priority) | Shown when the due date is unusual or already passed. It must not diagnose, frighten or promise anything; it only asks the person to check the date with their provider or facility. | |
+| 270 | `patient:profile.preg.ga.weeksOne` | {{n}} week | {{n}} linggo | COMPLETED WEEKS (priority) | Shown as completed weeks and days, for example "12 weeks, 3 days", which is the clinical way. Some patients count the week they are in and may expect "13". Please say if Filipino readers expect different counting or phrasing. Boundaries are draft, pending medical officer. | |
+| 271 | `patient:profile.preg.ga.weeksMany` | {{n}} weeks | {{n}} linggo | COMPLETED WEEKS (priority) | Shown as completed weeks and days, for example "12 weeks, 3 days", which is the clinical way. Some patients count the week they are in and may expect "13". Please say if Filipino readers expect different counting or phrasing. Boundaries are draft, pending medical officer. | |
+| 272 | `patient:profile.preg.ga.daysOne` | {{n}} day | {{n}} araw | COMPLETED WEEKS (priority) | Shown as completed weeks and days, for example "12 weeks, 3 days", which is the clinical way. Some patients count the week they are in and may expect "13". Please say if Filipino readers expect different counting or phrasing. Boundaries are draft, pending medical officer. | |
+| 273 | `patient:profile.preg.ga.daysMany` | {{n}} days | {{n}} araw | COMPLETED WEEKS (priority) | Shown as completed weeks and days, for example "12 weeks, 3 days", which is the clinical way. Some patients count the week they are in and may expect "13". Please say if Filipino readers expect different counting or phrasing. Boundaries are draft, pending medical officer. | |
+| 274 | `patient:profile.preg.ga.join` | {{weeks}}, {{days}} | {{weeks}} at {{days}} | COMPLETED WEEKS (priority) | Shown as completed weeks and days, for example "12 weeks, 3 days", which is the clinical way. Some patients count the week they are in and may expect "13". Please say if Filipino readers expect different counting or phrasing. Boundaries are draft, pending medical officer. | |
+| 275 | `patient:profile.preg.ga.trimesterLabel` | Trimester | Trimester | - |  | |
+| 276 | `patient:profile.preg.ga.trimester1` | First trimester | Unang trimester | TRIMESTER BOUNDARIES (draft) | First trimester up to 13 weeks 6 days, second 14 weeks 0 days to 27 weeks 6 days, third from 28 weeks 0 days. Draft, pending medical officer. Please confirm the Filipino ordinal words. | |
+| 277 | `patient:profile.preg.ga.trimester2` | Second trimester | Ikalawang trimester | TRIMESTER BOUNDARIES (draft) | First trimester up to 13 weeks 6 days, second 14 weeks 0 days to 27 weeks 6 days, third from 28 weeks 0 days. Draft, pending medical officer. Please confirm the Filipino ordinal words. | |
+| 278 | `patient:profile.preg.ga.trimester3` | Third trimester | Ikatlong trimester | TRIMESTER BOUNDARIES (draft) | First trimester up to 13 weeks 6 days, second 14 weeks 0 days to 27 weeks 6 days, third from 28 weeks 0 days. Draft, pending medical officer. Please confirm the Filipino ordinal words. | |
+| 279 | `patient:profile.preg.ga.explain` | Shown as completed weeks and days, counted from the due date. This is an estimate worked out by the app. Your provider may count differently. | Ipinapakita bilang kumpletong mga linggo at araw, mula sa due date. Pagtataya lamang ito ng app. Maaaring iba ang bilang ng iyong provider. | COMPLETED WEEKS + NOT DIAGNOSTIC (priority) | Says the weeks are completed weeks, an estimate worked out by the app, and that the provider may count differently. Please check it is clear and not worrying. | |
+| 280 | `patient:profile.preg.history` | Obstetric history (optional) | Kasaysayan ng pagbubuntis at panganganak (opsyonal) | HEALTH WORDING (priority) | Is this the term a midwife would use for obstetric history and for health conditions? Short notes only; no diagnosis is asked for. | |
+| 281 | `patient:profile.preg.historyHint` | Short notes only, for example earlier pregnancies. Up to {{max}} characters. | Maiikling tala lamang, halimbawa ang mga nakaraang pagbubuntis. Hanggang {{max}} karakter. | HEALTH WORDING (priority) | Is this the term a midwife would use for obstetric history and for health conditions? Short notes only; no diagnosis is asked for. | |
+| 282 | `patient:profile.preg.historyCount` | {{count}} of {{max}} characters | {{count}} sa {{max}} karakter | - |  | |
+| 283 | `patient:profile.preg.historyBad` | Please remove special or hidden characters from the notes. Line breaks are fine. | Pakialis ang mga espesyal o nakatagong karakter sa mga tala. Puwede ang mga line break. | - |  | |
+| 284 | `patient:profile.preg.historyLong` | The notes are too long. Please keep them to {{max}} characters or fewer. | Masyadong mahaba ang mga tala. Panatilihin itong hindi hihigit sa {{max}} karakter. | - |  | |
+| 285 | `patient:profile.preg.conditions` | Health conditions (optional) | Mga kondisyong pangkalusugan (opsyonal) | HEALTH WORDING (priority) | Is this the term a midwife would use for obstetric history and for health conditions? Short notes only; no diagnosis is asked for. | |
+| 286 | `patient:profile.preg.conditionsHint` | Add each condition separately. Up to {{max}} conditions, each up to {{len}} characters. | Idagdag nang hiwalay ang bawat kondisyon. Hanggang {{max}} kondisyon, bawat isa ay hanggang {{len}} karakter. | HEALTH WORDING (priority) | Is this the term a midwife would use for obstetric history and for health conditions? Short notes only; no diagnosis is asked for. | |
+| 287 | `patient:profile.preg.conditionsNone` | No conditions added. | Wala pang naidagdag na kondisyon. | - |  | |
+| 288 | `patient:profile.preg.conditionInput` | Add a condition | Magdagdag ng kondisyon | - |  | |
+| 289 | `patient:profile.preg.conditionAdd` | Add | Idagdag | - |  | |
+| 290 | `patient:profile.preg.conditionRemove` | Remove | Alisin | - |  | |
+| 291 | `patient:profile.preg.condEmpty` | Please type a condition first. | Mag-type muna ng kondisyon. | - |  | |
+| 292 | `patient:profile.preg.condBad` | Please remove special or hidden characters, or line breaks. | Pakialis ang mga espesyal o nakatagong karakter, o ang mga line break. | - |  | |
+| 293 | `patient:profile.preg.condLong` | Each condition can be up to {{len}} characters. | Hanggang {{len}} karakter ang bawat kondisyon. | - |  | |
+| 294 | `patient:profile.preg.condDuplicate` | That condition is already in the list. | Nasa listahan na ang kondisyong iyon. | - |  | |
+| 295 | `patient:profile.preg.condFull` | You can add up to {{max}} conditions. | Hanggang {{max}} kondisyon lamang ang puwedeng idagdag. | - |  | |
+| 296 | `patient:profile.preg.save` | Save details | I-save ang mga detalye | - |  | |
+| 297 | `patient:profile.preg.saving` | Saving… | Sine-save… | - |  | |
+| 298 | `patient:profile.preg.saved` | Your pregnancy details were saved. | Na-save ang iyong mga detalye ng pagbubuntis. | - |  | |
+| 299 | `patient:profile.preg.loadFailed` | We could not load your pregnancy details just now. | Hindi namin ma-load ang iyong mga detalye ng pagbubuntis ngayon. | - |  | |
+| 300 | `patient:profile.name.title` | Display name | Pangalang ipinapakita | - |  | |
+| 301 | `patient:profile.name.intro` | Optional. Your assigned provider may see this name. You choose it, and it is not checked or verified. | Opsyonal. Maaaring makita ng nakatalagang provider mo ang pangalang ito. Ikaw ang pumipili nito at hindi ito sinusuri o bine-verify. | NOT-VERIFIED WORDING (priority) | Says the name is chosen by the person and is not checked or verified, so nobody mistakes it for a proven identity. | |
+| 302 | `patient:profile.name.currentLabel` | Name shown now | Pangalang ipinapakita ngayon | - |  | |
+| 303 | `patient:profile.name.none` | No name is set. | Walang nakatakdang pangalan. | - |  | |
+| 304 | `patient:profile.name.label` | Name | Pangalan | - |  | |
+| 305 | `patient:profile.name.hint` | Up to {{max}} characters. Leave it empty and save to remove it. | Hanggang {{max}} karakter. Iwanang walang laman at i-save para alisin ito. | - |  | |
+| 306 | `patient:profile.name.save` | Save name | I-save ang pangalan | - |  | |
+| 307 | `patient:profile.name.saving` | Saving… | Sine-save… | - |  | |
+| 308 | `patient:profile.name.saved` | Your name was saved. | Na-save ang iyong pangalan. | - |  | |
+| 309 | `patient:profile.name.removed` | Your name was removed. | Naalis ang iyong pangalan. | - |  | |
+| 310 | `patient:profile.name.remove` | Remove name | Alisin ang pangalan | - |  | |
+| 311 | `patient:profile.name.bad` | Please remove special or hidden characters, or line breaks. | Pakialis ang mga espesyal o nakatagong karakter, o ang mga line break. | - |  | |
+| 312 | `patient:profile.name.long` | Please use {{max}} characters or fewer. | Gumamit ng hindi hihigit sa {{max}} karakter. | - |  | |
+| 313 | `patient:profile.timeline.title` | Health record timeline | Timeline ng talaan ng kalusugan | - |  | |
+| 314 | `patient:profile.timeline.intro` | Baby heart-rate checks, alerts and appointments in one list, newest first. Times are in Philippine time. | Mga check sa tibok ng puso ng sanggol, mga abiso at mga appointment sa iisang listahan, pinakabago muna. Nasa oras ng Pilipinas ang mga oras. | - |  | |
+| 315 | `patient:profile.timeline.empty` | Nothing to show yet. | Wala pang maipapakita. | - |  | |
+| 316 | `patient:profile.timeline.reading` | Baby's heart-rate check | Check sa tibok ng puso ng sanggol | - |  | |
+| 317 | `patient:profile.timeline.recorded` | Recorded | Naitala | - | A neutral word for a normal baby heart-rate check. It must not say the result is good or safe. | |
+| 318 | `patient:profile.timeline.appointment` | Appointment | Appointment | - |  | |
+| 319 | `patient:profile.timeline.more` | Show more | Magpakita pa | - |  | |
+| 320 | `patient:profile.timeline.limited` | Older items may not be listed here. The Monitor, Alerts and Care tabs show more. | Maaaring hindi nakalista rito ang mas lumang mga item. Mas marami ang makikita sa mga tab na Monitor, Abiso at Konsulta. | NO-PROMISE WORDING | Says the list may be incomplete. It must not suggest that anything was missed or is being handled. | |
+| 321 | `patient:profile.timeline.partial` | Some items could not be loaded, so this list may be incomplete. | May mga item na hindi na-load, kaya maaaring kulang ang listahang ito. | NO-PROMISE WORDING | Says the list may be incomplete. It must not suggest that anything was missed or is being handled. | |
+| 322 | `patient:profile.timeline.loadFailed` | The timeline could not be loaded just now. | Hindi ma-load ang timeline ngayon. | - |  | |
+| 323 | `patient:profile.device.title` | Your devices | Ang iyong mga device | - |  | |
+| 324 | `patient:profile.device.paired` | Paired | Naka-pair | - |  | |
+| 325 | `patient:profile.device.none` | No device is paired yet. | Wala pang naka-pair na device. | - |  | |
+| 326 | `patient:profile.device.loadFailed` | Your devices could not be loaded just now. | Hindi ma-load ang iyong mga device ngayon. | - |  | |
+| 327 | `patient:profile.device.reported` | Battery and last-seen time are reported by your app. They are not verified. | Ang baterya at oras ng huling kita ay iniuulat ng iyong app. Hindi ito bine-verify. | NOT-VERIFIED WORDING (priority) | Says battery and last-seen time are reported by the person's own app and are not verified. | |
+| 328 | `patient:profile.device.timeUnknown` | Last seen time unknown | Hindi alam ang oras ng huling kita | - |  | |
+| 329 | `patient:profile.device.pairingTitle` | Pairing | Pag-pair | - |  | |
+| 330 | `patient:profile.device.pairingBody` | Pairing a belt or wrist band will be added in a later version. Nothing is needed from you for now. | Idadagdag sa susunod na bersyon ang pag-pair ng belt o wrist band. Wala kang kailangang gawin sa ngayon. | - |  | |
+| 331 | `patient:profile.help.title` | Help | Tulong | - |  | |
+| 332 | `patient:profile.help.manualTitle` | User manual | Manwal ng gumagamit | - |  | |
+| 333 | `patient:profile.help.manualBody` | A short guide to using NurtureLink will be added here. | Maglalagay rito ng maikling gabay sa paggamit ng NurtureLink. | - |  | |
+| 334 | `patient:profile.help.videosTitle` | Demo videos | Mga demo video | - |  | |
+| 335 | `patient:profile.help.videosBody` | Short demo videos will be added here. | Maglalagay rito ng maiikling demo video. | - |  | |
+| 336 | `patient:profile.account.title` | Language and account | Wika at account | - |  | |
+| 337 | `patient:profile.account.languageHint` | Your language choice is saved to your account. | Sine-save sa iyong account ang napili mong wika. | - |  | |
+| 338 | `errors:display_name_invalid` | That name cannot be saved. Please remove special or hidden characters or line breaks, and shorten the name if it is long. | Hindi ma-save ang pangalang iyon. Pakialis ang mga espesyal o nakatagong karakter o line break, at paikliin ang pangalan kung mahaba. | - | Calm message shown when the database refuses a save. No numbers are written in the text on purpose. | |
+| 339 | `errors:due_date_out_of_range` | That due date cannot be saved. Please check that the date is right. | Hindi ma-save ang due date na iyon. Pakisuri kung tama ang petsa. | - | Calm message shown when the database refuses a save. No numbers are written in the text on purpose. | |
+| 340 | `errors:history_invalid` | The history notes cannot be saved. Please remove special or hidden characters, and shorten the notes if they are long. | Hindi ma-save ang mga tala ng kasaysayan. Pakialis ang mga espesyal o nakatagong karakter, at paikliin ang mga tala kung mahaba. | - | Calm message shown when the database refuses a save. No numbers are written in the text on purpose. | |
+| 341 | `errors:conditions_invalid` | The conditions cannot be saved. Please remove special or hidden characters, shorten long entries and keep the list short. | Hindi ma-save ang mga kondisyon. Pakialis ang mga espesyal o nakatagong karakter, paikliin ang mahahabang entry at panatilihing maikli ang listahan. | - | Calm message shown when the database refuses a save. No numbers are written in the text on purpose. | |
+
 ## Not yet written (later steps)
 
-Profile text, and provider screen content. Each will be added here as it is written. Consent and legal text also needs ethics/legal review (see `PLAN.md`, open items).
+Provider screen content. Each will be added here as it is written. Consent and legal text also needs ethics/legal review (see `PLAN.md`, open items).

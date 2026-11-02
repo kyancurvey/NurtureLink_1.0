@@ -91,17 +91,20 @@ grant execute on function public.set_my_language(text)        to authenticated; 
 -- ---------------------------------------------------------------------
 
 -- profiles: rows are created only by the signup trigger. Users may change
--- language and display name. NOT role, NOT date_of_birth (a minor must not be
--- able to turn into an adult by editing it).
+-- language directly. NOT role, NOT date_of_birth (a minor must not be able to
+-- turn into an adult by editing it). The display name is written ONLY through
+-- set_my_display_name() (013), so it has no direct column grant (edited in
+-- step 3.5; before that this line also granted display_name).
 grant select on public.profiles to authenticated;
-grant update (language, display_name) on public.profiles to authenticated;
+grant update (language) on public.profiles to authenticated;
 
--- pregnancy_profiles: the patient fills in the clinical details.
--- assigned_provider_id is NOT writable: assignment is made by the admin
+-- pregnancy_profiles: READ ONLY for clients. The patient's details are written
+-- only through save_pregnancy_details() (013), which applies the limits and
+-- never touches assigned_provider_id. Assignment is made by the admin
 -- (docs/ADMIN_SQL.md), otherwise anyone could give themselves access to a patient.
+-- (Edited in step 3.5: before that, lines here granted INSERT and UPDATE on
+-- due_date, obstetric_history and conditions.)
 grant select on public.pregnancy_profiles to authenticated;
-grant insert (patient_id, due_date, obstetric_history, conditions) on public.pregnancy_profiles to authenticated;
-grant update (due_date, obstetric_history, conditions) on public.pregnancy_profiles to authenticated;
 
 -- devices: patient pairs and updates their own belt and band.
 grant select on public.devices to authenticated;

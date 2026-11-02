@@ -28,10 +28,12 @@
 -- WHAT TO SEND BACK IF ANYTHING FAILS: the SUMMARY row and every FAIL row
 -- (test and detail columns), as text or an export. Nothing else.
 --
--- DEPENDS ON: 000 to 005, 008, 009, 010, 011 and 012 already run (the reading-time checks need 008;
+-- DEPENDS ON: 000 to 005, 008, 009, 010, 011, 012 and 013 already run (the reading-time checks need 008;
 -- the list of client functions below includes my_home_status from 009, my_normal_ranges from 010, mark_alert_seen from 011,
--- and request_appointment, cancel_my_appointment, request_reschedule and my_provider_name from 012;
--- patient appointment writes go through those functions after 012, not through policies).
+-- request_appointment, cancel_my_appointment, request_reschedule and my_provider_name from 012,
+-- and save_pregnancy_details and set_my_display_name from 013;
+-- patient appointment writes go through the 012 functions, and the display name and pregnancy details
+-- only through the 013 functions, not through policies or direct grants).
 -- READ-ONLY for your real data.
 -- SAFE TO RE-RUN: yes, any number of times.
 -- HOW TO UNDO: nothing to undo; the helper functions live only in this session.
@@ -223,10 +225,10 @@ begin
     r := r || pg_temp.ck('A reads own profile', pg_temp.q(format('select count(*)::int from public.profiles where id = %L', a), a) = 1);
     r := r || pg_temp.ck('A sees only their own profile in total', pg_temp.q('select count(*)::int from public.profiles', a) = 1);
     r := r || pg_temp.ck('A cannot read the profile of their own provider', pg_temp.q(format('select count(*)::int from public.profiles where id = %L', p1), a) = 0);
-    r := r || pg_temp.ck('A updates own language and display name',
-      pg_temp.q(format($q$with u as (update public.profiles set language = 'fil', display_name = 'Test A' where id = %L returning 1) select count(*)::int from u$q$, a), a) = 1);
+    r := r || pg_temp.ck('A updates own language (the display name now goes only through set_my_display_name, 013)',
+      pg_temp.q(format($q$with u as (update public.profiles set language = 'fil' where id = %L returning 1) select count(*)::int from u$q$, a), a) = 1);
     r := r || pg_temp.ck('A cannot edit another profile (0 rows changed)',
-      pg_temp.q(format($q$with u as (update public.profiles set display_name = 'hacked' where id = %L returning 1) select count(*)::int from u$q$, b), a) = 0);
+      pg_temp.q(format($q$with u as (update public.profiles set language = 'fil' where id = %L returning 1) select count(*)::int from u$q$, b), a) = 0);
     r := r || pg_temp.ck('set_my_language works for A', pg_temp.x($q$select public.set_my_language('en')$q$, a) = 'ok');
     r := r || pg_temp.ck('set_my_language rejects an unknown language', pg_temp.x($q$select public.set_my_language('xx')$q$, a) like 'ERR%invalid_language%');
     r := r || pg_temp.ck('A is not a provider and not an admin',
@@ -246,15 +248,18 @@ begin
 
     -- pregnancy_profiles
     r := r || pg_temp.ck('A reads own pregnancy profile', pg_temp.q(format('select count(*)::int from public.pregnancy_profiles where patient_id = %L', a), a) = 1);
-    r := r || pg_temp.ck('A updates own pregnancy details',
-      pg_temp.q(format($q$with u as (update public.pregnancy_profiles set due_date = current_date + 90, conditions = array['test'] where patient_id = %L returning 1) select count(*)::int from u$q$, a), a) = 1);
+    r := r || pg_temp.ck('A updates own pregnancy details through save_pregnancy_details (013); the provider stays P1',
+      pg_temp.x($q$select public.save_pregnancy_details(current_date + 90, null, array['test'])$q$, a) = 'ok'
+      and pg_temp.q(format($q$select (pp.due_date = current_date + 90 and pp.conditions = array['test'] and pp.assigned_provider_id = %L)::int from public.pregnancy_profiles pp where pp.patient_id = %L$q$, p1, a), a) = 1);
     r := r || pg_temp.ck('A cannot choose their own provider (assigned_provider_id not writable)',
       pg_temp.x(format('update public.pregnancy_profiles set assigned_provider_id = %L where patient_id = %L', p2, a), a) like 'ERR 42501 permission denied%');
     r := r || pg_temp.ck('A cannot create a pregnancy profile for someone else',
       pg_temp.x(format('insert into public.pregnancy_profiles (patient_id) values (%L)', d), a) like 'ERR 42501%');
-    r := r || pg_temp.ck('C (no provider) creates own pregnancy profile only without a provider',
+    r := r || pg_temp.ck('D (no row yet) cannot insert directly, with or without a provider; the function creates own row without a provider',
       pg_temp.x(format('insert into public.pregnancy_profiles (patient_id, assigned_provider_id) values (%L, %L)', d, p1), d) like 'ERR 42501 permission denied%'
-      and pg_temp.x(format('insert into public.pregnancy_profiles (patient_id, due_date) values (%L, current_date + 50)', d), d) = 'ok');
+      and pg_temp.x(format('insert into public.pregnancy_profiles (patient_id, due_date) values (%L, current_date + 50)', d), d) like 'ERR 42501 permission denied%'
+      and pg_temp.x($q$select public.save_pregnancy_details(current_date + 50, null, '{}')$q$, d) = 'ok'
+      and pg_temp.q(format($q$select (pp.assigned_provider_id is null and pp.due_date = current_date + 50)::int from public.pregnancy_profiles pp where pp.patient_id = %L$q$, d), d) = 1);
 
     -- devices
     r := r || pg_temp.ck('A pairs own device and updates it',
@@ -421,7 +426,7 @@ begin
       pg_temp.x(format($q$update public.profiles set role = 'admin' where id = %L$q$, p1), p1) like 'ERR 42501 permission denied%'
       and pg_temp.x(format($q$update public.profiles set role = 'provider' where id = %L$q$, a), p1) like 'ERR 42501 permission denied%');
     r := r || pg_temp.ck('P1 cannot edit A profile (0 rows changed)',
-      pg_temp.q(format($q$with u as (update public.profiles set display_name = 'x' where id = %L returning 1) select count(*)::int from u$q$, a), p1) = 0);
+      pg_temp.q(format($q$with u as (update public.profiles set language = 'fil' where id = %L returning 1) select count(*)::int from u$q$, a), p1) = 0);
     r := r || pg_temp.ck('P1 cannot assign themselves to a patient',
       pg_temp.x(format('update public.pregnancy_profiles set assigned_provider_id = %L where patient_id = %L', p1, c), p1) like 'ERR 42501 permission denied%'
       and pg_temp.x(format('insert into public.pregnancy_profiles (patient_id, assigned_provider_id) values (%L, %L)', p1, p1), p1) like 'ERR 42501 permission denied%');
@@ -429,7 +434,7 @@ begin
     r := r || pg_temp.ck('P1 cannot write readings or vitals of A',
       pg_temp.x(format($q$insert into public.belt_readings (patient_id, fetal_hr_bpm, source) values (%L, 140, 'device')$q$, a), p1) like 'ERR 42501 new row violates row-level security%'
       and pg_temp.x(format('update public.belt_readings set fetal_hr_bpm = 1 where patient_id = %L', a), p1) like 'ERR 42501 permission denied%');
-    r := r || pg_temp.ck('P1 cannot change A pregnancy details', pg_temp.q(format($q$with u as (update public.pregnancy_profiles set due_date = current_date where patient_id = %L returning 1) select count(*)::int from u$q$, a), p1) = 0);
+    r := r || pg_temp.ck('P1 cannot change A pregnancy details (direct update is permission denied since 013)', pg_temp.x(format('update public.pregnancy_profiles set due_date = current_date where patient_id = %L', a), p1) like 'ERR 42501 permission denied%');
 
     -- alerts
     r := r || pg_temp.ck('P1 acknowledges A alert and records the action',
@@ -583,11 +588,11 @@ begin
       and not has_column_privilege('authenticated', 'public.alerts', 'severity', 'UPDATE')
       and not has_column_privilege('authenticated', 'public.consent_records', 'accepted_at', 'INSERT')
       and not has_column_privilege('authenticated', 'public.belt_readings', 'created_at', 'INSERT'));
-    r := r || pg_temp.ck('signed-in users can execute exactly the 12 client functions',
+    r := r || pg_temp.ck('signed-in users can execute exactly the 14 client functions',
       (select coalesce(string_agg(p.proname, ',' order by p.proname), '') from pg_proc p join pg_namespace ns on ns.oid = p.pronamespace
         where ns.nspname = 'public' and p.proname <> 'rls_auto_enable' and has_function_privilege('authenticated', p.oid, 'EXECUTE')
           and not exists (select 1 from pg_depend dd where dd.objid = p.oid and dd.deptype = 'e'))
-      = 'cancel_my_appointment,is_admin,is_assigned_provider,is_provider,mark_alert_seen,my_home_status,my_normal_ranges,my_provider_name,redeem_provider_invite,request_appointment,request_reschedule,set_my_language',
+      = 'cancel_my_appointment,is_admin,is_assigned_provider,is_provider,mark_alert_seen,my_home_status,my_normal_ranges,my_provider_name,redeem_provider_invite,request_appointment,request_reschedule,save_pregnancy_details,set_my_display_name,set_my_language',
       (select string_agg(p.proname, ',' order by p.proname) from pg_proc p join pg_namespace ns on ns.oid = p.pronamespace
         where ns.nspname = 'public' and p.proname <> 'rls_auto_enable' and has_function_privilege('authenticated', p.oid, 'EXECUTE')));
     r := r || pg_temp.ck('every SECURITY DEFINER function in public has a fixed search_path',
