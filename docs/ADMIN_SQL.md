@@ -159,7 +159,7 @@ returning patient_id, assigned_provider_id;
 
 ## 6. Confirm the alert thresholds (medical officer sign-off)
 
-Thresholds start as `is_confirmed = false` ("DEFAULT, pending medical officer confirmation"). Any change a provider makes in the app also resets them to false and is written to the audit log. Confirm only after the medical officer has approved the values.
+Thresholds start as `is_confirmed = false` ("DEFAULT, pending medical officer confirmation"). **Since step 3.6 (migration 014) only the admin, in the SQL Editor, can change or confirm a limit.** Providers can read the limits but not edit them, because any provider could otherwise switch off alerts for every patient. Confirm only after the medical officer has approved the values.
 
 Look first:
 
@@ -174,7 +174,18 @@ Confirm all (or add `where alert_type = 'fever'` for one):
 update public.alert_thresholds set is_confirmed = true returning alert_type, is_confirmed;
 ```
 
-Read the audit trail of threshold changes:
+Change a limit (admin only; example: highest normal temperature). **Always set `is_confirmed = false` in the same statement:** a change made in the SQL Editor does NOT clear the confirmation by itself, and the medical officer approved the OLD numbers, not the new ones. Then confirm again after the officer approves. Keep a note of who approved what and when.
+
+```sql
+update public.alert_thresholds
+   set max_value = 38.0, is_confirmed = false, updated_by = null
+ where alert_type = 'fever'
+returning alert_type, min_value, max_value, sustained_count, severity, enabled, is_confirmed;
+```
+
+(Columns you can change this way: `min_value`, `max_value`, `sustained_count` (a whole number of readings in a row, 1 or more; keep it small), `severity` (`info`, `warning`, `critical`), `enabled`, `notes`. Setting `enabled = false` switches that alert off for every patient: do it only on the medical officer's instruction.)
+
+Read the audit trail of threshold changes (changes made before step 3.6 by providers in the app; the SQL Editor writes no audit row, so record admin changes yourself):
 
 ```sql
 select created_at, actor_id, details from public.audit_log where action = 'alert_threshold_updated' order by created_at desc;

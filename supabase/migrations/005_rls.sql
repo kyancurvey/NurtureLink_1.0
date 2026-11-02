@@ -161,20 +161,18 @@ create policy maternal_vitals_insert_own on public.maternal_vitals
   );
 
 
--- ===== alert_thresholds (global limits, providers only) ==============
+-- ===== alert_thresholds (global limits, providers read only) =========
 -- The limits are not per patient, so "assigned patients" cannot apply: any
--- provider may edit them. Section 4 limits the damage (resets the medical
--- officer confirmation and writes the audit log). Patients get no rows.
+-- provider may READ them. Since step 3.6 nobody edits them from the app (see
+-- the note below). Patients get no rows.
 drop policy if exists alert_thresholds_select_provider on public.alert_thresholds;
 create policy alert_thresholds_select_provider on public.alert_thresholds
   for select to authenticated
   using ((select public.is_provider()));
 
-drop policy if exists alert_thresholds_update_provider on public.alert_thresholds;
-create policy alert_thresholds_update_provider on public.alert_thresholds
-  for update to authenticated
-  using ((select public.is_provider()))
-  with check ((select public.is_provider()));
+-- (Edited in step 3.6, migration 014: the provider UPDATE policy that stood here
+-- was removed, together with the UPDATE grant in 004. Providers only read the
+-- limits; the admin changes them in the SQL Editor.)
 
 
 -- ===== alerts =======================================================

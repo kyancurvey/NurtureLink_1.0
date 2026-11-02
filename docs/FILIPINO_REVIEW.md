@@ -1,7 +1,7 @@
 # Filipino wording review
 
 **Status: DRAFT, pending review by the midwife or medical officer.**
-Last generated: 2026-11-02 (step 3.5 added), from `src/locales/en.json` and `src/locales/fil.json` (559 strings; the 81 added in step 2.4 are in section 5, the 71 added in step 3.1 are in section 6, the 70 added in step 3.2 are in section 7, the 48 added in step 3.3 are in section 8, the 66 added in step 3.4 are in section 9, the 86 added in step 3.5 are in section 10 at the end).
+Last generated: 2026-11-02 (step 3.6 added), from `src/locales/en.json` and `src/locales/fil.json` (560 strings; the 81 added in step 2.4 are in section 5, the 71 added in step 3.1 are in section 6, the 70 added in step 3.2 are in section 7, the 48 added in step 3.3 are in section 8, the 66 added in step 3.4 are in section 9, the 86 added in step 3.5 are in section 10, the 1 added in step 3.6 is in section 11 at the end).
 
 NurtureLink is a monitoring and screening prototype, not a diagnostic device. The Filipino text was written in plain, calm wording. It has **not** been checked by a clinician yet.
 
@@ -96,7 +96,7 @@ These texts are on the `/#/design` developer page, which is removed before relea
 | 33 | `common:design.split.detail` | Detail {{n}} | Detalye {{n}} | DEV ONLY |  | |
 | 34 | `common:design.split.body` | Detail content goes here. | Dito ilalagay ang nilalaman ng detalye. | DEV ONLY |  | |
 
-## 5. Provider tabs (step 2.3)
+## 4a. Provider tabs (step 2.3)
 
 Phones show five of the seven provider tabs; Validation and Reports are laptop-only for now.
 
@@ -110,7 +110,7 @@ Phones show five of the seven provider tabs; Validation and Reports are laptop-o
 | 6 | `provider:tabs.reports` | Reports | Ulat | HEALTH TERM | Laptop-only tab for now. "Ulat" = report. | |
 | 7 | `provider:tabs.settings` | Settings | Setting | HEALTH TERM | Provider tab. Kept as "Setting" (common usage). | |
 
-## 6. Sign-in screens (step 2.3)
+## 4b. Sign-in screens (step 2.3)
 
 Log in, sign up, forgot and reset password, provider invite, admin notice. Low risk, except the two lines flagged LEGAL TEXT.
 
@@ -158,7 +158,7 @@ Log in, sign up, forgot and reset password, provider invite, admin notice. Low r
 | 40 | `auth:admin.title` | Project owner account | Account ng may-ari ng proyekto | - |  | |
 | 41 | `auth:admin.body` | This is the admin account. Admin tasks are done in the Supabase SQL Editor, not in this app. Use a patient or provider account to try the app. | Ito ang admin account. Ginagawa ang mga gawain ng admin sa Supabase SQL Editor, hindi sa app na ito. Gumamit ng account ng pasyente o provider para subukan ang app. | - |  | |
 
-## 7. Error and empty-state messages (step 2.3)
+## 4c. Error and empty-state messages (step 2.3)
 
 Calm wording on purpose. Please read each as a worried person would.
 
@@ -575,7 +575,7 @@ Changed in this step (not a new key): `patient:home.appt.scheduled` was "Schedul
 
 The patient Profile tab: pregnancy details (due date, weeks and trimester worked out by the app, obstetric history, conditions), display name, health record timeline, devices (read only), help placeholders, language and log out. Review the rows flagged **COMPLETED WEEKS**, **TRIMESTER BOUNDARIES**, **HEALTH WORDING**, **NOT DIAGNOSTIC** and **NOT-VERIFIED WORDING** first. All limits and boundaries behind these screens are draft, pending the medical officer.
 
-Changed in this step (not a new key): `patient:home.device.none` was "No device is paired yet. Pairing will be added in Profile." / "Wala pang naka-pair na device. Idadagdag ang pag-pair sa Profile." and is now "...Pairing will be added in a later version." / "...Idadagdag ang pag-pair sa susunod na bersyon." The row in section 6 is updated. The section numbers 5, 6 and 7 each appear twice above (steps 2.3 and 2.4/3.1/3.2); they are left as they are so the old row references still work.
+Changed in this step (not a new key): `patient:home.device.none` was "No device is paired yet. Pairing will be added in Profile." / "Wala pang naka-pair na device. Idadagdag ang pag-pair sa Profile." and is now "...Pairing will be added in a later version." / "...Idadagdag ang pag-pair sa susunod na bersyon." The row in section 6 is updated. (The three step 2.3 sections that used to repeat the numbers 5, 6 and 7 were relabelled 4a, 4b and 4c in step 3.6; every other section number is unchanged, so all references to sections 5 to 10 still work.)
 
 Words reused from earlier sections, not new keys: Alerts "Handled / Naasikaso na" and "Open / Bukas", Care "Confirmed / Kumpirmado" and "Not confirmed", the Home status words (Normal, Needs attention, Urgent) and the check-history wording from the Monitor tab.
 
@@ -667,6 +667,14 @@ Words reused from earlier sections, not new keys: Alerts "Handled / Naasikaso na
 | 339 | `errors:due_date_out_of_range` | That due date cannot be saved. Please check that the date is right. | Hindi ma-save ang due date na iyon. Pakisuri kung tama ang petsa. | - | Calm message shown when the database refuses a save. No numbers are written in the text on purpose. | |
 | 340 | `errors:history_invalid` | The history notes cannot be saved. Please remove special or hidden characters, and shorten the notes if they are long. | Hindi ma-save ang mga tala ng kasaysayan. Pakialis ang mga espesyal o nakatagong karakter, at paikliin ang mga tala kung mahaba. | - | Calm message shown when the database refuses a save. No numbers are written in the text on purpose. | |
 | 341 | `errors:conditions_invalid` | The conditions cannot be saved. Please remove special or hidden characters, shorten long entries and keep the list short. | Hindi ma-save ang mga kondisyon. Pakialis ang mga espesyal o nakatagong karakter, paikliin ang mahahabang entry at panatilihing maikli ang listahan. | - | Calm message shown when the database refuses a save. No numbers are written in the text on purpose. | |
+
+## 11. Reading limit message (step 3.6)
+
+One new message, shown when the database refuses to save more readings because 600 of one kind were already saved by the same person in the last hour (a safety limit against abuse; a person using the app normally never reaches it). Calm wording, no blame, no number written in the text on purpose, and it points the person to their provider instead of promising anything. Flag: **NO-PROMISE WORDING**.
+
+| # | Key | English | Filipino | Flag | Notes for the reviewer | Reviewer: OK or better wording |
+|---|---|---|---|---|---|---|
+| 342 | `errors:too_many_readings` | A lot of readings were saved in the last hour, so saving is paused for now. Please try again in a little while. If you think this is a mistake, tell your provider. | Marami nang sukat ang na-save sa nakaraang isang oras, kaya pansamantalang huminto ang pag-save. Subukan muli pagkalipas ng ilang sandali. Kung sa tingin mo ay mali ito, sabihin sa iyong provider. | NO-PROMISE WORDING | Shown after Check now or a typed reading is refused by the limit. "Sukat" is the word used for readings elsewhere in this file. Draft wording. | |
 
 ## Not yet written (later steps)
 

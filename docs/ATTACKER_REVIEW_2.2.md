@@ -1,5 +1,7 @@
 # Attacker review, step 2.2 (grants 004 and row rules 005)
 
+> **Update, step 3.6 (2026-11-02):** two residual risks listed below, "any provider can edit the alert limits" and "flooding", were closed in the files by migration 014 (see `docs/ATTACKER_REVIEW_3.6.md`). Not yet run on the live project.
+
 **Attacker model:** a person with a normal patient account (valid JWT, role `authenticated`) who calls the Data API (PostgREST), GraphQL, Realtime and RPC directly, ignoring the app. A second attacker with no account (`anon`) is covered too.
 
 **Goal of the attacker:** read another patient's data, read provider-only data, become a provider or admin, or change recorded clinical data.

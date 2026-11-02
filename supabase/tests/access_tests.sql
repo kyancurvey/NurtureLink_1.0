@@ -28,7 +28,7 @@
 -- WHAT TO SEND BACK IF ANYTHING FAILS: the SUMMARY row and every FAIL row
 -- (test and detail columns), as text or an export. Nothing else.
 --
--- DEPENDS ON: 000 to 005, 008, 009, 010, 011, 012 and 013 already run (the reading-time checks need 008;
+-- DEPENDS ON: 000 to 005, 008, 009, 010, 011, 012, 013 and 014 already run (014: the alert limits are admin-only, so the checks that expect refusal need it; the reading-time checks need 008;
 -- the list of client functions below includes my_home_status from 009, my_normal_ranges from 010, mark_alert_seen from 011,
 -- request_appointment, cancel_my_appointment, request_reschedule and my_provider_name from 012,
 -- and save_pregnancy_details and set_my_display_name from 013;
@@ -342,8 +342,8 @@ begin
     r := r || pg_temp.ck('A sees no validation pairs', pg_temp.q('select count(*)::int from public.validation_pairs', a) = 0);
     r := r || pg_temp.ck('A cannot write a validation pair', pg_temp.x(format($q$insert into public.validation_pairs (session_id, patient_id, recorded_by, doppler_fhr_bpm) values (gen_random_uuid(), %L, %L, 140)$q$, a, a), a) like 'ERR 42501 new row violates row-level security%');
     r := r || pg_temp.ck('A sees no alert thresholds', pg_temp.q('select count(*)::int from public.alert_thresholds', a) = 0);
-    r := r || pg_temp.ck('A cannot change an alert threshold (0 rows, value unchanged)',
-      pg_temp.q($q$with u as (update public.alert_thresholds set min_value = 0 where alert_type = 'fhr_out_of_range' returning 1) select count(*)::int from u$q$, a) = 0
+    r := r || pg_temp.ck('A cannot change an alert threshold (permission denied since 014, value unchanged)',
+      pg_temp.x($q$update public.alert_thresholds set min_value = 0 where alert_type = 'fhr_out_of_range'$q$, a) like 'ERR 42501 permission denied%'
       and (select min_value from public.alert_thresholds where alert_type = 'fhr_out_of_range') = 110);
     r := r || pg_temp.ck('A cannot read the audit log (permission denied)', pg_temp.x('select * from public.audit_log', a) like 'ERR 42501 permission denied%');
     r := r || pg_temp.ck('A cannot write the audit log', pg_temp.x(format($q$insert into public.audit_log (actor_id, patient_id, action) values (%L, %L, 'fake')$q$, a, a), a) like 'ERR 42501 new row violates row-level security%');
@@ -488,24 +488,17 @@ begin
       and pg_temp.x(format($q$update public.validation_pairs set pediatrician_signoff_by = %L where patient_id = %L$q$, p2, a), p1) like 'ERR 42501 new row violates row-level security%');
     r := r || pg_temp.ck('P1 cannot delete validation pairs', pg_temp.x(format('delete from public.validation_pairs where patient_id = %L', a), p1) like 'ERR 42501 permission denied%');
 
-    -- alert thresholds: editable by providers, but guarded
+    -- alert thresholds: providers READ them; nobody edits them from the app (since step 3.6, migration 014)
     r := r || pg_temp.ck('P1 reads the 4 alert thresholds', pg_temp.q('select count(*)::int from public.alert_thresholds', p1) = 4);
-    r := r || pg_temp.ck('P1 edits a threshold limit',
-      pg_temp.q($q$with u as (update public.alert_thresholds set min_value = 105 where alert_type = 'fhr_out_of_range' returning 1) select count(*)::int from u$q$, p1) = 1);
-    r := r || pg_temp.ck('...which resets the medical-officer confirmation',
-      (select is_confirmed from public.alert_thresholds where alert_type = 'fhr_out_of_range') = false);
-    r := r || pg_temp.ck('...records who changed it', (select updated_by from public.alert_thresholds where alert_type = 'fhr_out_of_range') = p1);
-    r := r || pg_temp.ck('...and writes an audit log entry with old and new values',
-      exists (select 1 from public.audit_log where actor_id = p1 and action = 'alert_threshold_updated'
-              and details #>> '{old,min}' = '110' and details #>> '{new,min}' = '105'));
-    r := r || pg_temp.ck('P1 cannot confirm thresholds, rename a threshold, insert or delete one',
+    r := r || pg_temp.ck('P1 cannot edit a threshold limit (permission denied, value unchanged)',
+      pg_temp.x($q$update public.alert_thresholds set min_value = 105 where alert_type = 'fhr_out_of_range'$q$, p1) like 'ERR 42501 permission denied%'
+      and (select min_value from public.alert_thresholds where alert_type = 'fhr_out_of_range') = 110);
+    r := r || pg_temp.ck('P1 cannot confirm thresholds, rename a threshold, edit notes, insert or delete one',
       pg_temp.x($q$update public.alert_thresholds set is_confirmed = true where alert_type = 'fever'$q$, p1) like 'ERR 42501 permission denied%'
       and pg_temp.x($q$update public.alert_thresholds set alert_type = 'low_spo2' where alert_type = 'fever'$q$, p1) like 'ERR 42501 permission denied%'
+      and pg_temp.x($q$update public.alert_thresholds set notes = 'n' where alert_type = 'fever'$q$, p1) like 'ERR 42501 permission denied%'
       and pg_temp.x($q$delete from public.alert_thresholds where alert_type = 'fever'$q$, p1) like 'ERR 42501 permission denied%'
       and pg_temp.x($q$insert into public.alert_thresholds (alert_type, severity) values ('fever', 'info')$q$, p1) like 'ERR 42501 permission denied%');
-    r := r || pg_temp.ck('a notes-only edit does not reset confirmation',
-      (select is_confirmed from public.alert_thresholds where alert_type = 'fever') = false  -- seed is false already; check the guard does not break notes edits
-      and pg_temp.q($q$with u as (update public.alert_thresholds set notes = 'n' where alert_type = 'fever' returning 1) select count(*)::int from u$q$, p1) = 1);
 
     -- audit log: insert only
     r := r || pg_temp.ck('P1 writes an audit entry about A',

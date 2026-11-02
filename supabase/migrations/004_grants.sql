@@ -122,11 +122,13 @@ grant select on public.maternal_vitals to authenticated;
 grant insert (patient_id, device_id, measured_at, heart_rate_bpm, spo2_percent, temperature_c, source, client_id)
   on public.maternal_vitals to authenticated;
 
--- alert_thresholds: providers read and edit the limits (005 enforces
--- "providers only"). Only the limits can be edited, never the alert_type, and
--- never is_confirmed (only the admin confirms, in the SQL Editor). No insert, no delete.
+-- alert_thresholds: providers READ the limits (005 enforces "providers only").
+-- Nobody edits them from the app: since step 3.6 (migration 014) the limits are
+-- changed only by the admin in the SQL Editor (docs/ADMIN_SQL.md, snippet 6),
+-- because any provider could otherwise switch off alerts for every patient.
+-- (Edited in step 3.6: before that, a line here granted UPDATE on min_value,
+-- max_value, sustained_count, severity, enabled and notes.)
 grant select on public.alert_thresholds to authenticated;
-grant update (min_value, max_value, sustained_count, severity, enabled, notes) on public.alert_thresholds to authenticated;
 
 -- alerts: normally created by the database. Patients may raise an SOS and
 -- providers may add one (005 decides who). Providers update the handling
