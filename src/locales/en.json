@@ -219,7 +219,103 @@
     },
     "profile": {
       "privacyLink": "Privacy and consent",
-      "privacyHint": "What you agreed to, a copy to download, withdrawing, and data deletion"
+      "privacyHint": "What you agreed to, a copy to download, withdrawing, and data deletion",
+      "intro": "Your pregnancy details, health record, devices and settings.",
+      "comingSoon": "Coming soon",
+      "preg": {
+        "title": "Pregnancy details",
+        "intro": "Add your due date and a few short notes. Your assigned provider, if you have one, can see these details. The app works out your weeks from the due date as an estimate. It is not a medical assessment.",
+        "dueDate": "Due date",
+        "dueDateHint": "Use the date your health provider gave you.",
+        "dueInvalid": "Please enter a real date.",
+        "duePast": "This date is more than 2 weeks in the past. Please check it with your provider.",
+        "dueAhead": "This date is more than 40 weeks away. Please check it.",
+        "ga": {
+          "title": "Weeks of pregnancy",
+          "unset": "Add your due date to see this.",
+          "beforeStart": "This due date is more than 40 weeks away. Please check it.",
+          "over42": "More than 42 weeks. Please check the due date with your provider or health facility.",
+          "pastDue": "Your due date has passed. Please check with your provider or health facility.",
+          "weeksOne": "{{n}} week",
+          "weeksMany": "{{n}} weeks",
+          "daysOne": "{{n}} day",
+          "daysMany": "{{n}} days",
+          "join": "{{weeks}}, {{days}}",
+          "trimesterLabel": "Trimester",
+          "trimester1": "First trimester",
+          "trimester2": "Second trimester",
+          "trimester3": "Third trimester",
+          "explain": "Shown as completed weeks and days, counted from the due date. This is an estimate worked out by the app. Your provider may count differently."
+        },
+        "history": "Obstetric history (optional)",
+        "historyHint": "Short notes only, for example earlier pregnancies. Up to {{max}} characters.",
+        "historyCount": "{{count}} of {{max}} characters",
+        "historyBad": "Please remove special or hidden characters from the notes. Line breaks are fine.",
+        "historyLong": "The notes are too long. Please keep them to {{max}} characters or fewer.",
+        "conditions": "Health conditions (optional)",
+        "conditionsHint": "Add each condition separately. Up to {{max}} conditions, each up to {{len}} characters.",
+        "conditionsNone": "No conditions added.",
+        "conditionInput": "Add a condition",
+        "conditionAdd": "Add",
+        "conditionRemove": "Remove",
+        "condEmpty": "Please type a condition first.",
+        "condBad": "Please remove special or hidden characters, or line breaks.",
+        "condLong": "Each condition can be up to {{len}} characters.",
+        "condDuplicate": "That condition is already in the list.",
+        "condFull": "You can add up to {{max}} conditions.",
+        "save": "Save details",
+        "saving": "Saving…",
+        "saved": "Your pregnancy details were saved.",
+        "loadFailed": "We could not load your pregnancy details just now."
+      },
+      "name": {
+        "title": "Display name",
+        "intro": "Optional. Your assigned provider may see this name. You choose it, and it is not checked or verified.",
+        "currentLabel": "Name shown now",
+        "none": "No name is set.",
+        "label": "Name",
+        "hint": "Up to {{max}} characters. Leave it empty and save to remove it.",
+        "save": "Save name",
+        "saving": "Saving…",
+        "saved": "Your name was saved.",
+        "removed": "Your name was removed.",
+        "remove": "Remove name",
+        "bad": "Please remove special or hidden characters, or line breaks.",
+        "long": "Please use {{max}} characters or fewer."
+      },
+      "timeline": {
+        "title": "Health record timeline",
+        "intro": "Baby heart-rate checks, alerts and appointments in one list, newest first. Times are in Philippine time.",
+        "empty": "Nothing to show yet.",
+        "reading": "Baby's heart-rate check",
+        "recorded": "Recorded",
+        "appointment": "Appointment",
+        "more": "Show more",
+        "limited": "Older items may not be listed here. The Monitor, Alerts and Care tabs show more.",
+        "partial": "Some items could not be loaded, so this list may be incomplete.",
+        "loadFailed": "The timeline could not be loaded just now."
+      },
+      "device": {
+        "title": "Your devices",
+        "paired": "Paired",
+        "none": "No device is paired yet.",
+        "loadFailed": "Your devices could not be loaded just now.",
+        "reported": "Battery and last-seen time are reported by your app. They are not verified.",
+        "timeUnknown": "Last seen time unknown",
+        "pairingTitle": "Pairing",
+        "pairingBody": "Pairing a belt or wrist band will be added in a later version. Nothing is needed from you for now."
+      },
+      "help": {
+        "title": "Help",
+        "manualTitle": "User manual",
+        "manualBody": "A short guide to using NurtureLink will be added here.",
+        "videosTitle": "Demo videos",
+        "videosBody": "Short demo videos will be added here."
+      },
+      "account": {
+        "title": "Language and account",
+        "languageHint": "Your language choice is saved to your account."
+      }
     },
     "privacy": {
       "title": "Privacy and consent",
@@ -346,7 +442,7 @@
         "batteryUnknown": "Battery not reported",
         "lastSeen": "Last seen {{date}}",
         "neverSeen": "Not seen yet",
-        "none": "No device is paired yet. Pairing will be added in Profile."
+        "none": "No device is paired yet. Pairing will be added in a later version."
       },
       "appt": {
         "title": "Next appointment",
@@ -667,6 +763,10 @@
     "appointment_too_soon": "That time is too soon or has already passed. Please choose a time a little later.",
     "appointment_too_far": "That time is too far ahead. Please choose an earlier date.",
     "too_many_open_requests": "You already have several requests waiting. To make a new one, cancel one of them or wait until one is confirmed or its time has passed.",
-    "appointment_not_changed": "This appointment can no longer be changed here. It may already be cancelled, confirmed or past. The list has been refreshed."
+    "appointment_not_changed": "This appointment can no longer be changed here. It may already be cancelled, confirmed or past. The list has been refreshed.",
+    "display_name_invalid": "That name cannot be saved. Please remove special or hidden characters or line breaks, and shorten the name if it is long.",
+    "due_date_out_of_range": "That due date cannot be saved. Please check that the date is right.",
+    "history_invalid": "The history notes cannot be saved. Please remove special or hidden characters, and shorten the notes if they are long.",
+    "conditions_invalid": "The conditions cannot be saved. Please remove special or hidden characters, shorten long entries and keep the list short."
   }
 }

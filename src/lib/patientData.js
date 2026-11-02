@@ -531,3 +531,50 @@ export function cancelAppointment(appointmentId) {
 export function rescheduleAppointment(appointmentId, startsAtIso) {
   return callAppointmentFunction('request_reschedule', { p_id: appointmentId, p_new_starts_at: startsAtIso }, true)
 }
+
+// ---------------------------------------------------------------------
+// Step 3.5: Profile tab
+// ---------------------------------------------------------------------
+
+// How many timeline items the Profile tab shows at first, and per "Show more".
+export const TIMELINE_PAGE = 20
+
+// The patient's own pregnancy details. data = { due_date, obstetric_history, conditions }
+// or null when the patient has no row yet (a brand-new patient). Never the provider id.
+export function usePregnancyDetails() {
+  const id = usePatientId()
+  return useQuery(
+    () =>
+      supabase
+        .from('pregnancy_profiles')
+        .select('due_date, obstetric_history, conditions')
+        .eq('patient_id', id)
+        .maybeSingle(),
+    id,
+  )
+}
+
+// Save the pregnancy details (migration 013, save_pregnancy_details). The database
+// creates the row if there is none, applies the limits again and never touches the
+// provider assignment. Patients have no direct write access to this table.
+//   dueDate: 'YYYY-MM-DD' or empty; history: text or null; conditions: array of text.
+// Returns { error } (null on success). Error texts: due_date_out_of_range,
+// history_invalid, conditions_invalid, not_signed_in.
+export async function saveMyPregnancyDetails({ dueDate, history, conditions }) {
+  if (!supabase) return { error: { message: 'not_configured' } }
+  const { error } = await supabase.rpc('save_pregnancy_details', {
+    p_due_date: dueDate || null,
+    p_obstetric_history: history ?? null,
+    p_conditions: conditions ?? [],
+  })
+  return { error: error ?? null }
+}
+
+// Set or clear the signed-in user's display name (migration 013, set_my_display_name).
+// A blank name clears it. Returns { error, name }: name is the stored text, or null
+// when it was cleared. Error text display_name_invalid for bad characters or a name over 100.
+export async function setMyDisplayName(name) {
+  if (!supabase) return { error: { message: 'not_configured' }, name: null }
+  const { data, error } = await supabase.rpc('set_my_display_name', { p_name: name })
+  return { error: error ?? null, name: error ? null : (data ?? null) }
+}

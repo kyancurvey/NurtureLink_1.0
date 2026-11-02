@@ -219,7 +219,103 @@
     },
     "profile": {
       "privacyLink": "Privacy at pahintulot",
-      "privacyHint": "Ang sinang-ayunan mo, kopyang ida-download, pag-atras, at pagbura ng datos"
+      "privacyHint": "Ang sinang-ayunan mo, kopyang ida-download, pag-atras, at pagbura ng datos",
+      "intro": "Ang iyong mga detalye ng pagbubuntis, talaan ng kalusugan, mga device at mga setting.",
+      "comingSoon": "Malapit na",
+      "preg": {
+        "title": "Mga detalye ng pagbubuntis",
+        "intro": "Ilagay ang iyong due date at ilang maikling tala. Makikita ng nakatalagang provider mo, kung mayroon, ang mga detalyeng ito. Tinataya ng app ang iyong mga linggo mula sa due date. Hindi ito medikal na pagsusuri.",
+        "dueDate": "Inaasahang petsa ng panganganak (due date)",
+        "dueDateHint": "Gamitin ang petsang ibinigay ng iyong health provider.",
+        "dueInvalid": "Maglagay ng tunay na petsa.",
+        "duePast": "Mahigit 2 linggo nang lumipas ang petsang ito. Pakisuri ito sa iyong provider.",
+        "dueAhead": "Mahigit 40 linggo pa ang petsang ito. Pakisuri ito.",
+        "ga": {
+          "title": "Mga linggo ng pagbubuntis",
+          "unset": "Ilagay ang iyong due date para makita ito.",
+          "beforeStart": "Mahigit 40 linggo pa ang due date na ito. Pakisuri ito.",
+          "over42": "Lampas na sa 42 linggo. Pakisuri ang due date sa iyong provider o pasilidad pangkalusugan.",
+          "pastDue": "Lampas na ang iyong due date. Pakikonsulta sa iyong provider o pasilidad pangkalusugan.",
+          "weeksOne": "{{n}} linggo",
+          "weeksMany": "{{n}} linggo",
+          "daysOne": "{{n}} araw",
+          "daysMany": "{{n}} araw",
+          "join": "{{weeks}} at {{days}}",
+          "trimesterLabel": "Trimester",
+          "trimester1": "Unang trimester",
+          "trimester2": "Ikalawang trimester",
+          "trimester3": "Ikatlong trimester",
+          "explain": "Ipinapakita bilang kumpletong mga linggo at araw, mula sa due date. Pagtataya lamang ito ng app. Maaaring iba ang bilang ng iyong provider."
+        },
+        "history": "Kasaysayan ng pagbubuntis at panganganak (opsyonal)",
+        "historyHint": "Maiikling tala lamang, halimbawa ang mga nakaraang pagbubuntis. Hanggang {{max}} karakter.",
+        "historyCount": "{{count}} sa {{max}} karakter",
+        "historyBad": "Pakialis ang mga espesyal o nakatagong karakter sa mga tala. Puwede ang mga line break.",
+        "historyLong": "Masyadong mahaba ang mga tala. Panatilihin itong hindi hihigit sa {{max}} karakter.",
+        "conditions": "Mga kondisyong pangkalusugan (opsyonal)",
+        "conditionsHint": "Idagdag nang hiwalay ang bawat kondisyon. Hanggang {{max}} kondisyon, bawat isa ay hanggang {{len}} karakter.",
+        "conditionsNone": "Wala pang naidagdag na kondisyon.",
+        "conditionInput": "Magdagdag ng kondisyon",
+        "conditionAdd": "Idagdag",
+        "conditionRemove": "Alisin",
+        "condEmpty": "Mag-type muna ng kondisyon.",
+        "condBad": "Pakialis ang mga espesyal o nakatagong karakter, o ang mga line break.",
+        "condLong": "Hanggang {{len}} karakter ang bawat kondisyon.",
+        "condDuplicate": "Nasa listahan na ang kondisyong iyon.",
+        "condFull": "Hanggang {{max}} kondisyon lamang ang puwedeng idagdag.",
+        "save": "I-save ang mga detalye",
+        "saving": "Sine-save…",
+        "saved": "Na-save ang iyong mga detalye ng pagbubuntis.",
+        "loadFailed": "Hindi namin ma-load ang iyong mga detalye ng pagbubuntis ngayon."
+      },
+      "name": {
+        "title": "Pangalang ipinapakita",
+        "intro": "Opsyonal. Maaaring makita ng nakatalagang provider mo ang pangalang ito. Ikaw ang pumipili nito at hindi ito sinusuri o bine-verify.",
+        "currentLabel": "Pangalang ipinapakita ngayon",
+        "none": "Walang nakatakdang pangalan.",
+        "label": "Pangalan",
+        "hint": "Hanggang {{max}} karakter. Iwanang walang laman at i-save para alisin ito.",
+        "save": "I-save ang pangalan",
+        "saving": "Sine-save…",
+        "saved": "Na-save ang iyong pangalan.",
+        "removed": "Naalis ang iyong pangalan.",
+        "remove": "Alisin ang pangalan",
+        "bad": "Pakialis ang mga espesyal o nakatagong karakter, o ang mga line break.",
+        "long": "Gumamit ng hindi hihigit sa {{max}} karakter."
+      },
+      "timeline": {
+        "title": "Timeline ng talaan ng kalusugan",
+        "intro": "Mga check sa tibok ng puso ng sanggol, mga abiso at mga appointment sa iisang listahan, pinakabago muna. Nasa oras ng Pilipinas ang mga oras.",
+        "empty": "Wala pang maipapakita.",
+        "reading": "Check sa tibok ng puso ng sanggol",
+        "recorded": "Naitala",
+        "appointment": "Appointment",
+        "more": "Magpakita pa",
+        "limited": "Maaaring hindi nakalista rito ang mas lumang mga item. Mas marami ang makikita sa mga tab na Monitor, Abiso at Konsulta.",
+        "partial": "May mga item na hindi na-load, kaya maaaring kulang ang listahang ito.",
+        "loadFailed": "Hindi ma-load ang timeline ngayon."
+      },
+      "device": {
+        "title": "Ang iyong mga device",
+        "paired": "Naka-pair",
+        "none": "Wala pang naka-pair na device.",
+        "loadFailed": "Hindi ma-load ang iyong mga device ngayon.",
+        "reported": "Ang baterya at oras ng huling kita ay iniuulat ng iyong app. Hindi ito bine-verify.",
+        "timeUnknown": "Hindi alam ang oras ng huling kita",
+        "pairingTitle": "Pag-pair",
+        "pairingBody": "Idadagdag sa susunod na bersyon ang pag-pair ng belt o wrist band. Wala kang kailangang gawin sa ngayon."
+      },
+      "help": {
+        "title": "Tulong",
+        "manualTitle": "Manwal ng gumagamit",
+        "manualBody": "Maglalagay rito ng maikling gabay sa paggamit ng NurtureLink.",
+        "videosTitle": "Mga demo video",
+        "videosBody": "Maglalagay rito ng maiikling demo video."
+      },
+      "account": {
+        "title": "Wika at account",
+        "languageHint": "Sine-save sa iyong account ang napili mong wika."
+      }
     },
     "privacy": {
       "title": "Privacy at pahintulot",
@@ -346,7 +442,7 @@
         "batteryUnknown": "Hindi iniulat ang baterya",
         "lastSeen": "Huling nakita {{date}}",
         "neverSeen": "Hindi pa nakikita",
-        "none": "Wala pang naka-pair na device. Idadagdag ang pag-pair sa Profile."
+        "none": "Wala pang naka-pair na device. Idadagdag ang pag-pair sa susunod na bersyon."
       },
       "appt": {
         "title": "Susunod na appointment",
@@ -667,6 +763,10 @@
     "appointment_too_soon": "Masyadong malapit o lumipas na ang oras na iyon. Pumili ng mas huling oras.",
     "appointment_too_far": "Masyadong malayo ang oras na iyon. Pumili ng mas maagang petsa.",
     "too_many_open_requests": "Marami ka nang naghihintay na hiling. Para makagawa ng bago, kanselahin ang isa o hintaying makumpirma ang isa o lumipas ang oras nito.",
-    "appointment_not_changed": "Hindi na mababago rito ang appointment na ito. Maaaring kinansela, kinumpirma o lumipas na ito. Na-refresh na ang listahan."
+    "appointment_not_changed": "Hindi na mababago rito ang appointment na ito. Maaaring kinansela, kinumpirma o lumipas na ito. Na-refresh na ang listahan.",
+    "display_name_invalid": "Hindi ma-save ang pangalang iyon. Pakialis ang mga espesyal o nakatagong karakter o line break, at paikliin ang pangalan kung mahaba.",
+    "due_date_out_of_range": "Hindi ma-save ang due date na iyon. Pakisuri kung tama ang petsa.",
+    "history_invalid": "Hindi ma-save ang mga tala ng kasaysayan. Pakialis ang mga espesyal o nakatagong karakter, at paikliin ang mga tala kung mahaba.",
+    "conditions_invalid": "Hindi ma-save ang mga kondisyon. Pakialis ang mga espesyal o nakatagong karakter, paikliin ang mahahabang entry at panatilihing maikli ang listahan."
   }
 }

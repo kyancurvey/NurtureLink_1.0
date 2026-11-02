@@ -16,7 +16,7 @@ export function friendlyError(t, error) {
   const code = String(error?.code ?? error?.error_code ?? '')
   const status = Number(error?.status ?? 0)
 
-  // 1. Codes raised by our own functions and triggers (migrations 002, 008, 009, 010, 012).
+  // 1. Codes raised by our own functions and triggers (migrations 002, 008, 009, 010, 012, 013).
   switch (message) {
     case 'not_signed_in':
       return { text: t('errors:not_signed_in') }
@@ -55,6 +55,15 @@ export function friendlyError(t, error) {
     // answered "false" (the appointment was not the patient's, or not allowed any more).
     case 'appointment_not_changed':
       return { text: t('errors:appointment_not_changed') }
+    // Migration 013 (Profile tab): display name and pregnancy details.
+    case 'display_name_invalid':
+      return { text: t('errors:display_name_invalid') }
+    case 'due_date_out_of_range':
+      return { text: t('errors:due_date_out_of_range') }
+    case 'history_invalid':
+      return { text: t('errors:history_invalid') }
+    case 'conditions_invalid':
+      return { text: t('errors:conditions_invalid') }
     default:
       break
   }
