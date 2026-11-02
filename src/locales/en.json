@@ -758,6 +758,7 @@
     "reading_time_in_future": "The time on this reading is ahead of the real time, so it was not saved. Please check that your device's date and time are correct, then try again.",
     "sos_rate_limited": "Your SOS was already sent a moment ago, so a second one was not added. If you are in danger, call local emergency services or go to a health facility now.",
     "manual_reading_invalid": "That reading could not be saved because a value looks wrong. Please check the numbers and try again.",
+    "too_many_readings": "A lot of readings were saved in the last hour, so saving is paused for now. Please try again in a little while. If you think this is a mistake, tell your provider.",
     "no_provider": "You do not have a provider assigned yet, so an appointment cannot be requested here. To be linked with a provider, ask your clinic or the project team.",
     "appointment_time_invalid": "Please choose a date and a time.",
     "appointment_too_soon": "That time is too soon or has already passed. Please choose a time a little later.",

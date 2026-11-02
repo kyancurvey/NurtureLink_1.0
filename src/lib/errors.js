@@ -40,6 +40,9 @@ export function friendlyError(t, error) {
     // the entry limits, or it names a device, or it is back-dated).
     case 'manual_reading_invalid':
       return { text: t('errors:manual_reading_invalid') }
+    // Migration 014: more than 600 readings of one kind saved by this patient within the last hour.
+    case 'too_many_readings':
+      return { text: t('errors:too_many_readings') }
     // Migration 012 (Care tab): appointment requests and changes.
     case 'no_provider':
       return { text: t('errors:no_provider') }

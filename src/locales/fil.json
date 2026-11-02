@@ -758,6 +758,7 @@
     "reading_time_in_future": "Nasa hinaharap ang oras ng reading na ito (mas huli kaysa sa tunay na oras), kaya hindi ito nai-save. Pakisuri kung tama ang petsa at oras ng iyong device, at subukan muli.",
     "sos_rate_limited": "Naipadala na ang iyong SOS ilang sandali lang ang nakalipas, kaya hindi nagdagdag ng pangalawa. Kung nasa panganib ka, tumawag agad sa lokal na emergency services o pumunta sa pasilidad pangkalusugan.",
     "manual_reading_invalid": "Hindi na-save ang sukat dahil mukhang mali ang isang halaga. Pakisuri ang mga numero at subukan muli.",
+    "too_many_readings": "Marami nang sukat ang na-save sa nakaraang isang oras, kaya pansamantalang huminto ang pag-save. Subukan muli pagkalipas ng ilang sandali. Kung sa tingin mo ay mali ito, sabihin sa iyong provider.",
     "no_provider": "Wala ka pang nakatalagang provider, kaya hindi pa makakahiling ng appointment dito. Para maiugnay sa isang provider, magtanong sa iyong klinika o sa project team.",
     "appointment_time_invalid": "Pumili ng petsa at oras.",
     "appointment_too_soon": "Masyadong malapit o lumipas na ang oras na iyon. Pumili ng mas huling oras.",
