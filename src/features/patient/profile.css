@@ -1,0 +1,218 @@
+/* Patient Profile tab (step 3.5). Colors, spacing and type come from tokens.css only.
+   Every status is an icon AND words AND a colour. Alert colours (red, amber, green)
+   are used only for alert-like meaning; brand coral is never used here and white
+   text is never put on a coral or soft background. */
+
+.nl-profile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.nl-profile p {
+  margin: 0;
+}
+.nl-profile__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+.nl-profile__muted {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+.nl-profile__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.nl-profile__subtitle {
+  margin: 0;
+  font-size: var(--font-size-base);
+  color: var(--color-brand-purple);
+}
+.nl-profile__textarea {
+  min-height: 7rem;
+  font: inherit;
+  resize: vertical;
+}
+
+/* ---------- Messages ---------- */
+.nl-profile__msg {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+.nl-profile__msg--ok {
+  background: var(--color-success-bg);
+  color: var(--color-success-text);
+}
+.nl-profile__msg--error {
+  background: var(--color-danger-bg);
+  color: var(--color-danger-text);
+}
+.nl-profile__msg--info {
+  background: var(--color-bg-tint);
+  color: var(--color-text);
+}
+.nl-profile__msg svg {
+  flex: none;
+}
+
+/* ---------- Weeks of pregnancy ---------- */
+.nl-profile__age {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-tint);
+}
+.nl-profile__big {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--color-brand-purple);
+}
+
+/* ---------- Conditions ---------- */
+.nl-profile__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nl-profile__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--touch-min);
+  padding: 0 var(--space-2) 0 var(--space-3);
+  border: 2px solid var(--color-border-input);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  overflow-wrap: anywhere;
+}
+.nl-profile__chip-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--touch-min);
+  height: var(--touch-min);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+}
+.nl-profile__chip-remove:hover {
+  background: var(--color-hover-overlay);
+}
+.nl-profile__chip-remove:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.nl-profile__add-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+.nl-profile__add-row .nl-field {
+  flex: 1 1 14rem;
+}
+
+/* ---------- Timeline ---------- */
+.nl-profile__timeline {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.nl-profile__tl-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-border);
+}
+.nl-profile__tl-item:first-child {
+  border-top: 0;
+}
+.nl-profile__tl-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+.nl-profile__tl-title {
+  margin: 0;
+  font-size: var(--font-size-base);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.nl-profile__tl-when {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* A status: icon + words + colour (never colour alone). */
+.nl-profile__status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+.nl-profile__status--success {
+  background: var(--color-success-bg);
+  color: var(--color-success-text);
+}
+.nl-profile__status--warning {
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+}
+.nl-profile__status--danger {
+  background: var(--color-danger-bg);
+  color: var(--color-danger-text);
+}
+.nl-profile__status--neutral {
+  background: var(--color-bg-tint-strong);
+  color: var(--color-text);
+}
+
+/* ---------- Devices, help ---------- */
+.nl-profile__device {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-border);
+}
+.nl-profile__device:first-of-type {
+  border-top: 0;
+}
+.nl-profile__placeholder {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-tint);
+}
+.nl-profile__list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
