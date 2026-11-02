@@ -188,10 +188,10 @@ begin
     r := r || pg_temp.ck('the hardware_id length constraint exists',
       exists (select 1 from pg_constraint where conname = 'devices_hardware_id_length' and conrelid = 'public.devices'::regclass));
     r := r || pg_temp.ck('signed-in users can execute exactly 14 functions in public (014 added no client function)',
-      (select count(*) from pg_proc p where p.pronamespace = 'public'::regnamespace
-          and has_function_privilege('authenticated', p.oid, 'EXECUTE')) = 14);
+      (select count(*) from pg_proc p where p.pronamespace = 'public'::regnamespace and p.proname <> 'rls_auto_enable'
+          and has_function_privilege('authenticated', p.oid, 'EXECUTE')) = 14);   -- rls_auto_enable() is Supabase's own (see access_tests INFO)
     r := r || pg_temp.ck('anon can execute no function in public and has no privilege on alert_thresholds, belt_readings, maternal_vitals, devices, alerts or audit_log',
-      not exists (select 1 from pg_proc p where p.pronamespace = 'public'::regnamespace and has_function_privilege('anon', p.oid, 'EXECUTE'))
+      not exists (select 1 from pg_proc p where p.pronamespace = 'public'::regnamespace and p.proname <> 'rls_auto_enable' and has_function_privilege('anon', p.oid, 'EXECUTE'))
       and not exists (select 1 from unnest(array['alert_thresholds','belt_readings','maternal_vitals','devices','alerts','audit_log']) t
                       where has_table_privilege('anon', 'public.' || t, 'SELECT,INSERT,UPDATE,DELETE')));
     r := r || pg_temp.ck('alert_thresholds: signed-in users can SELECT but have no UPDATE on the table or on any column, and no UPDATE policy exists',
