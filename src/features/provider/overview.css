@@ -1,0 +1,174 @@
+/* Provider Overview tab. Colors, spacing and type come from tokens.css only.
+   Status colors (green / amber / red) are separate from brand coral and are
+   always paired with an icon AND text. Coral is never used here, and never
+   carries white text. */
+
+.nl-ov {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.nl-ov p {
+  margin: 0;
+}
+.nl-ov__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.nl-ov__card {
+  min-width: 0;
+}
+.nl-ov__muted {
+  margin-bottom: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+.nl-ov__empty-line {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  color: var(--color-brand-purple);
+}
+.nl-ov__empty-line svg {
+  flex: none;
+  margin-top: 0.2rem;
+}
+.nl-ov__problem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+}
+.nl-ov__line {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-brand-purple);
+  background: var(--color-bg-tint);
+  border: 2px solid var(--color-border-input);
+  border-radius: var(--radius-md);
+}
+.nl-ov__line svg {
+  flex: none;
+  margin-top: 0.15rem;
+}
+
+/* ---------- SOS banner: icon + words on the danger colors ---------- */
+.nl-ov__sos {
+  padding: var(--space-4);
+  color: var(--color-danger-text);
+  background: var(--color-danger-bg);
+  border: 3px solid var(--color-danger);
+  border-radius: var(--radius-md);
+}
+.nl-ov__sos-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0 0 var(--space-3);
+  font-size: var(--font-size-xl);
+}
+.nl-ov__sos-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  min-height: var(--touch-min);
+  padding: var(--space-2) 0;
+  color: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+}
+.nl-ov__sos-note {
+  margin-top: var(--space-3);
+  font-size: var(--font-size-sm);
+}
+.nl-ov__sos-row:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- Lists and rows ---------- */
+.nl-ov__plain-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.nl-ov__row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-height: var(--touch-min);
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-text);
+  text-decoration: none;
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+.nl-ov__row:hover {
+  background: var(--color-bg-tint);
+}
+.nl-ov__row[aria-current='page'] {
+  background: var(--color-bg-tint-strong);
+  border-color: var(--color-brand-purple);
+}
+.nl-ov__row:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+.nl-ov__label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-2);
+  min-width: 0;
+  font-weight: 800;
+  color: var(--color-brand-purple);
+}
+/* One line, cut with an ellipsis: a long chosen name never pushes the layout. */
+.nl-ov__name {
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.nl-ov__code {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+.nl-ov__badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+.nl-ov__type {
+  font-weight: 700;
+}
+.nl-ov__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+.nl-ov__seen {
+  color: var(--color-brand-purple);
+}
+
+/* Neutral badges: no recent data, unknown status, missed check. Not green, not coral. */
+.nl-ov__badge-neutral,
+.nl-ov__badge-missed {
+  color: var(--color-brand-purple);
+  background: var(--color-bg-tint);
+  border-color: var(--color-border-input);
+}
