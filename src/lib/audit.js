@@ -9,6 +9,8 @@ import { supabase } from './supabase.js'
 //   writeAudit(AUDIT.PROVIDER_LOGIN)                          // no patient
 //   writeAudit(AUDIT.PATIENT_RECORD_OPENED, { patientId })    // Phase 4: call this
 //                                                             // when a patient's detail opens
+//   writeAudit(AUDIT.OVERVIEW_VIEWED, { details: { count } }) // step 4.1: the Overview list was
+//                                                             // shown (count only, no patient ids)
 //
 // It never throws and never returns the saved row (there is no SELECT grant on
 // audit_log, so asking for the row back would fail). It returns
@@ -22,6 +24,7 @@ import { supabase } from './supabase.js'
 export const AUDIT = {
   PROVIDER_LOGIN: 'provider_login',
   PATIENT_RECORD_OPENED: 'patient_record_opened',
+  OVERVIEW_VIEWED: 'overview_viewed',
 }
 
 export async function writeAudit(action, { patientId = null, details = {} } = {}) {
