@@ -720,9 +720,75 @@
       "validation": "Validation",
       "reports": "Reports",
       "settings": "Settings"
+    },
+    "overview": {
+      "timesNote": "Times are shown in Philippine time.",
+      "retry": "Try again",
+      "livePaused": "Live updates paused. This list refreshes every 30 seconds.",
+      "refreshFailed": "The list could not be refreshed just now. You are seeing the last list that loaded.",
+      "selectPatient": "Select a patient from the list.",
+      "code": "ID {{code}}",
+      "patientNoName": "Patient {{code}}",
+      "noCheckYet": "No check yet",
+      "lastCheck": "Last check {{time}}",
+      "status": {
+        "critical": "Critical",
+        "warning": "Warning",
+        "stable": "Stable",
+        "noData": "No recent data",
+        "unknown": "Status unavailable"
+      },
+      "sos": {
+        "title": "SOS open",
+        "sentAt": "SOS sent {{time}}",
+        "sent": "SOS sent",
+        "note": "The app does not show whether anyone has responded yet.",
+        "badge": "SOS open"
+      },
+      "alerts": {
+        "title": "Open alerts",
+        "none": "No open alerts.",
+        "raised": "Raised {{time}}",
+        "seen": "Patient has seen this · {{time}}",
+        "seenNote": "“Patient has seen this” is for information only. It does not mean the alert has been handled.",
+        "limit": "Showing the newest alerts only."
+      },
+      "triage": {
+        "title": "Patients by priority",
+        "nameNote": "Names are typed by the patients and are not verified. Use the ID to tell patients apart.",
+        "openAlerts": "Open alerts: {{count}}"
+      },
+      "missed": {
+        "title": "Missed checks",
+        "badge": "Missed check",
+        "none": "No missed checks.",
+        "draftNote": "A missed check means no belt check was recorded recently. This rule is a draft, pending the medical officer."
+      },
+      "empty": {
+        "title": "No patients assigned yet",
+        "body": "When patients are assigned to you, they will appear here."
+      },
+      "placeholder": {
+        "title": "Patient details",
+        "body": "This is a placeholder. Patient details will be added in a later version. No patient data is shown here yet."
+      }
     }
   },
-  "alerts": {},
+  "alerts": {
+    "type": {
+      "sos": "SOS",
+      "fhr_out_of_range": "Baby heart rate outside the app's range",
+      "signal_loss": "Belt signal lost",
+      "low_spo2": "Low SpO2 reading",
+      "fever": "High temperature reading",
+      "other": "Alert"
+    },
+    "severity": {
+      "critical": "Critical",
+      "warning": "Warning",
+      "info": "For information"
+    }
+  },
   "errors": {
     "email_required": "Please enter your email address.",
     "email_invalid": "That does not look like an email address. Please check it.",

@@ -720,9 +720,75 @@
       "validation": "Beripikasyon",
       "reports": "Ulat",
       "settings": "Setting"
+    },
+    "overview": {
+      "timesNote": "Ipinapakita ang oras sa oras ng Pilipinas.",
+      "retry": "Subukan muli",
+      "livePaused": "Naka-pause ang live na update. Nagre-refresh ang listahang ito kada 30 segundo.",
+      "refreshFailed": "Hindi ma-refresh ang listahan ngayon. Ang huling na-load na listahan ang nakikita mo.",
+      "selectPatient": "Pumili ng pasyente sa listahan.",
+      "code": "ID {{code}}",
+      "patientNoName": "Pasyente {{code}}",
+      "noCheckYet": "Wala pang check",
+      "lastCheck": "Huling check noong {{time}}",
+      "status": {
+        "critical": "Kritikal",
+        "warning": "Babala",
+        "stable": "Matatag",
+        "noData": "Walang bagong datos",
+        "unknown": "Hindi makita ang katayuan"
+      },
+      "sos": {
+        "title": "Bukas ang SOS",
+        "sentAt": "Ipinadala ang SOS noong {{time}}",
+        "sent": "Ipinadala ang SOS",
+        "note": "Hindi ipinapakita ng app kung may tumugon na.",
+        "badge": "Bukas ang SOS"
+      },
+      "alerts": {
+        "title": "Mga bukas na abiso",
+        "none": "Walang bukas na abiso.",
+        "raised": "Naitala noong {{time}}",
+        "seen": "Nakita na ito ng pasyente · {{time}}",
+        "seenNote": "Ang “Nakita na ito ng pasyente” ay para sa kaalaman lamang. Hindi ito nangangahulugang naasikaso na ang abiso.",
+        "limit": "Ang pinakabagong mga abiso lamang ang ipinapakita."
+      },
+      "triage": {
+        "title": "Mga pasyente ayon sa priyoridad",
+        "nameNote": "Ang mga pangalan ay tina-type mismo ng mga pasyente at hindi bine-verify. Gamitin ang ID para makilala ang bawat pasyente.",
+        "openAlerts": "Bukas na abiso: {{count}}"
+      },
+      "missed": {
+        "title": "Mga hindi nagawang check",
+        "badge": "Hindi nag-check",
+        "none": "Walang hindi nagawang check.",
+        "draftNote": "Ang hindi nagawang check ay nangangahulugang walang naitalang belt check kamakailan. Draft pa ang patakarang ito, hinihintay ang medical officer."
+      },
+      "empty": {
+        "title": "Wala pang nakatalagang pasyente",
+        "body": "Kapag may nakatalagang pasyente sa iyo, lalabas sila rito."
+      },
+      "placeholder": {
+        "title": "Mga detalye ng pasyente",
+        "body": "Placeholder ito. Idadagdag sa susunod na bersyon ang mga detalye ng pasyente. Wala pang ipinapakitang datos ng pasyente rito."
+      }
     }
   },
-  "alerts": {},
+  "alerts": {
+    "type": {
+      "sos": "SOS",
+      "fhr_out_of_range": "Tibok ng puso ng sanggol na wala sa saklaw ng app",
+      "signal_loss": "Nawala ang signal ng belt",
+      "low_spo2": "Mababang SpO2 na sukat",
+      "fever": "Mataas na sukat ng temperatura",
+      "other": "Abiso"
+    },
+    "severity": {
+      "critical": "Kritikal",
+      "warning": "Babala",
+      "info": "Para sa kaalaman"
+    }
+  },
   "errors": {
     "email_required": "Pakilagay ang iyong email address.",
     "email_invalid": "Mukhang hindi ito email address. Pakisuri.",
