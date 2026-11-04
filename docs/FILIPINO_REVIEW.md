@@ -676,6 +676,65 @@ One new message, shown when the database refuses to save more readings because 6
 |---|---|---|---|---|---|---|
 | 342 | `errors:too_many_readings` | A lot of readings were saved in the last hour, so saving is paused for now. Please try again in a little while. If you think this is a mistake, tell your provider. | Marami nang sukat ang na-save sa nakaraang isang oras, kaya pansamantalang huminto ang pag-save. Subukan muli pagkalipas ng ilang sandali. Kung sa tingin mo ay mali ito, sabihin sa iyong provider. | NO-PROMISE WORDING | Shown after Check now or a typed reading is refused by the limit. "Sukat" is the word used for readings elsewhere in this file. Draft wording. | |
 
+## 12. Provider Overview tab (step 4.1)
+
+New provider-facing wording. The Overview lists the provider's assigned patients by priority with a status, an SOS banner, open alerts and missed checks. Please look first at the rows flagged **STATUS WORDING**, **SOS WORDING**, **NO-PROMISE WORDING**, **NOT-VERIFIED WORDING**, **DRAFT RULE** and **CLINICAL WORDING**.
+
+**For the midwife or medical officer (decisions needed, all DRAFT):**
+
+1. The status words for providers (Critical, Warning, Stable, No recent data).
+2. **The position of "No recent data" in the list order.** Current draft order: open SOS, Critical, Warning, No recent data, Stable. The alternative is to place "No recent data" above Warning, because "unknown" can matter more than a known warning.
+3. The missed-check rule: no belt check recorded within the freshness window (default 14 hours, the same number the patient Home uses). Draft, replaced by wear schedules in step 4.5.
+4. The wording of the SOS banner. It must not promise help or a response.
+
+| # | Key | English | Filipino | Flag | Notes for the reviewer | Reviewer: OK or better wording |
+|---|---|---|---|---|---|---|
+| 343 | `provider:overview.timesNote` | Times are shown in Philippine time. | Ipinapakita ang oras sa oras ng Pilipinas. | - |  |  |
+| 344 | `provider:overview.retry` | Try again | Subukan muli | - |  |  |
+| 345 | `provider:overview.livePaused` | Live updates paused. This list refreshes every 30 seconds. | Naka-pause ang live na update. Nagre-refresh ang listahang ito kada 30 segundo. | - |  |  |
+| 346 | `provider:overview.refreshFailed` | The list could not be refreshed just now. You are seeing the last list that loaded. | Hindi ma-refresh ang listahan ngayon. Ang huling na-load na listahan ang nakikita mo. | - |  |  |
+| 347 | `provider:overview.selectPatient` | Select a patient from the list. | Pumili ng pasyente sa listahan. | - |  |  |
+| 348 | `provider:overview.code` | ID {{code}} | ID {{code}} | - |  |  |
+| 349 | `provider:overview.patientNoName` | Patient {{code}} | Pasyente {{code}} | - |  |  |
+| 350 | `provider:overview.noCheckYet` | No check yet | Wala pang check | - |  |  |
+| 351 | `provider:overview.lastCheck` | Last check {{time}} | Huling check noong {{time}} | - |  |  |
+| 352 | `provider:overview.status.critical` | Critical | Kritikal | STATUS WORDING (priority) | Provider-facing status word for the most serious state (database code "urgent"). Patients see "Urgent / Agarang atensyon" on their own Home; the provider screen uses Critical. Please confirm the word. |  |
+| 353 | `provider:overview.status.warning` | Warning | Babala | STATUS WORDING (priority) | Provider-facing status word for "attention". Patients see "Needs attention". |  |
+| 354 | `provider:overview.status.stable` | Stable | Matatag | STATUS WORDING (priority) | Shown only when a recent check is usable, inside the limits, and nothing is open. Please confirm "Stable" is the right word and does not sound like a clearance. |  |
+| 355 | `provider:overview.status.noData` | No recent data | Walang bagong datos | STATUS WORDING (priority) | Never shown as stable. Same wording as the patient Home. MEDICAL OFFICER: please also confirm where "No recent data" sits in the list order: now after Warning and before Stable (alternative: before Warning). |  |
+| 356 | `provider:overview.status.unknown` | Status unavailable | Hindi makita ang katayuan | STATUS WORDING (priority) | Shown if the app meets a status it does not know. Same wording as the patient Home. |  |
+| 357 | `provider:overview.sos.title` | SOS open | Bukas ang SOS | SOS WORDING (priority) | Heading of the banner at the top when any assigned patient has an open SOS. |  |
+| 358 | `provider:overview.sos.sentAt` | SOS sent {{time}} | Ipinadala ang SOS noong {{time}} | SOS WORDING (priority) | Follows the patient label; {{time}} is Philippine time. |  |
+| 359 | `provider:overview.sos.sent` | SOS sent | Ipinadala ang SOS | SOS WORDING (priority) | Used only if the time is missing. |  |
+| 360 | `provider:overview.sos.note` | The app does not show whether anyone has responded yet. | Hindi ipinapakita ng app kung may tumugon na. | NO-PROMISE WORDING | Must not promise help or a response. It only says the app does not show whether anyone has responded yet. |  |
+| 361 | `provider:overview.sos.badge` | SOS open | Bukas ang SOS | SOS WORDING (priority) | Small badge on a patient row. |  |
+| 362 | `provider:overview.alerts.title` | Open alerts | Mga bukas na abiso | - |  |  |
+| 363 | `provider:overview.alerts.none` | No open alerts. | Walang bukas na abiso. | - |  |  |
+| 364 | `provider:overview.alerts.raised` | Raised {{time}} | Naitala noong {{time}} | - |  |  |
+| 365 | `provider:overview.alerts.seen` | Patient has seen this · {{time}} | Nakita na ito ng pasyente · {{time}} | INFORMATION ONLY | Says the patient has opened the alert. It must not sound like the alert is handled. |  |
+| 366 | `provider:overview.alerts.seenNote` | “Patient has seen this” is for information only. It does not mean the alert has been handled. | Ang “Nakita na ito ng pasyente” ay para sa kaalaman lamang. Hindi ito nangangahulugang naasikaso na ang abiso. | NO-PROMISE WORDING | Explains that "seen" is information only and does not mean handled. |  |
+| 367 | `provider:overview.alerts.limit` | Showing the newest alerts only. | Ang pinakabagong mga abiso lamang ang ipinapakita. | - |  |  |
+| 368 | `provider:overview.triage.title` | Patients by priority | Mga pasyente ayon sa priyoridad | - |  |  |
+| 369 | `provider:overview.triage.nameNote` | Names are typed by the patients and are not verified. Use the ID to tell patients apart. | Ang mga pangalan ay tina-type mismo ng mga pasyente at hindi bine-verify. Gamitin ang ID para makilala ang bawat pasyente. | NOT-VERIFIED WORDING (priority) | Says names are typed by the patients and are not verified. |  |
+| 370 | `provider:overview.triage.openAlerts` | Open alerts: {{count}} | Bukas na abiso: {{count}} | - |  |  |
+| 371 | `provider:overview.missed.title` | Missed checks | Mga hindi nagawang check | DRAFT RULE (priority) | Heading of the list of patients with no recent belt check. |  |
+| 372 | `provider:overview.missed.badge` | Missed check | Hindi nag-check | DRAFT RULE (priority) | Missed check = no belt check recorded within the freshness window (default 14 hours). Draft, pending medical officer; replaced by wear schedules in step 4.5. |  |
+| 373 | `provider:overview.missed.none` | No missed checks. | Walang hindi nagawang check. | - |  |  |
+| 374 | `provider:overview.missed.draftNote` | A missed check means no belt check was recorded recently. This rule is a draft, pending the medical officer. | Ang hindi nagawang check ay nangangahulugang walang naitalang belt check kamakailan. Draft pa ang patakarang ito, hinihintay ang medical officer. | DRAFT RULE (priority) | States that the rule is a draft pending the medical officer. No number is written on purpose. |  |
+| 375 | `provider:overview.empty.title` | No patients assigned yet | Wala pang nakatalagang pasyente | - |  |  |
+| 376 | `provider:overview.empty.body` | When patients are assigned to you, they will appear here. | Kapag may nakatalagang pasyente sa iyo, lalabas sila rito. | - |  |  |
+| 377 | `provider:overview.placeholder.title` | Patient details | Mga detalye ng pasyente | - |  |  |
+| 378 | `provider:overview.placeholder.body` | This is a placeholder. Patient details will be added in a later version. No patient data is shown here yet. | Placeholder ito. Idadagdag sa susunod na bersyon ang mga detalye ng pasyente. Wala pang ipinapakitang datos ng pasyente rito. | - | Placeholder shown when a patient is tapped, until step 4.3. It says no patient data is shown yet. |  |
+| 379 | `alerts:type.sos` | SOS | SOS | - |  |  |
+| 380 | `alerts:type.fhr_out_of_range` | Baby heart rate outside the app's range | Tibok ng puso ng sanggol na wala sa saklaw ng app | CLINICAL WORDING (priority) | Says the baby heart rate was outside the APP'S range (draft limits pending the medical officer). Must not say what it means. |  |
+| 381 | `alerts:type.signal_loss` | Belt signal lost | Nawala ang signal ng belt | - |  |  |
+| 382 | `alerts:type.low_spo2` | Low SpO2 reading | Mababang SpO2 na sukat | CLINICAL WORDING (priority) | "SpO2" kept as in the patient screens. |  |
+| 383 | `alerts:type.fever` | High temperature reading | Mataas na sukat ng temperatura | CLINICAL WORDING (priority) | Says the reading was high; does not say "fever" as a diagnosis. |  |
+| 384 | `alerts:type.other` | Alert | Abiso | - |  |  |
+| 385 | `alerts:severity.critical` | Critical | Kritikal | - |  |  |
+| 386 | `alerts:severity.warning` | Warning | Babala | - |  |  |
+| 387 | `alerts:severity.info` | For information | Para sa kaalaman | - |  |  |
+
 ## Not yet written (later steps)
 
-Provider screen content. Each will be added here as it is written. Consent and legal text also needs ethics/legal review (see `PLAN.md`, open items).
+Provider screen content other than the Overview (section 12). Each will be added here as it is written. Consent and legal text also needs ethics/legal review (see `PLAN.md`, open items).

@@ -1,6 +1,6 @@
 # Plan update, step 3.6: Phase 3 review and close-out
 
-Written 2026-11-02. **Written, nothing run on the live project.** The SQL was run on a local Postgres 16 that copies Supabase's roles; see `docs/ATTACKER_REVIEW_3.6.md` for what that does and does not prove.
+Written 2026-11-02; updated 2026-11-03. **The SQL is proven live (014 and all nine test files, 0 FAIL, seen by the user); the user reports (2026-11-03) that the 12-step script was run and was all good (report only, no per-step detail).** The SQL was also run on a local Postgres 16 that copies Supabase's roles; see `docs/ATTACKER_REVIEW_3.6.md` for what that does and does not prove.
 
 ## 1. What this step did
 
@@ -13,7 +13,7 @@ Written 2026-11-02. **Written, nothing run on the live project.** The SQL was ru
 
 ## 2. The live script: one pass, 12 steps, phone and laptop
 
-**Before step 1 (SQL Editor, not counted below; see the manual steps in the reply):** run `014_phase3_review_hardening.sql`, then `014_phase3_review_tests.sql`, then every older test file; delete the old test alert for patient01 (`delete from public.alerts where alert_type = 'fhr_out_of_range' and patient_id = (select id from auth.users where email = 'patient01@example.test');` only if it exists), then re-run `supabase/seed/demo_seed.sql` (demo mode must be on).
+**Before step 1 (SQL Editor, not counted below):** 014 and all test files are already run (2026-11-03). Delete the old test alert for patient01 (`delete from public.alerts where alert_type = 'fhr_out_of_range' and patient_id = (select id from auth.users where email = 'patient01@example.test');` only if it exists), then re-run `supabase/seed/demo_seed.sql` (demo mode must be on).
 
 Accounts are `patientNN@example.test`. **Laptop A** = a normal browser window, **Laptop B** = a private window, **Phone** = your phone's browser or the installed app. Times in the app are always Asia/Manila. Note anything that looks wrong with the screen, the account and the time, and send it.
 
@@ -95,7 +95,7 @@ Not in the script on purpose (each needs a code edit and a redeploy, so it stays
 
 **Phase 4 may rely on** (each was seen to pass on the live project, as reported to Claude): the access, consent, home, monitor, alerts, care and profile test files at 0 FAIL: `access_tests.sql` 209, `006_consent_flow_tests.sql` 30, `demo_isolation_checks.sql` 29, `009_patient_home_tests.sql` 37, `010_monitor_tests.sql` 57, `011_patient_alerts_tests.sql` 57, `012_patient_care_tests.sql` 130, `013_patient_profile_tests.sql` 144. That proves, for the state through migration 013: a patient reads and writes only their own rows; a provider reads only assigned patients; no view exists; the 14 client functions are exactly the ones listed in PLAN.md; `anon` has nothing; `alerts` is the only published Realtime table.
 
-**Phase 4 must not assume** anything from 014 until you have run it and shown the results: the 600/hour cap, the 5-device limit, the 2000-byte limit, and "providers cannot edit alert limits" are all **unrun on the live project**, as are the new `access_tests.sql` count and the 54 checks in `014_phase3_review_tests.sql`. It must also not assume: that the live screens work in every state (only the user's overall report for 3.4 and 3.5 exists, and the 12-step script is unrun); that two simultaneous requests are safe; that the status of the alert limits is "confirmed" (they are unconfirmed defaults); that `source` proves where a reading came from.
+**Also proven live since 2026-11-03:** 014 and its 54 checks (reading cap, device limits, 2000-byte limit, alert limits admin only, 14 client functions) and `access_tests.sql` at 205, with the older files unchanged. **Phase 4 must not assume** the real-time behaviour of those guards under two simultaneous requests (no one-session test proves it). It must also not assume: that the live screens work in every state (only the user's overall report for 3.4 and 3.5 exists, and the 12-step script is unrun); that two simultaneous requests are safe; that the status of the alert limits is "confirmed" (they are unconfirmed defaults); that `source` proves where a reading came from.
 
 **Notes for Phase 4:**
 

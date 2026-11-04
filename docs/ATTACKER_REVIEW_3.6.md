@@ -1,6 +1,6 @@
 # Attacker and reviewer pass, step 3.6 (end of Phase 3)
 
-Written 2026-11-02. **Everything below was run on a local Postgres 16 that copies Supabase's roles (anon, authenticated, the grants and RLS from 000 to 013). Nothing was run on the live Supabase project, and nothing was run in a real browser against it.** Migration 014 and its tests have therefore never been run live. Their local results are evidence about the SQL, not about your project.
+Written 2026-11-02. **The attack scripts were run on a local Postgres 16 that copies Supabase's roles. Since 2026-11-03 migration 014 and all nine SQL test files have also been run on the live project by the user (014 tests 54 PASS, access 205, others unchanged, all 0 FAIL). The repros below (section 4, F1 to F4) have not been run live; nothing was run in a real browser.**
 
 ## 1. Result in one paragraph
 
@@ -128,7 +128,7 @@ One result that looked like a finding and is not: in the local harness, `set rol
 
 ## 7. What could not be run, and why
 
-- **Nothing on the live Supabase project.** 014, its tests and the changed 004, 005 and `access_tests.sql` have never been run live. Counts seen locally: `014_phase3_review_tests.sql` 54 PASS 0 FAIL; `access_tests.sql` 205 PASS 0 FAIL (live is 209 before 014; expect a different number, see the manual steps); the other files 0 FAIL locally. **Do not treat these as live counts.**
+- **The F1 to F4 repros and the app screens on the live project** (live script step 12). The SQL tests themselves were run live 2026-11-03 with the counts above.
 - **Two requests at the same instant** (the advisory locks). A test file is one session, so it cannot prove them.
 - **Request-body size limits** at the API gateway are not visible from SQL.
 - **Real browsers, real phones, Realtime delivery between two devices, the service worker, installation.** Covered only by the live script.
