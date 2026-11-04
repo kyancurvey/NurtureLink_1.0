@@ -11,11 +11,12 @@ import InvitePage from './features/auth/InvitePage.jsx'
 import AdminNoticePage from './features/auth/AdminNoticePage.jsx'
 import ConsentGate from './features/consent/ConsentGate.jsx'
 import Splash from './components/Splash.jsx'
-import ProviderApp from './features/provider/ProviderApp.jsx'
 import DesignPage from './features/design/DesignPage.jsx'
 
-// The patient app is downloaded only when a patient opens it (code splitting).
+// The patient app and the provider app are downloaded only when someone opens them
+// (code splitting).
 const PatientApp = lazy(() => import('./features/patient/PatientApp.jsx'))
+const ProviderApp = lazy(() => import('./features/provider/ProviderApp.jsx'))
 
 // HashRouter keeps deep links working on GitHub Pages, which has no
 // server-side routing. AuthProvider sits inside it so every screen can ask who
