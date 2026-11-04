@@ -241,6 +241,7 @@ declare
   v_n integer;
   bad text;
   cnt integer;
+  want integer;
   fid oid;
   tmp uuid;
   val text;
@@ -551,8 +552,10 @@ begin
       w := pg_temp.j('select to_jsonb(public.status_fresh_hours())', q1);
       n := case when jsonb_typeof(w) = 'number' then (w #>> '{}')::integer end;
       hs := pg_temp.j('select public.my_home_status()', q1);
-      if n is distinct from (hs ->> 'fresh_hours')::integer
-         or n is distinct from case when val in ('5', '168', '1') then val::integer else 14 end then
+      -- The expected value is worked out BEFORE the IF: PL/pgSQL ends an IF condition at the
+      -- first THEN it sees, so a CASE ... THEN inside the condition cannot be used.
+      want := case when val in ('5', '168', '1') then val::integer else 14 end;
+      if n is distinct from (hs ->> 'fresh_hours')::integer or n is distinct from want then
         bad := bad || '[' || val || '] helper=' || coalesce(n::text, 'null') || ' home=' || coalesce(hs ->> 'fresh_hours', 'null') || '; ';
       end if;
     end loop;
