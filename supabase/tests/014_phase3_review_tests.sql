@@ -18,7 +18,7 @@
 --   * JSON size: an API insert into alerts or audit_log with details over 2000
 --     bytes is refused (details_too_large), exactly 2000 passes; the owner is not
 --     limited; the SOS rate limit still holds.
---   * Nothing else moved: still exactly 14 client functions, anon still has
+--   * Nothing else moved: exactly 16 client functions (014 added none; 015 added 2), anon still has
 --     nothing, the three new trigger functions cannot be run from the API.
 --
 -- ALL NUMBERS TESTED HERE (600 an hour, 5 devices, 100 characters, 2000 bytes) ARE
@@ -44,7 +44,7 @@
 -- WHAT TO SEND BACK IF ANYTHING FAILS: the SUMMARY row and every FAIL row (or the
 -- error text if the whole file stops with an error).
 --
--- DEPENDS ON: 000 to 014. READ-ONLY for your real data.
+-- DEPENDS ON: 000 to 015 (015 adds the two client functions counted in section 0). READ-ONLY for your real data.
 -- SAFE TO RE-RUN: yes, any number of times. HOW TO UNDO: nothing to undo.
 -- =====================================================================
 
@@ -187,9 +187,9 @@ begin
                            'alerts_guard_details', 'audit_log_guard_details')) = 5);
     r := r || pg_temp.ck('the hardware_id length constraint exists',
       exists (select 1 from pg_constraint where conname = 'devices_hardware_id_length' and conrelid = 'public.devices'::regclass));
-    r := r || pg_temp.ck('signed-in users can execute exactly 14 functions in public (014 added no client function)',
+    r := r || pg_temp.ck('signed-in users can execute exactly 16 functions in public (014 added none; the 15th and 16th are provider_overview and status_fresh_hours from 015)',
       (select count(*) from pg_proc p where p.pronamespace = 'public'::regnamespace and p.proname <> 'rls_auto_enable'
-          and has_function_privilege('authenticated', p.oid, 'EXECUTE')) = 14);   -- rls_auto_enable() is Supabase's own (see access_tests INFO)
+          and has_function_privilege('authenticated', p.oid, 'EXECUTE')) = 16);   -- rls_auto_enable() is Supabase's own (see access_tests INFO)
     r := r || pg_temp.ck('anon can execute no function in public and has no privilege on alert_thresholds, belt_readings, maternal_vitals, devices, alerts or audit_log',
       not exists (select 1 from pg_proc p where p.pronamespace = 'public'::regnamespace and p.proname <> 'rls_auto_enable' and has_function_privilege('anon', p.oid, 'EXECUTE'))
       and not exists (select 1 from unnest(array['alert_thresholds','belt_readings','maternal_vitals','devices','alerts','audit_log']) t

@@ -28,10 +28,11 @@
 -- WHAT TO SEND BACK IF ANYTHING FAILS: the SUMMARY row and every FAIL row
 -- (test and detail columns), as text or an export. Nothing else.
 --
--- DEPENDS ON: 000 to 005, 008, 009, 010, 011, 012, 013 and 014 already run (014: the alert limits are admin-only, so the checks that expect refusal need it; the reading-time checks need 008;
+-- DEPENDS ON: 000 to 005, 008, 009, 010, 011, 012, 013, 014 and 015 already run (014: the alert limits are admin-only, so the checks that expect refusal need it; the reading-time checks need 008;
 -- the list of client functions below includes my_home_status from 009, my_normal_ranges from 010, mark_alert_seen from 011,
 -- request_appointment, cancel_my_appointment, request_reschedule and my_provider_name from 012,
--- and save_pregnancy_details and set_my_display_name from 013;
+-- save_pregnancy_details and set_my_display_name from 013,
+-- and provider_overview and status_fresh_hours from 015 (16 in all);
 -- patient appointment writes go through the 012 functions, and the display name and pregnancy details
 -- only through the 013 functions, not through policies or direct grants).
 -- READ-ONLY for your real data.
@@ -581,11 +582,11 @@ begin
       and not has_column_privilege('authenticated', 'public.alerts', 'severity', 'UPDATE')
       and not has_column_privilege('authenticated', 'public.consent_records', 'accepted_at', 'INSERT')
       and not has_column_privilege('authenticated', 'public.belt_readings', 'created_at', 'INSERT'));
-    r := r || pg_temp.ck('signed-in users can execute exactly the 14 client functions',
+    r := r || pg_temp.ck('signed-in users can execute exactly the 16 client functions',
       (select coalesce(string_agg(p.proname, ',' order by p.proname), '') from pg_proc p join pg_namespace ns on ns.oid = p.pronamespace
         where ns.nspname = 'public' and p.proname <> 'rls_auto_enable' and has_function_privilege('authenticated', p.oid, 'EXECUTE')
           and not exists (select 1 from pg_depend dd where dd.objid = p.oid and dd.deptype = 'e'))
-      = 'cancel_my_appointment,is_admin,is_assigned_provider,is_provider,mark_alert_seen,my_home_status,my_normal_ranges,my_provider_name,redeem_provider_invite,request_appointment,request_reschedule,save_pregnancy_details,set_my_display_name,set_my_language',
+      = 'cancel_my_appointment,is_admin,is_assigned_provider,is_provider,mark_alert_seen,my_home_status,my_normal_ranges,my_provider_name,provider_overview,redeem_provider_invite,request_appointment,request_reschedule,save_pregnancy_details,set_my_display_name,set_my_language,status_fresh_hours',
       (select string_agg(p.proname, ',' order by p.proname) from pg_proc p join pg_namespace ns on ns.oid = p.pronamespace
         where ns.nspname = 'public' and p.proname <> 'rls_auto_enable' and has_function_privilege('authenticated', p.oid, 'EXECUTE')));
     r := r || pg_temp.ck('every SECURITY DEFINER function in public has a fixed search_path',
