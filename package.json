@@ -1,0 +1,30 @@
+{
+  "name": "nurturelink",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "licenses": "node scripts/copy-font-licenses.mjs",
+    "prebuild": "node scripts/copy-font-licenses.mjs",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "@fontsource/open-sans": "^5.0.0",
+    "@fontsource/roboto": "^5.0.0",
+    "i18next": "^23.11.0",
+    "lucide-react": "^0.475.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-i18next": "^15.0.0",
+    "react-router-dom": "^6.28.0",
+    "recharts": "^2.15.0",
+    "write-excel-file": "^2.0.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0",
+    "vite-plugin-pwa": "^0.21.0"
+  }
+}
