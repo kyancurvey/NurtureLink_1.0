@@ -1,0 +1,47 @@
+{
+  "app": {
+    "name": "NurtureLink"
+  },
+  "language": {
+    "label": "Wika",
+    "en": "English",
+    "fil": "Filipino",
+    "enShort": "EN",
+    "filShort": "FIL"
+  },
+  "topbar": {
+    "notifications": "Mga abiso",
+    "notificationsUnread": "Mga abiso, {{count}} ang hindi pa nababasa"
+  },
+  "nav": {
+    "label": "Pangunahing menu",
+    "home": "Tahanan",
+    "schedule": "Iskedyul",
+    "consult": "Konsulta",
+    "hele": "Hele AI",
+    "profile": "Profile",
+    "monitor": "Subaybay",
+    "chat": "Chat",
+    "calendar": "Kalendaryo",
+    "tracker": "Pregnancy Tracker"
+  },
+  "empty": {
+    "title": "Wala pang ipapakita rito",
+    "body": "Lalabas sa screen na ito ang iyong impormasyon."
+  },
+  "signIn": {
+    "title": "Mag-sign in",
+    "welcome": "Maligayang pagdating sa NurtureLink.",
+    "identifier": "Numero ng telepono o email",
+    "password": "Password",
+    "submit": "Mag-sign in"
+  },
+  "splash": {
+    "loading": "Nilo-load ang NurtureLink"
+  },
+  "ui": {
+    "close": "Isara",
+    "dismiss": "Alisin",
+    "loading": "Nilo-load"
+  }
+}

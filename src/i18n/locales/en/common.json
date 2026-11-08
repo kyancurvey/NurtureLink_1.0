@@ -1,0 +1,47 @@
+{
+  "app": {
+    "name": "NurtureLink"
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "fil": "Filipino",
+    "enShort": "EN",
+    "filShort": "FIL"
+  },
+  "topbar": {
+    "notifications": "Notifications",
+    "notificationsUnread": "Notifications, {{count}} unread"
+  },
+  "nav": {
+    "label": "Main menu",
+    "home": "Home",
+    "schedule": "Schedule",
+    "consult": "Consult",
+    "hele": "Hele AI",
+    "profile": "Profile",
+    "monitor": "Monitor",
+    "chat": "Chat",
+    "calendar": "Calendar",
+    "tracker": "Pregnancy Tracker"
+  },
+  "empty": {
+    "title": "Nothing to show here yet",
+    "body": "Your information will appear on this screen."
+  },
+  "signIn": {
+    "title": "Sign in",
+    "welcome": "Welcome to NurtureLink.",
+    "identifier": "Contact number or email",
+    "password": "Password",
+    "submit": "Sign in"
+  },
+  "splash": {
+    "loading": "Loading NurtureLink"
+  },
+  "ui": {
+    "close": "Close",
+    "dismiss": "Dismiss",
+    "loading": "Loading"
+  }
+}

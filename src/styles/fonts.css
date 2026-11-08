@@ -1,0 +1,12 @@
+/* Self-hosted fonts (spec 5.1, COM-08): Latin and Latin Extended only, listed weights only.
+   The @fontsource files declare font-display: swap, so the system sans-serif shows first. */
+@import '@fontsource/open-sans/latin-400.css';
+@import '@fontsource/open-sans/latin-600.css';
+@import '@fontsource/open-sans/latin-700.css';
+@import '@fontsource/open-sans/latin-ext-400.css';
+@import '@fontsource/open-sans/latin-ext-600.css';
+@import '@fontsource/open-sans/latin-ext-700.css';
+@import '@fontsource/roboto/latin-400.css';
+@import '@fontsource/roboto/latin-500.css';
+@import '@fontsource/roboto/latin-ext-400.css';
+@import '@fontsource/roboto/latin-ext-500.css';
